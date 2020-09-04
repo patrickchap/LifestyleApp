@@ -1,3 +1,11 @@
 <resources>
+    <string name="lifestyle_app_logo">Lifestyle app logo</string>
+    <string name="user_info_prompt">Please provide us with some information about yourself.</string>
+    <string name="user_info_directions">Click each box to update</string>
+    <string name="user_info_gender">Gender</string>
+    <string name="user_info_birthday">Birthday</string>
+    <string name="user_info_height">Height</string>
+    <string name="user_info_weight">Weight</string>
+    <string name="continue_button">Continue</string>
     <string name="app_name">My Application</string>
 </resources>
