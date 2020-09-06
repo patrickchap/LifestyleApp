@@ -8,4 +8,6 @@
     <string name="user_info_weight">Weight</string>
     <string name="continue_button">Continue</string>
     <string name="app_name">My Application</string>
+    <string name="login_email">Email</string>
+    <string name="login_password">Password</string>
 </resources>
