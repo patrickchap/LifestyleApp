@@ -16,8 +16,8 @@ import android.widget.TextView;
 
 
 public class UserInfo3 extends Activity implements View.OnClickListener{
-    TextView mSnapSelfie;
-    ImageView mProfilePicture;
+    TextView mSnapSelfieTextView;
+    ImageView mProfilePictureImageView;
     Button mCreateButton;
 
     //Define a request code for the camera
@@ -28,11 +28,11 @@ public class UserInfo3 extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_info_3);
 
-        mSnapSelfie = findViewById(R.id.snapSelfie);
-        mProfilePicture = findViewById(R.id.userImage);
+        mSnapSelfieTextView = findViewById(R.id.snapSelfie);
+        mProfilePictureImageView = findViewById(R.id.userImage);
         mCreateButton = findViewById(R.id.createButton);
 
-        mSnapSelfie.setOnClickListener((View.OnClickListener) this);
+        mSnapSelfieTextView.setOnClickListener((View.OnClickListener) this);
         mCreateButton.setOnClickListener((View.OnClickListener) this);
 
     }
@@ -54,7 +54,7 @@ public class UserInfo3 extends Activity implements View.OnClickListener{
         if (requestCode==REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
             Bundle extras = data.getExtras();
             Bitmap thumbnailImage = (Bitmap) extras.get("data");
-            mProfilePicture.setImageBitmap(thumbnailImage);
+            mProfilePictureImageView.setImageBitmap(thumbnailImage);
         }
     }
 }
