@@ -46,6 +46,7 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
                 if(cameraIntent.resolveActivity(getPackageManager())!=null){
                     startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
                 }
+                break;
             }
             case R.id.createButton: {
                 Intent intent = new Intent(this, Home.class);
