@@ -7,9 +7,10 @@
     <string name="user_info_height">Height</string>
     <string name="user_info_weight">Weight</string>
     <string name="continue_button">Continue</string>
-    <string name="app_name">My Application</string>
+    <string name="app_name">LifestyleApp</string>
     <string name="login_email">Email</string>
     <string name="login_password">Password</string>
     <string name="user_info_2_location">Location</string>
     <string name="user_info_3_who_can_see">Who can see this?</string>
+    <string name="user_info_3_picture_message">This will be your profile picture! It can be changed at any time!</string>
 </resources>

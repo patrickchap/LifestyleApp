@@ -44,7 +44,7 @@
         android:background="@drawable/continue_button"
         android:text="Create"
         android:textColor="@color/eWhite"
-        app:layout_constraintBottom_toTopOf="@+id/guideline10"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline12"
         app:layout_constraintStart_toStartOf="@+id/guideline11" />
 
@@ -66,9 +66,33 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:text="Snap a Selfie!"
-        android:textSize="24sp"
+        android:textSize="24dp"
         android:textColor="@color/userInfoSkyBlue"
         app:layout_constraintBottom_toTopOf="@+id/userImage"
         app:layout_constraintEnd_toStartOf="@+id/guideline12"
         app:layout_constraintStart_toStartOf="@+id/guideline11" />
+
+    <TextView
+        android:id="@+id/messageTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/user_info_3_picture_message"
+        android:textSize="18dp"
+        android:textColor="@color/eWhite"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/snapSelfie"
+        app:layout_constraintEnd_toStartOf="@+id/guideline12"
+        app:layout_constraintStart_toStartOf="@+id/guideline11"
+        app:layout_constraintTop_toTopOf="@+id/guideline6"
+        app:layout_constraintVertical_bias="0.65" />
+
+    <ImageView
+        android:id="@+id/appImageView3"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/messageTextView"
+        app:layout_constraintEnd_toStartOf="@+id/guideline12"
+        app:layout_constraintStart_toStartOf="@+id/guideline11"
+        app:layout_constraintTop_toTopOf="@+id/guideline6"
+        tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>

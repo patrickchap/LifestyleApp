@@ -43,7 +43,7 @@
         android:background="@drawable/continue_button"
         android:text="@string/continue_button"
         android:textColor="@color/eWhite"
-        app:layout_constraintBottom_toTopOf="@+id/guideline14"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline16"
         app:layout_constraintStart_toStartOf="@+id/guideline15" />
 
@@ -60,7 +60,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline15" />
 
     <ImageView
-        android:id="@+id/avatar"
+        android:id="@+id/appImageView2"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="100dp"
@@ -85,7 +85,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline16"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline15"
-        app:layout_constraintTop_toBottomOf="@+id/avatar"
+        app:layout_constraintTop_toBottomOf="@+id/appImageView2"
         app:layout_constraintVertical_bias="0.94" />
 
     <TextView
