@@ -8,14 +8,14 @@ import android.widget.Button;
 
 import androidx.annotation.Nullable;
 
-public class UserInfo1 extends Activity {
-
+public class UserInfo2 extends Activity {
     Button mContinueButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_info_1);
+        setContentView(R.layout.user_info_2);
+
 
         mContinueButton = findViewById(R.id.continueButton);
 
@@ -24,13 +24,13 @@ public class UserInfo1 extends Activity {
 
             @Override
             public void onClick(View v) {
-                continueToUserInfo2();
+                continueToUserInfo3();
             }
         });
     }
 
-    private void continueToUserInfo2() {
-        Intent intent = new Intent(this, UserInfo2.class);
+    private void continueToUserInfo3() {
+        Intent intent = new Intent(this, UserInfo3.class);
         startActivity(intent);
     }
 }
