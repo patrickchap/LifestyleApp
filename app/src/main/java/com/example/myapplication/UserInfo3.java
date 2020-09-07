@@ -54,7 +54,6 @@ public class UserInfo3 extends Activity implements View.OnClickListener{
         if (requestCode==REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
             Bundle extras = data.getExtras();
             Bitmap thumbnailImage = (Bitmap) extras.get("data");
-//            mIvPic = (ImageView) findViewById(R.id.iv_pic);
             mProfilePicture.setImageBitmap(thumbnailImage);
         }
     }
