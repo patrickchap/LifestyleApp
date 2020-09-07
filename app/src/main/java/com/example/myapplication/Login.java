@@ -9,7 +9,7 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 
 public class Login extends Activity {
-    Button mSubmit;
+    Button mSubmit, mSignUp;
     String mPassword, mEmail;
 
     @Override
@@ -18,8 +18,9 @@ public class Login extends Activity {
         setContentView(R.layout.login);
 
         mSubmit = findViewById(R.id.submitButton);
+        mSignUp = findViewById(R.id.signUpButton);
 
-        mSubmit.setOnClickListener(new View.OnClickListener(){
+        mSignUp.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
