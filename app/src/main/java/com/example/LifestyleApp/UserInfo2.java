@@ -9,8 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.LifestyleApp.R;
-
 public class UserInfo2 extends AppCompatActivity {
     Button mContinueButton;
     TextView mLocationTextView;
@@ -27,19 +25,24 @@ public class UserInfo2 extends AppCompatActivity {
 
 
         mContinueButton = findViewById(R.id.continueButton);
+        mLocationTextView = findViewById(R.id.editTextTextPostalAddress);
+        mWhoCanSeeTextView = findViewById(R.id.editTextWhoCanSee);
         mContinueButton.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-                continueToUserInfo3();
+                String location = mLocationTextView.getText().toString();
+                String whoCanSee = mWhoCanSeeTextView.getText().toString();
+                       continueToUserInfo3(location, whoCanSee);
             }
         });
     }
 
 
-    private void continueToUserInfo3() {
+    private void continueToUserInfo3(String location, String whoCanSee) {
         Intent intent = new Intent(this, UserInfo3.class);
-        //TODO: pass all user information along
+
+        //TODO: pass all user information alon
         startActivity(intent);
     }
 }
