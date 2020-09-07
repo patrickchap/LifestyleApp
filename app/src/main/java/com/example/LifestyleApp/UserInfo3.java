@@ -29,6 +29,8 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_info_3);
 
+        //TODO: create intent and get member variables from UserInfo2
+
         mSnapSelfieTextView = findViewById(R.id.snapSelfie);
         mProfilePictureImageView = findViewById(R.id.userImage);
         mCreateButton = findViewById(R.id.createButton);
@@ -50,6 +52,7 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
             }
             case R.id.createButton: {
                 Intent intent = new Intent(this, Home.class);
+                //TODO: pass all user information along with user photo
                 startActivity(intent);
             }
         }
