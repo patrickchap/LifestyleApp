@@ -1,22 +1,13 @@
 package com.example.LifestyleApp;
 
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-
-import com.example.LifestyleApp.R;
-
-import java.util.Calendar;
-import java.util.Date;
 
 public class UserInfo1 extends AppCompatActivity  implements View.OnClickListener{
 
