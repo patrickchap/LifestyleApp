@@ -1,5 +1,6 @@
 package com.example.LifestyleApp;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,21 +11,21 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import com.example.LifestyleApp.R;
 
 import java.util.Calendar;
 import java.util.Date;
 
-public class UserInfo1 extends AppCompatActivity  implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
+public class UserInfo1 extends AppCompatActivity  implements View.OnClickListener{
 
     Button mContinueButton;
     TextView mGenderTextView;
     TextView mDOB;
-//    Date mDOB;
-    int mWeight;
+    TextView mWeight;
     //height is in inches
-    int mHeight;
+    TextView mHeight;
     //bmi Formula: 703 x weight (lbs) / [height (in)]2
     float mBMI;
 
@@ -60,24 +61,13 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
             }
             case R.id.birthdayTextView: {
                 System.out.println("Show picker");
-                showDatePicker();
+                DialogFragment dialogFragment = new DatePickerDialogMyTheme();
+                dialogFragment.show(getSupportFragmentManager(), "myTheme");
+
             }
         }
     }
 
-    private void showDatePicker(){
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-                this,
-                this,
-                Calendar.getInstance().get(Calendar.YEAR),
-                Calendar.getInstance().get(Calendar.MONTH),
-                Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.show();
-    }
 
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        String date = month + "/" + dayOfMonth + "/" + year;
-        mDOB.setText(date);
-    }
 }
+
