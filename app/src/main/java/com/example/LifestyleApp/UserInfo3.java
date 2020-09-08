@@ -3,17 +3,14 @@ package com.example.LifestyleApp;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.LifestyleApp.R;
 
 
 public class UserInfo3 extends AppCompatActivity implements View.OnClickListener{
@@ -41,8 +38,8 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
     }
 
     @Override
-    public void onClick(View view) {
-        switch (view.getId()){
+    public void onClick(View v) {
+        switch (v.getId()){
             case R.id.snapSelfie: {
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if(cameraIntent.resolveActivity(getPackageManager())!=null){
@@ -52,7 +49,7 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
             }
             case R.id.createButton: {
                 Intent intent = new Intent(this, Home.class);
-                //TODO: pass all user information along with user photo
+                //TODO: create a user
                 startActivity(intent);
             }
         }

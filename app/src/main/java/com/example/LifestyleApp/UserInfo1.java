@@ -13,7 +13,7 @@ import com.example.LifestyleApp.R;
 
 import java.util.Date;
 
-public class UserInfo1 extends AppCompatActivity {
+public class UserInfo1 extends AppCompatActivity  implements View.OnClickListener{
 
     Button mContinueButton;
     TextView mGenderTextView;
@@ -31,20 +31,27 @@ public class UserInfo1 extends AppCompatActivity {
         setContentView(R.layout.user_info_1);
 
         mContinueButton = findViewById(R.id.continueButton);
-        mContinueButton.setOnClickListener(new View.OnClickListener(){
+        mContinueButton.setOnClickListener(this);
 
-            @Override
-            public void onClick(View v) {
-                continueToUserInfo2();
-            }
-        });
 
         //TODO: take input from the user and calculate BMI
+        //TODO: handle onClick for Gender, Weight, Height, and DOB
     }
 
     private void continueToUserInfo2() {
         Intent intent = new Intent(this, UserInfo2.class);
         //TODO: pass member variables along
         startActivity(intent);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.continueButton: {
+                continueToUserInfo2();
+            }
+
+        }
+
     }
 }
