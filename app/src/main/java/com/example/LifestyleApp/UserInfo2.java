@@ -11,7 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class UserInfo2 extends AppCompatActivity implements View.OnClickListener{
     Button mContinueButton;
-    TextView mLocationTextView;
+//    TextView mLocationTextView;
+    TextView mCity;
+    TextView mCountry;
     TextView mWhoCanSeeTextView;
 
 
@@ -26,15 +28,18 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
         // but we need to change them to onClick options with either drop downs or picker
 
         mContinueButton = findViewById(R.id.continueButton);
-        mLocationTextView = findViewById(R.id.editTextTextPostalAddress);
+//        mLocationTextView = findViewById(R.id.editTextCountry);
+        mCity = findViewById(R.id.editTextCity);
+        mCountry = findViewById(R.id.editTextCountry);
         mWhoCanSeeTextView = findViewById(R.id.editTextWhoCanSee);
         mContinueButton.setOnClickListener(this);
     }
 
 
-    private void continueToUserInfo3(String location, String whoCanSee) {
+    private void continueToUserInfo3(String city, String country , String whoCanSee) {
         Intent intent = new Intent(this, UserInfo3.class);
-        intent.putExtra("location", location);
+        intent.putExtra("city", city);
+        intent.putExtra("country", country);
         intent.putExtra("whoCanSee", whoCanSee);
         //TODO: pass all user information along to UserInfo3
         startActivity(intent);
@@ -44,10 +49,11 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.continueButton: {
-                String location = mLocationTextView.getText().toString();
+                String city = mCity.getText().toString();
+                String country = mCountry.getText().toString();
                 String whoCanSee = mWhoCanSeeTextView.getText().toString();
                 //TODO: pass along information from userInfo1
-                continueToUserInfo3(location, whoCanSee);
+                continueToUserInfo3(city, country, whoCanSee);
             }
         }
     }
