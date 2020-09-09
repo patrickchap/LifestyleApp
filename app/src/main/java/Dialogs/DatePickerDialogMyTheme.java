@@ -1,4 +1,4 @@
-package com.example.LifestyleApp;
+package Dialogs;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
+
+import com.example.LifestyleApp.R;
 
 import java.util.Calendar;
 import java.util.Objects;

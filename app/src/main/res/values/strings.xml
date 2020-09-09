@@ -14,4 +14,21 @@
     <string name="user_info_2_city">City</string>
     <string name="user_info_3_who_can_see">Who can see this?</string>
     <string name="user_info_3_picture_message">This will be your profile picture! It can be changed at any time!</string>
+    <string name="picker_separator">.</string>
+    <string name="weight_lbs">lbs</string>
+    <string name="weight_positive">okay</string>
+    <string name="weight_negative">cancel</string>
+    <string name="height_positive">okay</string>
+    <string name="height_negative">cancel</string>
+    <string name="gender_positive">okay</string>
+    <string name="gender_negative">cancel</string>
+    <string name="bmiLabel">BMI</string>
+    <string name="gender_picker_gender">Gender:</string>
+
+    <string-array name="gender_array">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+
 </resources>

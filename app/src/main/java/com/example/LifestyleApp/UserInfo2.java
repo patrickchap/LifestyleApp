@@ -37,10 +37,15 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
 
 
     private void continueToUserInfo3(String city, String country , String whoCanSee) {
+        Intent intentFromUserInfo1 = getIntent();
+        double bmi = intentFromUserInfo1.getDoubleExtra("bmi",0);
+        System.out.println("bmi from user1 in 2 " + bmi);
+
         Intent intent = new Intent(this, UserInfo3.class);
         intent.putExtra("city", city);
         intent.putExtra("country", country);
         intent.putExtra("whoCanSee", whoCanSee);
+        intent.putExtra("bmi", bmi);
         //TODO: pass all user information along to UserInfo3
         startActivity(intent);
     }
@@ -52,6 +57,9 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
                 String city = mCity.getText().toString();
                 String country = mCountry.getText().toString();
                 String whoCanSee = mWhoCanSeeTextView.getText().toString();
+
+
+
                 //TODO: pass along information from userInfo1
                 continueToUserInfo3(city, country, whoCanSee);
             }

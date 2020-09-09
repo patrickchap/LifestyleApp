@@ -2,21 +2,28 @@ package com.example.LifestyleApp;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.ByteArrayOutputStream;
 
 
 public class UserInfo3 extends AppCompatActivity implements View.OnClickListener{
     TextView mSnapSelfieTextView;
     ImageView mProfilePictureImageView;
     Button mCreateButton;
+
 
     //Define a request code for the camera
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -48,7 +55,20 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
                 break;
             }
             case R.id.createButton: {
+                Intent intentFromUserInfo1 = getIntent();
+                double bmi = intentFromUserInfo1.getDoubleExtra("bmi",0);
+                System.out.println("bmi from user2 in 3 " + bmi);
+
                 Intent intent = new Intent(this, Home.class);
+                intent.putExtra("bmi", bmi);
+
+                Bitmap bmp = ((BitmapDrawable)mProfilePictureImageView.getDrawable()).getBitmap();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+//                Drawable drawable = mProfilePictureImageView.getDrawable();
+                intent.putExtra("profilePicture", byteArray);
+
                 //TODO: create a user
                 startActivity(intent);
             }
@@ -61,6 +81,7 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap thumbnailImage = (Bitmap) extras.get("data");
+
             mProfilePictureImageView.setImageBitmap(thumbnailImage);
         }
     }
