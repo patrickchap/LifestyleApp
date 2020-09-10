@@ -2,14 +2,10 @@ package com.example.LifestyleApp;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -39,8 +35,8 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
         mProfilePictureImageView = findViewById(R.id.userImage);
         mCreateButton = findViewById(R.id.createButton);
 
-        mSnapSelfieTextView.setOnClickListener((View.OnClickListener) this);
-        mCreateButton.setOnClickListener((View.OnClickListener) this);
+        mSnapSelfieTextView.setOnClickListener(this);
+        mCreateButton.setOnClickListener(this);
 
     }
 
@@ -81,7 +77,6 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap thumbnailImage = (Bitmap) extras.get("data");
-
             mProfilePictureImageView.setImageBitmap(thumbnailImage);
         }
     }

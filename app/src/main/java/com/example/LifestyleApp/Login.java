@@ -30,7 +30,6 @@ public class Login extends AppCompatActivity {
             }
         });
 
-
     }
 
     private void continueToUserInfo1(){
