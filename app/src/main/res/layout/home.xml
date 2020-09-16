@@ -34,26 +34,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="50dp" />
 
-    <TextView
-        android:id="@+id/bmiTextView"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:background="@drawable/rounded_corner_box"
-        android:textColor="@color/eWhite"
-        app:layout_constraintBottom_toTopOf="@+id/guideline18"
-        app:layout_constraintEnd_toStartOf="@+id/guideline20"
-        app:layout_constraintStart_toStartOf="@+id/guideline19"
-        app:layout_constraintTop_toTopOf="@+id/guideline17" />
-
-    <TextView
-        android:id="@+id/bmiLabelTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/bmiLabel"
-        android:textColor="@color/eWhite"
-        app:layout_constraintBottom_toTopOf="@+id/bmiTextView"
-        app:layout_constraintStart_toStartOf="@+id/guideline19" />
-
     <ImageView
         android:id="@+id/profilePictureIV"
         android:layout_width="84dp"
@@ -61,4 +41,17 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline20"
         app:layout_constraintTop_toTopOf="@+id/guideline17"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <FrameLayout
+        android:id="@+id/master_list_phone"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline18"
+        app:layout_constraintEnd_toStartOf="@+id/guideline20"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline19"
+        app:layout_constraintTop_toBottomOf="@+id/profilePictureIV"
+        app:layout_constraintVertical_bias="0.0">
+
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

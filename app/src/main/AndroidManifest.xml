@@ -12,6 +12,7 @@
         <activity android:name="com.example.LifestyleApp.UserInfo2" />
         <activity android:name="com.example.LifestyleApp.UserInfo3" />
         <activity android:name=".Home" />
+        <activity android:name="ItemDetailActivity"/>
         <activity android:name="com.example.LifestyleApp.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
