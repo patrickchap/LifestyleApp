@@ -1,71 +1,81 @@
 package com.example.LifestyleApp;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
+import android.os.Build;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-
 import org.junit.Test;
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-import Dialogs.DatePickerDialogMyTheme;
-import Dialogs.GenderSpinnerDialog;
-import Dialogs.HeightPickerDialog;
-import Dialogs.WeightPickerDialog;
+@RunWith(RobolectricTestRunner.class)
+@Config(maxSdk = Build.VERSION_CODES.P, minSdk = Build.VERSION_CODES.P) // Value of Build.VERSION_CODES.P is 28
+public class UserInfo1Tests {
 
-import static org.junit.Assert.*;
+    private UserInfo1 userInfo1;
 
+    @Before
+    public void setup() {
 
-class userInfoInputTests {
-
-    @Test
-    public void testGenderInput() {
-
-    }
-
-    @Test
-    public void testDOBInput() {
-
-    }
-
-    @Test
-    public void testWeightInput() {
+        userInfo1 = Robolectric.setupActivity(UserInfo1.class);
 
     }
 
     @Test
-    public void testHeightInput() {
+    public void loginShouldNotBeNull() throws Exception
+    {
+        assertNotNull( userInfo1 );
+    }
+
+    @Test
+    public void continueButtonCorrectText() {
+
+        Button continueButton = (Button) userInfo1.findViewById(R.id.continueButton);
+
+        assertTrue("Continue button contains incorrect text",
+                "Continue".equals(continueButton.getText().toString()));
 
     }
 
-}
+    @Test
+    public void genderTextViewCorrectText() {
 
-class BMICalculationTests {
+        TextView genderTextView = (TextView) userInfo1.findViewById(R.id.genderTextView);
 
-    Button mContinueButton;
-    TextView mGenderTextView;
-    TextView mDOB;
-    TextView mWeight;
-    //height is in inches
-    TextView mHeight;
+        assertTrue("Gender Text View contains incorrect text",
+                "Gender".equals(genderTextView.getText().toString()));
+    }
 
     @Test
-    public void testBMICalculation() {
+    public void dobTextViewCorrectText() {
 
-        String height = (String) mHeight.getText();
-        int ft = Integer.parseInt(height.split(" ")[0]);
-        int in = Integer.parseInt(height.split(" ")[2]);
-        int heightInInches = (ft * 12) + in;
+        TextView dob = (TextView) userInfo1.findViewById(R.id.birthdayTextView);
 
-        String weight = (String) mWeight.getText();
-        float fWeight = Float.parseFloat(weight.split(" ")[0]);
-        //bmi Formula: 703 x weight (lbs) / [height (in)]2
-        double bmi = ((703 * fWeight) / Math.pow(heightInInches,2));
+        assertTrue("DOB Text View contains incorrect text",
+                "Birthday".equals(dob.getText().toString()));
+    }
 
+    @Test
+    public void weightTextViewCorrectText() {
+
+        TextView weight = (TextView) userInfo1.findViewById(R.id.weightTextView);
+
+        assertTrue("Weight Text View contains incorrect text",
+                "Weight".equals(weight.getText().toString()));
+    }
+
+    @Test
+    public void heightTextViewCorrectText() {
+
+        TextView height = (TextView) userInfo1.findViewById(R.id.heightTextView);
+
+        assertTrue("Weight Text View contains incorrect text",
+                "Height".equals(height.getText().toString()));
     }
 
 }

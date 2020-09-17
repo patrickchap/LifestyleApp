@@ -1,37 +1,53 @@
 package com.example.LifestyleApp;
 
+import android.os.Build;
+import android.widget.Button;
+
 import org.junit.Test;
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-import static org.junit.Assert.*;
+@RunWith(RobolectricTestRunner.class)
+@Config(maxSdk = Build.VERSION_CODES.P, minSdk = Build.VERSION_CODES.P) // Value of Build.VERSION_CODES.P is 28
+public class LoginTests {
 
+    private Login login;
 
-/*
-public class Login extends AppCompatActivity {
-    Button mSubmit, mSignUp;
-    String mPassword, mEmail;
+    @Before
+    public void setup() {
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
-
-        mSubmit = findViewById(R.id.submitButton);
-        mSignUp = findViewById(R.id.signUpButton);
-
-        mSignUp.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                continueToUserInfo1();
-            }
-        });
-
+        login = Robolectric.setupActivity(Login.class);
 
     }
 
-    private void continueToUserInfo1(){
-        Intent intent = new Intent(this, UserInfo1.class);
-        startActivity(intent);
+    @Test
+    public void loginShouldNotBeNull() throws Exception
+    {
+        assertNotNull( login );
     }
+
+    @Test
+    public void submitButtonCorrectText() {
+
+        Button submitButton = (Button) login.findViewById(R.id.submitButton);
+
+        assertTrue("Button contains incorrect text",
+                "Submit".equals(submitButton.getText().toString()));
+
+    }
+
+    @Test
+    public void signupButtonText() {
+
+        Button signupButton = (Button) login.findViewById(R.id.signUpButton);
+
+        assertTrue("Signup button contains incorrect text",
+                "Sign Up".equals(signupButton.getText().toString()));
+    }
+
 }
-*/
