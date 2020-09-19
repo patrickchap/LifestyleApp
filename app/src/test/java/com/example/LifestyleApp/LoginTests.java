@@ -1,19 +1,33 @@
 package com.example.LifestyleApp;
 
 import android.os.Build;
+import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.api.mockito.verification.PrivateMethodVerification;
+import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(maxSdk = Build.VERSION_CODES.P, minSdk = Build.VERSION_CODES.P) // Value of Build.VERSION_CODES.P is 28
+@Config(maxSdk = Build.VERSION_CODES.P, minSdk = Build.VERSION_CODES.P)
+@PrepareForTest(Login.class)
+// Value of Build.VERSION_CODES.P is 28
 public class LoginTests {
 
     private Login login;
@@ -26,9 +40,8 @@ public class LoginTests {
     }
 
     @Test
-    public void loginShouldNotBeNull() throws Exception
-    {
-        assertNotNull( login );
+    public void loginShouldNotBeNull() throws Exception {
+        assertNotNull(login);
     }
 
     @Test
@@ -42,12 +55,27 @@ public class LoginTests {
     }
 
     @Test
-    public void signupButtonText() {
+    public void signupButtonCorrectText() {
 
         Button signupButton = (Button) login.findViewById(R.id.signUpButton);
 
         assertTrue("Signup button contains incorrect text",
                 "Sign Up".equals(signupButton.getText().toString()));
+    }
+
+    @Test
+    public void userInputCorrect() {
+
+        EditText inputEmail = (EditText) login.findViewById(R.id.editTextTextEmailAddress);
+        EditText inputPassword = (EditText) login.findViewById(R.id.editTextTextPassword);
+
+        inputEmail.setText("testEmail");
+        inputPassword.setText("testPassword");
+
+        assertEquals("Email should match user input", "testEmail",
+                inputEmail.getText().toString());
+        assertEquals("Password should match user input", "testPassword",
+                inputPassword.getText().toString());
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.LifestyleApp;
 
 import android.os.Build;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -90,6 +91,25 @@ public class UserInfo2Tests {
 
         assertTrue("User info click directions has incorrect text",
                 "User info 2 city".equals(textView.getContentDescription().toString()));
+
+    }
+
+    @Test
+    public void userInputCorrect() {
+
+        EditText country = userInfo2.findViewById(R.id.editTextCountry);
+
+        country.setText("United States");
+
+        assertTrue("Country Text View does not match user input",
+                "United States".equals(country.getText().toString()));
+
+        EditText whoCanSee = userInfo2.findViewById(R.id.editTextWhoCanSee);
+
+        whoCanSee.setText("Me");
+
+        assertTrue("Who can see Text View does not match user input",
+                "Me".equals(whoCanSee.getText().toString()));
 
     }
 

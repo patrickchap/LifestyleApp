@@ -94,7 +94,5 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
             }
         }
     }
-
-
 }
 
