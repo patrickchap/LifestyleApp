@@ -24,9 +24,9 @@ public class GetWeatherDataUtil {
     public static void getWeatherInfo(Context context, final TextView textView) {
 
 
-        String consumerKey = BuildConfig.WEATHERKEY;
+        String weatherkey = BuildConfig.WEATHERKEY;
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "http://api.openweathermap.org/data/2.5/weather?q=Salt Lake City&APPID="+consumerKey+"&units=imperial";
+        String url = "http://api.openweathermap.org/data/2.5/weather?q=Salt Lake City&APPID="+weatherkey+"&units=imperial";
 
         LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
