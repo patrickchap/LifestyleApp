@@ -5,19 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class MyRVAdapter extends RecyclerView.Adapter<MyRVAdapter.ViewHolder>{
+public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder>{
     private List<String> mListItems;
-    private Context mContext;
     private DataPasser mDataPasser;
 
-    public MyRVAdapter(List<String> inputList) {
+    public RvAdapter(List<String> inputList) {
         mListItems = inputList;
     }
 
@@ -34,12 +32,12 @@ public class MyRVAdapter extends RecyclerView.Adapter<MyRVAdapter.ViewHolder>{
 
     @NonNull
     @Override
-    public MyRVAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        mContext = parent.getContext();
+    public RvAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Context mContext = parent.getContext();
         try{
             mDataPasser = (DataPasser) mContext;
         }catch(ClassCastException e){
-            throw new ClassCastException(mContext.toString()+ " must implement OnDataPass");
+            throw new ClassCastException(mContext.toString()+ " must implement DataPasser");
         }
 
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
