@@ -31,7 +31,10 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
+
     implementation 'junit:junit:4.12'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.mcxiaoke.volley:library:1.0.19'
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.hamcrest:hamcrest-library:1.3'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
@@ -51,5 +54,13 @@ dependencies {
     testImplementation 'org.robolectric:robolectric:4.3.1'
     testCompile 'org.mockito:mockito-core:1.10.19'
 
-
 }
+def apikeyPropertiesFile = rootProject.file("apikey.properties")
+def apikeyProperties = new Properties()
+apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+android {
+    defaultConfig {
+        buildConfigField("String", "WEATHERKEY", apikeyProperties['WEATHER_KEY'])
+    }
+}
+
