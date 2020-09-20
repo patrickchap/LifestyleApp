@@ -1,70 +1,122 @@
 package com.example.LifestyleApp;
 
-import android.content.Intent;
-import android.os.Bundle;
+import android.os.Build;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import org.junit.Test;
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
-import Dialogs.DatePickerDialogMyTheme;
 import Dialogs.GenderSpinnerDialog;
-import Dialogs.HeightPickerDialog;
-import Dialogs.WeightPickerDialog;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
+@RunWith(RobolectricTestRunner.class)
+@Config(maxSdk = Build.VERSION_CODES.P, minSdk = Build.VERSION_CODES.P)
+// Value of Build.VERSION_CODES.P is 28
+public class UserInfo1Tests {
 
-class userInfoInputTests {
+    private UserInfo1 userInfo1;
 
-    @Test
-    public void testGenderInput() {
+    @Before
+    public void setup() {
 
-    }
-
-    @Test
-    public void testDOBInput() {
-
-    }
-
-    @Test
-    public void testWeightInput() {
+        userInfo1 = Robolectric.setupActivity(UserInfo1.class);
 
     }
 
     @Test
-    public void testHeightInput() {
+    public void loginShouldNotBeNull() throws Exception {
+        assertNotNull(userInfo1);
+    }
+
+    @Test
+    public void continueButtonCorrectText() {
+
+        Button continueButton = (Button) userInfo1.findViewById(R.id.continueButton);
+
+        assertTrue("Continue button contains incorrect text",
+                "Continue".equals(continueButton.getText().toString()));
 
     }
 
-}
+    @Test
+    public void genderTextViewCorrectText() {
 
-class BMICalculationTests {
+        TextView genderTextView = (TextView) userInfo1.findViewById(R.id.genderTextView);
 
-    Button mContinueButton;
-    TextView mGenderTextView;
-    TextView mDOB;
-    TextView mWeight;
-    //height is in inches
-    TextView mHeight;
+        assertTrue("Gender Text View contains incorrect text",
+                "Gender".equals(genderTextView.getText().toString()));
+    }
 
     @Test
-    public void testBMICalculation() {
+    public void dobTextViewCorrectText() {
 
-        String height = (String) mHeight.getText();
-        int ft = Integer.parseInt(height.split(" ")[0]);
-        int in = Integer.parseInt(height.split(" ")[2]);
-        int heightInInches = (ft * 12) + in;
+        TextView dob = (TextView) userInfo1.findViewById(R.id.birthdayTextView);
 
-        String weight = (String) mWeight.getText();
-        float fWeight = Float.parseFloat(weight.split(" ")[0]);
-        //bmi Formula: 703 x weight (lbs) / [height (in)]2
-        double bmi = ((703 * fWeight) / Math.pow(heightInInches,2));
+        assertTrue("DOB Text View contains incorrect text",
+                "Birthday".equals(dob.getText().toString()));
+    }
+
+    @Test
+    public void weightTextViewCorrectText() {
+
+        TextView weight = (TextView) userInfo1.findViewById(R.id.weightTextView);
+
+        assertTrue("Weight Text View contains incorrect text",
+                "Weight".equals(weight.getText().toString()));
+    }
+
+    @Test
+    public void heightTextViewCorrectText() {
+
+        TextView height = (TextView) userInfo1.findViewById(R.id.heightTextView);
+
+        assertTrue("Weight Text View contains incorrect text",
+                "Height".equals(height.getText().toString()));
+    }
+
+    @Test
+    public void userInputCorrect() {
+
+        TextView gender = userInfo1.findViewById(R.id.genderTextView);
+
+        gender.setText("Male");
+        assertTrue("Gender Text View does not match user input",
+                "Male".equals(gender.getText().toString()));
+
+        TextView birthday = userInfo1.findViewById(R.id.birthdayTextView);
+
+        birthday.setText("9/19/2020");
+
+        assertTrue("Birthday Text View does not match user input",
+                "9/19/2020".equals(birthday.getText().toString()));
+
+        TextView height = userInfo1.findViewById(R.id.heightTextView);
+
+        height.setText("9 ft 0 in");
+
+        assertTrue("Height Text View does not match user input",
+                "9 ft 0 in".equals(height.getText().toString()));
+
+        TextView weight = userInfo1.findViewById(R.id.weightTextView);
+
+        weight.setText("900.0 lbs");
+
+        assertTrue("Weight Text View does not match user input",
+                "900.0 lbs".equals(weight.getText().toString()));
 
     }
 

@@ -1,56 +1,46 @@
 package com.example.LifestyleApp;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import android.os.Build;
 
 import org.junit.Test;
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+import static org.junit.Assert.assertNotNull;
 
-import static org.junit.Assert.*;
+@RunWith(RobolectricTestRunner.class)
+@Config(maxSdk = Build.VERSION_CODES.P, minSdk = Build.VERSION_CODES.P) // Value of Build.VERSION_CODES.P is 28
+public class HomeTests {
 
-class testBMI extends AppCompatActivity{
-
-    TextView mBMI;
-
-    @Test
-    public void test() {
-
-        Intent intent = getIntent();
-
-        mBMI = findViewById(R.id.bmiTextView);
-
-        String bmi = Double.toString(intent.getDoubleExtra("bmi", 0));
-
-        mBMI.setText(bmi);
-
-    }
+    private Login login;
+    private Home home;
 
 
-}
+    @Before
+    public void setup() {
 
-class testProfilePicture extends AppCompatActivity {
+      //  LoginTests loginTests = new LoginTests();
 
-    ImageView mUserProfilePicture;
+        //loginTests.signUpUser();
 
-    @Test
-    public void test() {
-
-        Intent intent = getIntent();
-
-        mUserProfilePicture = findViewById(R.id.profilePictureIV);
-
-        byte[] byteArray = intent.getByteArrayExtra("profilePicture");
-
-        Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-
-        mUserProfilePicture.setImageBitmap(bmp);
+        home = Robolectric.setupActivity(Home.class);
 
     }
+//
+//    @Test
+//    public void homeShouldNotBeNull() throws Exception
+//    {
+//        assertNotNull( home );
+//    }
+//
+////    @Test
+////    public void validateBMITextView() {
+////
+////        TextView bmiTextView = (TextView) home.findViewById(R.id.bmiLabelTextView);
+////        assertTrue("TextView contains incorrect text",
+////                "Hello world!".equals(bmiTextView.getText().toString()));
+////    }
+//
 }

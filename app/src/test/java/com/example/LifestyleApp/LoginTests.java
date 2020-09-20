@@ -1,37 +1,81 @@
 package com.example.LifestyleApp;
 
+import android.os.Build;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+
 import org.junit.Test;
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.api.mockito.verification.PrivateMethodVerification;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
+@RunWith(RobolectricTestRunner.class)
+@Config(maxSdk = Build.VERSION_CODES.P, minSdk = Build.VERSION_CODES.P)
+@PrepareForTest(Login.class)
+// Value of Build.VERSION_CODES.P is 28
+public class LoginTests {
 
-/*
-public class Login extends AppCompatActivity {
-    Button mSubmit, mSignUp;
-    String mPassword, mEmail;
+    private Login login;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+    @Before
+    public void setup() {
 
-        mSubmit = findViewById(R.id.submitButton);
-        mSignUp = findViewById(R.id.signUpButton);
-
-        mSignUp.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                continueToUserInfo1();
-            }
-        });
-
+        login = Robolectric.setupActivity(Login.class);
 
     }
 
-    private void continueToUserInfo1(){
-        Intent intent = new Intent(this, UserInfo1.class);
-        startActivity(intent);
+    @Test
+    public void loginShouldNotBeNull() throws Exception {
+        assertNotNull(login);
     }
+
+    @Test
+    public void submitButtonCorrectText() {
+
+        Button submitButton = (Button) login.findViewById(R.id.submitButton);
+
+        assertTrue("Button contains incorrect text",
+                "Submit".equals(submitButton.getText().toString()));
+
+    }
+
+    @Test
+    public void signupButtonCorrectText() {
+
+        Button signupButton = (Button) login.findViewById(R.id.signUpButton);
+
+        assertTrue("Signup button contains incorrect text",
+                "Sign Up".equals(signupButton.getText().toString()));
+    }
+
+    @Test
+    public void userInputCorrect() {
+
+        EditText inputEmail = (EditText) login.findViewById(R.id.editTextTextEmailAddress);
+        EditText inputPassword = (EditText) login.findViewById(R.id.editTextTextPassword);
+
+        inputEmail.setText("testEmail");
+        inputPassword.setText("testPassword");
+
+        assertEquals("Email should match user input", "testEmail",
+                inputEmail.getText().toString());
+        assertEquals("Password should match user input", "testPassword",
+                inputPassword.getText().toString());
+    }
+
 }
-*/
