@@ -20,7 +20,6 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
     ImageView mProfilePictureImageView;
     Button mCreateButton;
 
-
     //Define a request code for the camera
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
