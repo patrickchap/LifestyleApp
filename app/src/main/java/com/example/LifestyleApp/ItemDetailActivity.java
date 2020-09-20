@@ -15,8 +15,6 @@ public class ItemDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_item_detail);
 
         mItemDetailFragment = new ItemDetailFragment();
-
-
         mItemDetailFragment.setArguments(getIntent().getExtras());
 
         FragmentTransaction fTrans = getSupportFragmentManager().beginTransaction();

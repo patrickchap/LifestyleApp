@@ -37,7 +37,7 @@ public class MasterListFragment  extends Fragment {
         CustomMasterList customListData = getArguments().getParcelable("item_list");
         List<String> inputList = customListData.getItemList();
 
-        mAdapter = new MyRVAdapter(inputList);
+        mAdapter = new RvAdapter(inputList);
         mRecyclerView.setAdapter(mAdapter);
 
         return fragmentView;
