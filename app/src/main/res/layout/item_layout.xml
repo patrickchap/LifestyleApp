@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:padding="8dp">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:text="Dummy"
+        android:textSize="20sp"
+        android:layout_marginTop="8dp"
+        android:id="@+id/tv_data"
+        android:textColor="@color/eWhite"
+        android:background="@drawable/continue_button"
+  />
+</LinearLayout>
