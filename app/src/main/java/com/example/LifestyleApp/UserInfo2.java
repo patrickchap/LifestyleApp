@@ -1,5 +1,7 @@
 package com.example.LifestyleApp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -58,10 +60,31 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
                 String country = mCountry.getText().toString();
                 String whoCanSee = mWhoCanSeeTextView.getText().toString();
 
+                if (!city.equals("") && !country.equals("")
+                        && !whoCanSee.equals("")){
 
+                    //TODO: pass along information from userInfo1
+                    continueToUserInfo3(city, country, whoCanSee);
+                }
 
-                //TODO: pass along information from userInfo1
-                continueToUserInfo3(city, country, whoCanSee);
+                else {
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(UserInfo2.this);
+                    builder.setTitle("User Info Incomplete")
+                            .setMessage("Please finish entering your information")
+                            .setCancelable(false)
+                            .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finishActivity(this.hashCode());
+                                }
+                            });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
+                }
+
             }
         }
     }

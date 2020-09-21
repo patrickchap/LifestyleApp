@@ -1,5 +1,6 @@
 package com.example.LifestyleApp;
 
+import android.content.Intent;
 import android.os.Build;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,9 +12,14 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowAlertDialog;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(maxSdk = Build.VERSION_CODES.P, minSdk = Build.VERSION_CODES.P) // Value of Build.VERSION_CODES.P is 28
@@ -60,7 +66,7 @@ public class UserInfo2Tests {
         TextView textView2 = (TextView) userInfo2.findViewById(R.id.textView2);
 
         assertTrue("Text view 2 has incorrect text",
-                "User info 2 location".equals(textView2.getContentDescription().toString()));
+                "Country".equals(textView2.getText().toString()));
 
     }
 
@@ -70,7 +76,7 @@ public class UserInfo2Tests {
         TextView textView3 = (TextView) userInfo2.findViewById(R.id.textView3);
 
         assertTrue("Text view 2 has incorrect text",
-                "User info 3 who can see".equals(textView3.getContentDescription().toString()));
+                "Who can see this?".equals(textView3.getText().toString()));
 
     }
 
@@ -80,7 +86,7 @@ public class UserInfo2Tests {
         TextView userInfoClickDirections = (TextView) userInfo2.findViewById(R.id.userInfoClickDirections);
 
         assertTrue("User info click directions has incorrect text",
-                "User info directions".equals(userInfoClickDirections.getContentDescription().toString()));
+                "Click each box to update".equals(userInfoClickDirections.getText().toString()));
 
     }
 
@@ -90,7 +96,7 @@ public class UserInfo2Tests {
         TextView textView = (TextView) userInfo2.findViewById(R.id.textView);
 
         assertTrue("User info click directions has incorrect text",
-                "User info 2 city".equals(textView.getContentDescription().toString()));
+                "City".equals(textView.getText().toString()));
 
     }
 
@@ -110,6 +116,72 @@ public class UserInfo2Tests {
 
         assertTrue("Who can see Text View does not match user input",
                 "Me".equals(whoCanSee.getText().toString()));
+
+    }
+
+    @Test
+    public void clickingContinueWithUserInfoComplete_shouldContinueToUserInfo3() {
+        TextView cityView = userInfo2.findViewById(R.id.editTextCity);
+        TextView countryView = userInfo2.findViewById(R.id.editTextCountry);
+        TextView whoSeesView = userInfo2.findViewById(R.id.editTextWhoCanSee);
+
+        cityView.setText("Salt Lake City");
+        countryView.setText("United States");
+        whoSeesView.setText("Me");
+
+        Intent userInfo3Intent = new Intent(userInfo2, UserInfo3.class);
+
+        userInfo2.findViewById(R.id.continueButton).performClick();
+        Intent actual = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
+
+        assertEquals(userInfo3Intent.getComponent(), actual.getComponent());
+
+    }
+
+    @Test
+    public void clickingContinueWithOutCity_shouldPromptAlert() {
+        TextView countryView = userInfo2.findViewById(R.id.editTextCountry);
+        TextView whoSeesView = userInfo2.findViewById(R.id.editTextWhoCanSee);
+
+        countryView.setText("United States");
+        whoSeesView.setText("Me");
+
+        Intent userInfo3Intent = new Intent(userInfo2, UserInfo3.class);
+
+        userInfo2.findViewById(R.id.continueButton).performClick();
+
+        ShadowAlertDialog dialog = shadowOf(RuntimeEnvironment.application).getLatestAlertDialog();
+        assertEquals("User Info Incomplete", dialog.getTitle());
+
+    }
+
+    @Test
+    public void clickingContinueWithOutCountry_shouldPromptAlert() {
+        TextView cityView = userInfo2.findViewById(R.id.editTextCity);
+        TextView whoSeesView = userInfo2.findViewById(R.id.editTextWhoCanSee);
+
+        cityView.setText("Salt Lake City");
+        whoSeesView.setText("Me");
+
+        userInfo2.findViewById(R.id.continueButton).performClick();
+
+        ShadowAlertDialog dialog = shadowOf(RuntimeEnvironment.application).getLatestAlertDialog();
+        assertEquals("User Info Incomplete", dialog.getTitle());
+
+    }
+
+    @Test
+    public void clickingContinueWithOutWhoSees_shouldPromptAlert() {
+        TextView cityView = userInfo2.findViewById(R.id.editTextCity);
+        TextView countryView = userInfo2.findViewById(R.id.editTextCountry);
+
+        cityView.setText("Salt Lake City");
+        countryView.setText("United States");
+
+        userInfo2.findViewById(R.id.continueButton).performClick();
+
+        ShadowAlertDialog dialog = shadowOf(RuntimeEnvironment.application).getLatestAlertDialog();
+        assertEquals("User Info Incomplete", dialog.getTitle());
 
     }
 

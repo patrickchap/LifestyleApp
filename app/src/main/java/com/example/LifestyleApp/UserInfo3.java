@@ -50,9 +50,9 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
                 break;
             }
             case R.id.createButton: {
+
                 Intent intentFromUserInfo1 = getIntent();
                 double bmi = intentFromUserInfo1.getDoubleExtra("bmi",0);
-                System.out.println("bmi from user2 in 3 " + bmi);
 
                 Intent intent = new Intent(this, Home.class);
                 intent.putExtra("bmi", bmi);
@@ -61,7 +61,6 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
-//                Drawable drawable = mProfilePictureImageView.getDrawable();
                 intent.putExtra("profilePicture", byteArray);
 
                 //TODO: create a user

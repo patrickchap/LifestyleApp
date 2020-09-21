@@ -1,5 +1,6 @@
 package com.example.LifestyleApp;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import org.powermock.api.mockito.verification.PrivateMethodVerification;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import static org.junit.Assert.assertNotNull;
@@ -23,6 +25,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(maxSdk = Build.VERSION_CODES.P, minSdk = Build.VERSION_CODES.P)
@@ -76,6 +79,15 @@ public class LoginTests {
                 inputEmail.getText().toString());
         assertEquals("Password should match user input", "testPassword",
                 inputPassword.getText().toString());
+    }
+
+    @Test
+    public void clickingSignUp_shouldContinueToUserInfo() {
+        login.findViewById(R.id.signUpButton).performClick();
+
+        Intent expectedIntent = new Intent(login, UserInfo1.class);
+        Intent actual = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
+        assertEquals(expectedIntent.getComponent(), actual.getComponent());
     }
 
 }
