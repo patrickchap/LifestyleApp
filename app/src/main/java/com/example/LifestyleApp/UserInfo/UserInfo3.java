@@ -1,4 +1,4 @@
-package com.example.LifestyleApp;
+package com.example.LifestyleApp.UserInfo;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.LifestyleApp.MasterList;
+import com.example.LifestyleApp.R;
+
 import java.io.ByteArrayOutputStream;
 
 
@@ -19,6 +22,7 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
     TextView mSnapSelfieTextView;
     ImageView mProfilePictureImageView;
     Button mCreateButton;
+    User user;
 
     //Define a request code for the camera
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -26,9 +30,8 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        user = (User) getIntent().getSerializableExtra("user");
         setContentView(R.layout.user_info_3);
-
-        //TODO: create intent and get member variables from UserInfo2
 
         mSnapSelfieTextView = findViewById(R.id.snapSelfie);
         mProfilePictureImageView = findViewById(R.id.userImage);
@@ -52,17 +55,18 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
             case R.id.createButton: {
                 Intent intentFromUserInfo1 = getIntent();
                 double bmi = intentFromUserInfo1.getDoubleExtra("bmi",0);
-                System.out.println("bmi from user2 in 3 " + bmi);
+//                System.out.println("bmi from user2 in 3 " + user.getBmi());
 
-                Intent intent = new Intent(this, Home.class);
-                intent.putExtra("bmi", bmi);
-
+                Intent intent = new Intent(this, MasterList.class);
+//                intent.putExtra("bmi", bmi);
                 Bitmap bmp = ((BitmapDrawable)mProfilePictureImageView.getDrawable()).getBitmap();
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
+                user.setProfilePicture(byteArray);
+                intent.putExtra("user", user);
 //                Drawable drawable = mProfilePictureImageView.getDrawable();
-                intent.putExtra("profilePicture", byteArray);
+//                intent.putExtra("profilePicture", byteArray);
 
                 //TODO: create a user
                 startActivity(intent);

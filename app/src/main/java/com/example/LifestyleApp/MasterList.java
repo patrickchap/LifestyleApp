@@ -9,32 +9,36 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.LifestyleApp.UserInfo.User;
+
 import util.GetIntentUtil;
 
 
-public class Home extends AppCompatActivity implements RvAdapter.DataPasser {
+public class MasterList extends AppCompatActivity implements RvAdapter.DataPasser {
     ImageView mUserProfilePicture;
     private MasterListFragment mMasterListFragment;
     private CustomMasterList mCustomMasterList = new CustomMasterList();
+    private User user;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home);
+        setContentView(R.layout.master_list);
+        user = (User) getIntent().getSerializableExtra("user");
+
         mUserProfilePicture = findViewById(R.id.profilePictureIV);
-        Intent intent = getIntent();
-        //get profile picture
-        byte[] byteArray = intent.getByteArrayExtra("profilePicture");
+        byte[] byteArray = user.getProfilePicture();//intent.getByteArrayExtra("profilePicture");
         Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         mUserProfilePicture.setImageBitmap(bmp);
 
-        String bmi = Double.toString(intent.getDoubleExtra("bmi", 0));
+        String bmi = Double.toString(user.getBmi());
 
         // add item name and detail to custom list. This will be used for the master detail flow to show modules
         mCustomMasterList.addItem("BMI", bmi);
         mCustomMasterList.addItem("Weather", "Weather");
         mCustomMasterList.addItem("Hikes near me", "Hikes");
+        mCustomMasterList.addItem("Set Goal", "Goal");
 
         //create fragrament that holds the master list and send the custom list
         mMasterListFragment = new MasterListFragment();
@@ -71,8 +75,8 @@ public class Home extends AppCompatActivity implements RvAdapter.DataPasser {
         }
         else{
             //Phones we will create a new activity that will be replaced by fragments for the detail
-            Intent sendIntent = GetIntentUtil.getIntent(this, itemDetailString);
-            sendIntent.putExtras(detailBundle);
+            Intent sendIntent = GetIntentUtil.getIntent(this, itemDetailString, detailBundle, user);
+//            sendIntent.putExtras(detailBundle);
             startActivity(sendIntent);
         }
     }
