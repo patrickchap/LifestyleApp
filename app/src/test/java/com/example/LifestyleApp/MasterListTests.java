@@ -2,7 +2,6 @@ package com.example.LifestyleApp;
 
 import android.os.Build;
 
-import org.junit.Test;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -12,10 +11,10 @@ import static org.junit.Assert.assertNotNull;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(maxSdk = Build.VERSION_CODES.P, minSdk = Build.VERSION_CODES.P) // Value of Build.VERSION_CODES.P is 28
-public class HomeTests {
+public class MasterListTests {
 
     private Login login;
-    private Home home;
+    private MasterList masterList;
 
 
     @Before
@@ -25,20 +24,20 @@ public class HomeTests {
 
         //loginTests.signUpUser();
 
-        home = Robolectric.setupActivity(Home.class);
+        masterList = Robolectric.setupActivity(MasterList.class);
 
     }
 //
 //    @Test
 //    public void homeShouldNotBeNull() throws Exception
 //    {
-//        assertNotNull( home );
+//        assertNotNull( master_list );
 //    }
 //
 ////    @Test
 ////    public void validateBMITextView() {
 ////
-////        TextView bmiTextView = (TextView) home.findViewById(R.id.bmiLabelTextView);
+////        TextView bmiTextView = (TextView) master_list.findViewById(R.id.bmiLabelTextView);
 ////        assertTrue("TextView contains incorrect text",
 ////                "Hello world!".equals(bmiTextView.getText().toString()));
 ////    }

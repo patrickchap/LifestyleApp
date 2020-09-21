@@ -2,8 +2,9 @@ package com.example.LifestyleApp;
 
 import android.os.Build;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.LifestyleApp.UserInfo.UserInfo3;
 
 import org.junit.Test;
 import org.junit.Before;

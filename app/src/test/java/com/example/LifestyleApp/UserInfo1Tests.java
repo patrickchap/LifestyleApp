@@ -1,14 +1,10 @@
 package com.example.LifestyleApp;
 
 import android.os.Build;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.fragment.app.DialogFragment;
+import com.example.LifestyleApp.UserInfo.UserInfo1;
 
 import org.junit.Test;
 import org.junit.Before;
@@ -16,8 +12,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-
-import Dialogs.GenderSpinnerDialog;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
