@@ -18,7 +18,6 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
     TextView mCountry;
     TextView mWhoCanSeeTextView;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

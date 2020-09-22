@@ -3,10 +3,9 @@ package com.example.LifestyleApp;
 import android.content.Intent;
 import android.os.Build;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONException;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -16,16 +15,20 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
 
+import java.io.IOException;
+import java.util.Map;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(maxSdk = Build.VERSION_CODES.P, minSdk = Build.VERSION_CODES.P) // Value of Build.VERSION_CODES.P is 28
+@Config(maxSdk = Build.VERSION_CODES.P, minSdk = Build.VERSION_CODES.P)
 public class UserInfo2Tests {
 
     private UserInfo2 userInfo2;
+    private int numUsers = 10;
 
     @Before
     public void setup() {
@@ -35,13 +38,13 @@ public class UserInfo2Tests {
     }
 
     @Test
-    public void loginShouldNotBeNull() throws Exception
+    public void initialView_userInfo2ShouldNotBeNull() throws Exception
     {
         assertNotNull( userInfo2 );
     }
 
     @Test
-    public void continueButtonCorrectText() {
+    public void initialView_continueButtonCorrectText() {
 
         Button continueButton = (Button) userInfo2.findViewById(R.id.continueButton);
 
@@ -51,138 +54,136 @@ public class UserInfo2Tests {
     }
 
     @Test
-    public void imageViewCorrectDescription() {
+    public void inputtingUserData_shouldMatchRandomData() throws IOException, JSONException {
 
-        ImageView imageView = (ImageView) userInfo2.findViewById(R.id.appImageView2);
+        for (int i = 0; i < numUsers; i++) {
 
-        assertTrue("Image view has incorrect content description",
-                "Lifestyle app logo".equals(imageView.getContentDescription().toString()));
+            UserTestData userTestData = new UserTestData();
+
+            Map<String, String> userInfo2TestData = userTestData.getUserInfo2TestData();
+
+            String city = userInfo2TestData.get("city");
+            String country = userInfo2TestData.get("country");
+            String whoSees = userInfo2TestData.get("whoSees");
+
+            TextView cityTextView = (TextView) userInfo2.findViewById(R.id.editTextCity);
+            cityTextView.setText(city);
+            assertEquals("City text view has incorrect text", city, cityTextView.getText().toString());
+
+            TextView countryTextView = (TextView) userInfo2.findViewById(R.id.editTextCountry);
+            countryTextView.setText(country);
+            assertEquals("Country text view has incorrect text", country, countryTextView.getText().toString());
+
+            TextView whoSeesTextView = (TextView) userInfo2.findViewById(R.id.editTextWhoCanSee);
+            whoSeesTextView.setText(whoSees);
+            assertEquals("Who Sees text view has incorrect text", whoSees, whoSeesTextView.getText().toString());
+
+        }
+    }
+
+    @Test
+    public void clickingContinueWithUserInfoComplete_shouldContinueToUserInfo3() throws IOException, JSONException {
+        for (int i = 0; i < numUsers; i++) {
+
+            UserTestData userTestData = new UserTestData();
+
+            Map<String, String> userInfo2TestData = userTestData.getUserInfo2TestData();
+
+            String city = userInfo2TestData.get("city");
+            String country = userInfo2TestData.get("country");
+            String whoSees = userInfo2TestData.get("whoSees");
+
+            TextView cityTextView = (TextView) userInfo2.findViewById(R.id.editTextCity);
+            cityTextView.setText(city);
+
+            TextView countryTextView = (TextView) userInfo2.findViewById(R.id.editTextCountry);
+            countryTextView.setText(country);
+
+            TextView whoSeesTextView = (TextView) userInfo2.findViewById(R.id.editTextWhoCanSee);
+            whoSeesTextView.setText(whoSees);
+
+            Intent userInfo3Intent = new Intent(userInfo2, UserInfo3.class);
+
+            userInfo2.findViewById(R.id.continueButton).performClick();
+            Intent actual = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
+
+            assertEquals(userInfo3Intent.getComponent(), actual.getComponent());
+        }
 
     }
 
     @Test
-    public void textView2CorrectText() {
+    public void clickingContinueWithOutCity_shouldPromptAlert() throws IOException, JSONException {
+        for (int i = 0; i < numUsers; i++) {
 
-        TextView textView2 = (TextView) userInfo2.findViewById(R.id.textView2);
+            UserTestData userTestData = new UserTestData();
 
-        assertTrue("Text view 2 has incorrect text",
-                "Country".equals(textView2.getText().toString()));
+            Map<String, String> userInfo2TestData = userTestData.getUserInfo2TestData();
 
-    }
+            String country = userInfo2TestData.get("country");
+            String whoSees = userInfo2TestData.get("whoSees");
 
-    @Test
-    public void textView3CorrectText() {
+            TextView countryTextView = (TextView) userInfo2.findViewById(R.id.editTextCountry);
+            countryTextView.setText(country);
 
-        TextView textView3 = (TextView) userInfo2.findViewById(R.id.textView3);
+            TextView whoSeesTextView = (TextView) userInfo2.findViewById(R.id.editTextWhoCanSee);
+            whoSeesTextView.setText(whoSees);
 
-        assertTrue("Text view 2 has incorrect text",
-                "Who can see this?".equals(textView3.getText().toString()));
+            userInfo2.findViewById(R.id.continueButton).performClick();
 
-    }
-
-    @Test
-    public void userInfoClickDirectionsCorrectText() {
-
-        TextView userInfoClickDirections = (TextView) userInfo2.findViewById(R.id.userInfoClickDirections);
-
-        assertTrue("User info click directions has incorrect text",
-                "Click each box to update".equals(userInfoClickDirections.getText().toString()));
+            ShadowAlertDialog dialog = shadowOf(RuntimeEnvironment.application).getLatestAlertDialog();
+            assertEquals("User Info Incomplete", dialog.getTitle());
+        }
 
     }
 
     @Test
-    public void userInfo2CityCorrectText() {
+    public void clickingContinueWithOutCountry_shouldPromptAlert() throws IOException, JSONException {
+        for (int i = 0; i < numUsers; i++) {
 
-        TextView textView = (TextView) userInfo2.findViewById(R.id.textView);
+            UserTestData userTestData = new UserTestData();
 
-        assertTrue("User info click directions has incorrect text",
-                "City".equals(textView.getText().toString()));
+            Map<String, String> userInfo2TestData = userTestData.getUserInfo2TestData();
 
-    }
+            String city = userInfo2TestData.get("city");
+            String whoSees = userInfo2TestData.get("whoSees");
 
-    @Test
-    public void userInputCorrect() {
+            TextView cityTextView = (TextView) userInfo2.findViewById(R.id.editTextCity);
+            cityTextView.setText(city);
 
-        EditText country = userInfo2.findViewById(R.id.editTextCountry);
+            TextView whoSeesTextView = (TextView) userInfo2.findViewById(R.id.editTextWhoCanSee);
+            whoSeesTextView.setText(whoSees);
 
-        country.setText("United States");
+            userInfo2.findViewById(R.id.continueButton).performClick();
 
-        assertTrue("Country Text View does not match user input",
-                "United States".equals(country.getText().toString()));
-
-        EditText whoCanSee = userInfo2.findViewById(R.id.editTextWhoCanSee);
-
-        whoCanSee.setText("Me");
-
-        assertTrue("Who can see Text View does not match user input",
-                "Me".equals(whoCanSee.getText().toString()));
+            ShadowAlertDialog dialog = shadowOf(RuntimeEnvironment.application).getLatestAlertDialog();
+            assertEquals("User Info Incomplete", dialog.getTitle());
+        }
 
     }
 
     @Test
-    public void clickingContinueWithUserInfoComplete_shouldContinueToUserInfo3() {
-        TextView cityView = userInfo2.findViewById(R.id.editTextCity);
-        TextView countryView = userInfo2.findViewById(R.id.editTextCountry);
-        TextView whoSeesView = userInfo2.findViewById(R.id.editTextWhoCanSee);
+    public void clickingContinueWithOutWhoSees_shouldPromptAlert() throws IOException, JSONException {
+        for (int i = 0; i < numUsers; i++) {
 
-        cityView.setText("Salt Lake City");
-        countryView.setText("United States");
-        whoSeesView.setText("Me");
+            UserTestData userTestData = new UserTestData();
 
-        Intent userInfo3Intent = new Intent(userInfo2, UserInfo3.class);
+            Map<String, String> userInfo2TestData = userTestData.getUserInfo2TestData();
 
-        userInfo2.findViewById(R.id.continueButton).performClick();
-        Intent actual = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
+            String city = userInfo2TestData.get("city");
+            String country = userInfo2TestData.get("country");
 
-        assertEquals(userInfo3Intent.getComponent(), actual.getComponent());
+            TextView cityTextView = (TextView) userInfo2.findViewById(R.id.editTextCity);
+            cityTextView.setText(city);
 
-    }
+            TextView countryTextView = (TextView) userInfo2.findViewById(R.id.editTextCountry);
+            countryTextView.setText(country);
 
-    @Test
-    public void clickingContinueWithOutCity_shouldPromptAlert() {
-        TextView countryView = userInfo2.findViewById(R.id.editTextCountry);
-        TextView whoSeesView = userInfo2.findViewById(R.id.editTextWhoCanSee);
+            userInfo2.findViewById(R.id.continueButton).performClick();
 
-        countryView.setText("United States");
-        whoSeesView.setText("Me");
-
-        Intent userInfo3Intent = new Intent(userInfo2, UserInfo3.class);
-
-        userInfo2.findViewById(R.id.continueButton).performClick();
-
-        ShadowAlertDialog dialog = shadowOf(RuntimeEnvironment.application).getLatestAlertDialog();
-        assertEquals("User Info Incomplete", dialog.getTitle());
-
-    }
-
-    @Test
-    public void clickingContinueWithOutCountry_shouldPromptAlert() {
-        TextView cityView = userInfo2.findViewById(R.id.editTextCity);
-        TextView whoSeesView = userInfo2.findViewById(R.id.editTextWhoCanSee);
-
-        cityView.setText("Salt Lake City");
-        whoSeesView.setText("Me");
-
-        userInfo2.findViewById(R.id.continueButton).performClick();
-
-        ShadowAlertDialog dialog = shadowOf(RuntimeEnvironment.application).getLatestAlertDialog();
-        assertEquals("User Info Incomplete", dialog.getTitle());
-
-    }
-
-    @Test
-    public void clickingContinueWithOutWhoSees_shouldPromptAlert() {
-        TextView cityView = userInfo2.findViewById(R.id.editTextCity);
-        TextView countryView = userInfo2.findViewById(R.id.editTextCountry);
-
-        cityView.setText("Salt Lake City");
-        countryView.setText("United States");
-
-        userInfo2.findViewById(R.id.continueButton).performClick();
-
-        ShadowAlertDialog dialog = shadowOf(RuntimeEnvironment.application).getLatestAlertDialog();
-        assertEquals("User Info Incomplete", dialog.getTitle());
-
+            ShadowAlertDialog dialog = shadowOf(RuntimeEnvironment.application).getLatestAlertDialog();
+            assertEquals("User Info Incomplete", dialog.getTitle());
+        }
     }
 
 }

@@ -27,11 +27,10 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
     //height is in inches
     TextView mHeight;
 
-    String height;
-    String weight;
-    String dob;
-    String gender;
-
+    private String height;
+    private String weight;
+    private String dob;
+    private String gender;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

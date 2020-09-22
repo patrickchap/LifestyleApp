@@ -2,18 +2,12 @@ package com.example.LifestyleApp;
 
 import android.content.Intent;
 import android.os.Build;
-import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.api.mockito.verification.PrivateMethodVerification;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
@@ -23,14 +17,12 @@ import org.robolectric.annotation.Config;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(maxSdk = Build.VERSION_CODES.P, minSdk = Build.VERSION_CODES.P)
 @PrepareForTest(Login.class)
-// Value of Build.VERSION_CODES.P is 28
+
 public class LoginTests {
 
     private Login login;
@@ -87,6 +79,7 @@ public class LoginTests {
 
         Intent expectedIntent = new Intent(login, UserInfo1.class);
         Intent actual = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
+
         assertEquals(expectedIntent.getComponent(), actual.getComponent());
     }
 

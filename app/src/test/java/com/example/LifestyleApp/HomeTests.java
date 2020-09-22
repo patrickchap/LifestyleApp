@@ -1,17 +1,9 @@
 package com.example.LifestyleApp;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
-import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.fragment.app.FragmentTransaction;
 
 import org.junit.Test;
 import org.junit.Before;
@@ -21,29 +13,68 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertThat;
 
 import static org.robolectric.Shadows.shadowOf;
 
-import java.io.ByteArrayOutputStream;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 @RunWith(RobolectricTestRunner.class)
-@Config(maxSdk = Build.VERSION_CODES.P, minSdk = Build.VERSION_CODES.P) // Value of Build.VERSION_CODES.P is 28
+@Config(maxSdk = Build.VERSION_CODES.P, minSdk = Build.VERSION_CODES.P)
+
 public class HomeTests {
 
+    private UserInfo1 userInfo1;
+    private UserInfo2 userInfo2;
     private UserInfo3 userInfo3;
     private Home home;
+
+    private double userInfo1BMI;
+    private ImageView mProfilePictureImageView;
 
     @Before
     public void setup() {
 
-        userInfo3 = Robolectric.setupActivity(UserInfo3.class);
+        userInfo1 = Robolectric.setupActivity(UserInfo1.class);
+
+        TextView gender = userInfo1.findViewById(R.id.genderTextView);
+        gender.setText("Male");
+
+        TextView birthday = userInfo1.findViewById(R.id.birthdayTextView);
+        birthday.setText("9/19/2020");
+
+        TextView height = userInfo1.findViewById(R.id.heightTextView);
+        height.setText("9 ft 0 in");
+
+        TextView weight = userInfo1.findViewById(R.id.weightTextView);
+        weight.setText("900.0 lbs");
+
+        int ft = Integer.parseInt(height.getText().toString().split(" ")[0]);
+        int in = Integer.parseInt(height.getText().toString().split(" ")[2]);
+        int heightInInches = (ft * 12) + in;
+
+        float fWeight = Float.parseFloat(weight.getText().toString().split(" ")[0]);
+
+        //bmi Formula: 703 x weight (lbs) / [height (in)]2
+        userInfo1BMI = ((703 * fWeight) / Math.pow(heightInInches,2));
+
+        userInfo1.findViewById(R.id.continueButton).performClick();
+
+        Intent userInfo2Intent = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
+        userInfo2 =  Robolectric.buildActivity(UserInfo2.class, userInfo2Intent).create().get();
+
+        TextView cityView = userInfo2.findViewById(R.id.editTextCity);
+        TextView countryView = userInfo2.findViewById(R.id.editTextCountry);
+        TextView whoSeesView = userInfo2.findViewById(R.id.editTextWhoCanSee);
+
+        cityView.setText("Salt Lake City");
+        countryView.setText("United States");
+        whoSeesView.setText("Me");
+
+        userInfo2.findViewById(R.id.continueButton).performClick();
+
+        Intent userInfo3Intent = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
+        userInfo3 =  Robolectric.buildActivity(UserInfo3.class, userInfo3Intent).create().get();
+
         userInfo3.findViewById(R.id.createButton).performClick();
         Intent homeIntent = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
         home =  Robolectric.buildActivity(Home.class, homeIntent).create().get();
@@ -81,58 +112,13 @@ public class HomeTests {
 
     }
 
-//    @Test
-//    public void userInfo3PictureNotNull() {
-//
-//        assertNotNull(userInfo3.findViewById(R.id.userImage));
-//
-//    }
+    @Test
+    public void homeBMIMatchesUserInfo1() {
 
-//    @Test
-//    public void profilePictureMatchesUserImage() {
-//
-//        ImageView userInfo3ImageView = userInfo3.findViewById(R.id.userImage);
-//
-//        Bitmap bmp = ((BitmapDrawable)userInfo3ImageView.getDrawable()).getBitmap();
-//        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        double homeBMI = home.getIntent().getDoubleExtra("bmi", 0);
 
-//        ImageView userInfo3ImageView = userInfo3.findViewById(R.id.userImage);
-//
-//        Bitmap userInfo3ImageBitmap = ((BitmapDrawable)userInfo3ImageView.getDrawable()).getBitmap();
-//        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//        userInfo3ImageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-//        //byte[] userInfo3ImagebyteArray = stream.toByteArray();
-//
-//        ImageView homeImageView = home.findViewById(R.id.profilePictureIV);
-//        Intent homeIntent = home.getIntent();
-//
-//        //get profile picture
-//        byte[] homeImageByteArray = homeIntent.getByteArrayExtra("profilePicture");
-//
-//        Bitmap homeImageByteArrayDecoded = BitmapFactory.decodeByteArray(homeImageByteArray, 0, homeImageByteArray.length);
-//
-//        Bitmap homeImageBitmap = BitmapFactory.decodeByteArray(homeImageByteArray, 0, homeImageByteArray.length);
+        assertTrue(userInfo1BMI == homeBMI);
 
-
-        //                Drawable drawable = mProfilePictureImageView.getDrawable();
-        //intent.putExtra("profilePicture", byteArray);
-
-       // ImageView userInfo3ImageView = userInfo3.findViewById(R.id.userImage);
-//        userInfo3ImageView.invalidate();
-//        BitmapDrawable userInfo3Drawable = (BitmapDrawable) userInfo3ImageView.getDrawable();
-//        Bitmap userInfo3ImageBitmap = userInfo3Drawable.getBitmap();
-
-//        homeImageView.invalidate();
-//        BitmapDrawable homeImageDrawable = (BitmapDrawable) homeImageView.getDrawable();
-//        Bitmap homeImageBitmap = homeImageDrawable.getBitmap();
-
-//        assertEquals(shadowOf(homeImageView.getDrawable()).getCreatedFromResId(),
-//                shadowOf(userInfo3ImageView.getDrawable()).getCreatedFromResId());
-
-//        assertEquals(userInfo3ImagebyteArray,
-//                homeImageByteArray);
-
-//    }
+    }
 
 }

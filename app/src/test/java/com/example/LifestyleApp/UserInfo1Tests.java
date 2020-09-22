@@ -1,18 +1,11 @@
 package com.example.LifestyleApp;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Build;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.fragment.app.DialogFragment;
-
-import org.junit.Assert;
+import org.json.JSONException;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -22,171 +15,148 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
 
-import Dialogs.GenderSpinnerDialog;
+import java.io.IOException;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(maxSdk = Build.VERSION_CODES.P, minSdk = Build.VERSION_CODES.P)
-// Value of Build.VERSION_CODES.P is 28
 public class UserInfo1Tests {
 
     private UserInfo1 userInfo1;
+    private int numUsers = 10;
 
     @Before
-    public void setup() {
+    public void setup() throws IOException, JSONException {
 
         userInfo1 = Robolectric.setupActivity(UserInfo1.class);
 
     }
 
     @Test
-    public void loginShouldNotBeNull() throws Exception {
+    public void initialView_userInfo1ShouldNotBeNull() throws Exception {
+
         assertNotNull(userInfo1);
+
     }
 
     @Test
-    public void continueButtonCorrectText() {
+    public void initialView_continueButtonCorrectText() {
 
         Button continueButton = (Button) userInfo1.findViewById(R.id.continueButton);
-
         assertEquals("Continue button contains incorrect text", "Continue", continueButton.getText().toString());
 
     }
 
     @Test
-    public void genderTextViewCorrectText() {
+    public void initialView_textViewsCorrect() {
 
         TextView genderTextView = (TextView) userInfo1.findViewById(R.id.genderTextView);
-
         assertEquals("Gender Text View contains incorrect text", "Gender", genderTextView.getText().toString());
-    }
-
-    @Test
-    public void dobTextViewCorrectText() {
 
         TextView dob = (TextView) userInfo1.findViewById(R.id.birthdayTextView);
-
         assertEquals("DOB Text View contains incorrect text", "Birthday", dob.getText().toString());
-    }
-
-    @Test
-    public void weightTextViewCorrectText() {
 
         TextView weight = (TextView) userInfo1.findViewById(R.id.weightTextView);
-
         assertEquals("Weight Text View contains incorrect text", "Weight", weight.getText().toString());
-    }
 
-    @Test
-    public void heightTextViewCorrectText() {
 
         TextView height = (TextView) userInfo1.findViewById(R.id.heightTextView);
-
         assertEquals("Weight Text View contains incorrect text", "Height", height.getText().toString());
     }
 
     @Test
-    public void userInputCorrect() {
+    public void inputtingUserData_shouldMatchRandomData() throws IOException, JSONException {
 
-        TextView gender = userInfo1.findViewById(R.id.genderTextView);
+        for (int i = 0; i < numUsers; i++){
 
-        gender.setText("Male");
-        assertEquals("Gender Text View does not match user input", "Male", gender.getText().toString());
+            UserTestData userTestData = new UserTestData();
 
-        TextView birthday = userInfo1.findViewById(R.id.birthdayTextView);
+            Map<String, String> userInfo1TestData = userTestData.getUserInfo1TestData();
 
-        birthday.setText("9/19/2020");
+            String gender = userInfo1TestData.get("gender");
+            String dob = userInfo1TestData.get("dob");
+            String height = userInfo1TestData.get("height");
+            String weight = userInfo1TestData.get("weight");
 
-        assertEquals("Birthday Text View does not match user input", "9/19/2020", birthday.getText().toString());
+            TextView genderTextView = userInfo1.findViewById(R.id.genderTextView);
+            genderTextView.setText(gender);
+            assertEquals("Gender Text View does not match user input", gender, genderTextView.getText().toString());
 
-        TextView height = userInfo1.findViewById(R.id.heightTextView);
+            TextView dobTextView = userInfo1.findViewById(R.id.birthdayTextView);
+            dobTextView.setText(dob);
+            assertEquals("Birthday Text View does not match user input", dob, dobTextView.getText().toString());
 
-        height.setText("9 ft 0 in");
+            TextView heightTextView = userInfo1.findViewById(R.id.heightTextView);
+            heightTextView.setText(height);
+            assertEquals("Height Text View does not match user input", height, heightTextView.getText().toString());
 
-        assertEquals("Height Text View does not match user input", "9 ft 0 in", height.getText().toString());
+            TextView weightTextView = userInfo1.findViewById(R.id.weightTextView);
+            weightTextView.setText(weight);
+            assertEquals("Weight Text View does not match user input", weight, weightTextView.getText().toString());
 
-        TextView weight = userInfo1.findViewById(R.id.weightTextView);
-
-        weight.setText("900.0 lbs");
-
-        assertEquals("Weight Text View does not match user input", "900.0 lbs", weight.getText().toString());
+        }
 
     }
 
     @Test
-    public void clickingContinueWithUserInfoComplete_shouldContinueToUserInfo2() {
+    public void clickingContinueWithUserInfoComplete_shouldContinueToUserInfo2() throws IOException, JSONException {
 
-        TextView height = userInfo1.findViewById(R.id.heightTextView);
-        height.setText("9 ft 0 in");
+        for (int i = 0; i < numUsers; i++) {
 
-        TextView weight = userInfo1.findViewById(R.id.weightTextView);
-        weight.setText("900.0 lbs");
+            UserTestData userTestData = new UserTestData();
 
-        TextView gender = userInfo1.findViewById(R.id.genderTextView);
-        gender.setText("Male");
+            Map<String, String> userInfo1TestData = userTestData.getUserInfo1TestData();
 
-        TextView birthday = userInfo1.findViewById(R.id.birthdayTextView);
-        birthday.setText("9/21/2020");
+            String gender = userInfo1TestData.get("gender");
+            String dob = userInfo1TestData.get("dob");
+            String height = userInfo1TestData.get("height");
+            String weight = userInfo1TestData.get("weight");
 
-        Intent userInfo2Intent = new Intent(userInfo1, UserInfo2.class);
+            TextView genderTextView = userInfo1.findViewById(R.id.genderTextView);
+            genderTextView.setText(gender);
 
-        userInfo1.findViewById(R.id.continueButton).performClick();
-        Intent actual = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
+            TextView dobTextView = userInfo1.findViewById(R.id.birthdayTextView);
+            dobTextView.setText(dob);
 
-        assertEquals(userInfo2Intent.getComponent(), actual.getComponent());
+            TextView heightTextView = userInfo1.findViewById(R.id.heightTextView);
+            heightTextView.setText(height);
+
+            TextView weightTextView = userInfo1.findViewById(R.id.weightTextView);
+            weightTextView.setText(weight);
+
+            Intent userInfo2Intent = new Intent(userInfo1, UserInfo2.class);
+
+            userInfo1.findViewById(R.id.continueButton).performClick();
+            Intent actual = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
+
+            assertEquals(userInfo2Intent.getComponent(), actual.getComponent());
+
+        }
     }
 
     @Test
-    public void clickingContinueWithoutHeight_shouldPromptAlert() {
+    public void clickingContinueWithoutHeight_shouldPromptAlert() throws IOException, JSONException {
 
-        TextView weight = userInfo1.findViewById(R.id.weightTextView);
-        weight.setText("900.0 lbs");
+        UserTestData userTestData = new UserTestData();
 
-        TextView gender = userInfo1.findViewById(R.id.genderTextView);
-        gender.setText("Male");
+        Map<String, String> userInfo1TestData = userTestData.getUserInfo1TestData();
 
-        TextView birthday = userInfo1.findViewById(R.id.birthdayTextView);
-        birthday.setText("9/21/2020");
+        String gender = userInfo1TestData.get("gender");
+        String dob = userInfo1TestData.get("dob");
+        String weight = userInfo1TestData.get("weight");
 
-        userInfo1.findViewById(R.id.continueButton).performClick();
+        TextView genderTextView = userInfo1.findViewById(R.id.genderTextView);
+        genderTextView.setText(gender);
 
-        ShadowAlertDialog dialog = shadowOf(RuntimeEnvironment.application).getLatestAlertDialog();
-        assertEquals("User Info Incomplete", dialog.getTitle());
-    }
+        TextView dobTextView = userInfo1.findViewById(R.id.birthdayTextView);
+        dobTextView.setText(dob);
 
-    @Test
-    public void clickingContinueWithoutWeight_shouldPromptAlert() {
-
-        TextView height = userInfo1.findViewById(R.id.heightTextView);
-        height.setText("9 ft 0 in");
-
-        TextView gender = userInfo1.findViewById(R.id.genderTextView);
-        gender.setText("Male");
-
-        TextView birthday = userInfo1.findViewById(R.id.birthdayTextView);
-        birthday.setText("9/21/2020");
-
-        userInfo1.findViewById(R.id.continueButton).performClick();
-
-        ShadowAlertDialog dialog = shadowOf(RuntimeEnvironment.application).getLatestAlertDialog();
-        assertEquals("User Info Incomplete", dialog.getTitle());
-    }
-
-    @Test
-    public void clickingContinueWithoutDOB_shouldPromptAlert() {
-
-        TextView height = userInfo1.findViewById(R.id.heightTextView);
-        height.setText("9 ft 0 in");
-
-        TextView weight = userInfo1.findViewById(R.id.weightTextView);
-        weight.setText("900.0 lbs");
-
-        TextView gender = userInfo1.findViewById(R.id.genderTextView);
-        gender.setText("Male");
+        TextView weightTextView = userInfo1.findViewById(R.id.weightTextView);
+        weightTextView.setText(weight);
 
         userInfo1.findViewById(R.id.continueButton).performClick();
 
@@ -195,16 +165,82 @@ public class UserInfo1Tests {
     }
 
     @Test
-    public void clickingContinueWithoutGender_shouldPromptAlert() {
+    public void clickingContinueWithoutWeight_shouldPromptAlert() throws IOException, JSONException {
 
-        TextView height = userInfo1.findViewById(R.id.heightTextView);
-        height.setText("9 ft 0 in");
+        UserTestData userTestData = new UserTestData();
 
-        TextView weight = userInfo1.findViewById(R.id.weightTextView);
-        weight.setText("900.0 lbs");
+        Map<String, String> userInfo1TestData = userTestData.getUserInfo1TestData();
 
-        TextView birthday = userInfo1.findViewById(R.id.birthdayTextView);
-        birthday.setText("9/21/2020");
+        String gender = userInfo1TestData.get("gender");
+        String dob = userInfo1TestData.get("dob");
+        String height = userInfo1TestData.get("height");
+
+        TextView genderTextView = userInfo1.findViewById(R.id.genderTextView);
+        genderTextView.setText(gender);
+
+        TextView dobTextView = userInfo1.findViewById(R.id.birthdayTextView);
+        dobTextView.setText(dob);
+
+        TextView heightTextView = userInfo1.findViewById(R.id.heightTextView);
+        heightTextView.setText(height);
+
+        userInfo1.findViewById(R.id.continueButton).performClick();
+
+        ShadowAlertDialog dialog = shadowOf(RuntimeEnvironment.application).getLatestAlertDialog();
+        assertEquals("User Info Incomplete", dialog.getTitle());
+    }
+
+    @Test
+    public void clickingContinueWithoutDOB_shouldPromptAlert() throws IOException, JSONException {
+
+        UserTestData userTestData = new UserTestData();
+
+        Map<String, String> userInfo1TestData = userTestData.getUserInfo1TestData();
+
+        String gender = userInfo1TestData.get("gender");
+        String height = userInfo1TestData.get("height");
+        String weight = userInfo1TestData.get("weight");
+
+        TextView genderTextView = userInfo1.findViewById(R.id.genderTextView);
+        genderTextView.setText(gender);
+        assertEquals("Gender Text View does not match user input", gender, genderTextView.getText().toString());
+
+        TextView heightTextView = userInfo1.findViewById(R.id.heightTextView);
+        heightTextView.setText(height);
+        assertEquals("Height Text View does not match user input", height, heightTextView.getText().toString());
+
+        TextView weightTextView = userInfo1.findViewById(R.id.weightTextView);
+        weightTextView.setText(weight);
+        assertEquals("Weight Text View does not match user input", weight, weightTextView.getText().toString());
+
+        userInfo1.findViewById(R.id.continueButton).performClick();
+
+        ShadowAlertDialog dialog = shadowOf(RuntimeEnvironment.application).getLatestAlertDialog();
+        assertEquals("User Info Incomplete", dialog.getTitle());
+    }
+
+    @Test
+    public void clickingContinueWithoutGender_shouldPromptAlert() throws IOException, JSONException {
+
+        UserTestData userTestData = new UserTestData();
+
+        Map<String, String> userInfo1TestData = userTestData.getUserInfo1TestData();
+
+        String dob = userInfo1TestData.get("dob");
+        String height = userInfo1TestData.get("height");
+        String weight = userInfo1TestData.get("weight");
+
+        TextView dobTextView = userInfo1.findViewById(R.id.birthdayTextView);
+        dobTextView.setText(dob);
+        assertEquals("Birthday Text View does not match user input", dob, dobTextView.getText().toString());
+
+        TextView heightTextView = userInfo1.findViewById(R.id.heightTextView);
+        heightTextView.setText(height);
+        assertEquals("Height Text View does not match user input", height, heightTextView.getText().toString());
+
+        TextView weightTextView = userInfo1.findViewById(R.id.weightTextView);
+        weightTextView.setText(weight);
+        assertEquals("Weight Text View does not match user input", weight, weightTextView.getText().toString());
 
         userInfo1.findViewById(R.id.continueButton).performClick();
 
