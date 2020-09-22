@@ -37,6 +37,7 @@
     <string name="gm_gain_btn">Gain Weight</string>
     <string name="gm_gpw">Choose Goal</string>
     <string name="gm_save_btn">Save Goal</string>
+    <string name="home_module_button">Modules</string>
 
     <string-array name="gender_array">
         <item>Male</item>

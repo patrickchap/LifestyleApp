@@ -12,10 +12,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.LifestyleApp.MasterList;
+import com.example.LifestyleApp.Home;
 import com.example.LifestyleApp.R;
-
 import java.io.ByteArrayOutputStream;
+
 
 
 public class UserInfo3 extends AppCompatActivity implements View.OnClickListener{
@@ -53,22 +53,13 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
                 break;
             }
             case R.id.createButton: {
-                Intent intentFromUserInfo1 = getIntent();
-                double bmi = intentFromUserInfo1.getDoubleExtra("bmi",0);
-//                System.out.println("bmi from user2 in 3 " + user.getBmi());
-
-                Intent intent = new Intent(this, MasterList.class);
-//                intent.putExtra("bmi", bmi);
+                Intent intent = new Intent(this, Home.class);
                 Bitmap bmp = ((BitmapDrawable)mProfilePictureImageView.getDrawable()).getBitmap();
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
                 user.setProfilePicture(byteArray);
                 intent.putExtra("user", user);
-//                Drawable drawable = mProfilePictureImageView.getDrawable();
-//                intent.putExtra("profilePicture", byteArray);
-
-                //TODO: create a user
                 startActivity(intent);
             }
         }

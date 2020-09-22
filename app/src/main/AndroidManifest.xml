@@ -20,6 +20,7 @@
         <activity android:name=".MasterList" />
         <activity android:name=".ItemDetail.ItemDetailActivity"/>
         <activity android:name=".GoalManager.GoalManagerActivity"/>
+        <activity android:name=".Home"/>
         <activity android:name="com.example.LifestyleApp.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
