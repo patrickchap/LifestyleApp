@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class MasterListFragment  extends Fragment {
+public class MasterListFragment extends Fragment {
     RecyclerView mRecyclerView;
     LinearLayoutManager layoutManager;
     private RecyclerView.Adapter mAdapter;

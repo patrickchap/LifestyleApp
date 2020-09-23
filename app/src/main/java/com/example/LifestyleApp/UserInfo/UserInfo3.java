@@ -53,6 +53,7 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
                 break;
             }
             case R.id.createButton: {
+
                 Intent intent = new Intent(this, Home.class);
                 Bitmap bmp = ((BitmapDrawable)mProfilePictureImageView.getDrawable()).getBitmap();
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
