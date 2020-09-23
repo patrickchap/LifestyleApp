@@ -41,5 +41,4 @@ public class MasterListTests {
 ////        assertTrue("TextView contains incorrect text",
 ////                "Hello world!".equals(bmiTextView.getText().toString()));
 ////    }
-//
 }
