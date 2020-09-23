@@ -1,9 +1,11 @@
-package com.example.LifestyleApp;
+package com.example.LifestyleApp.ItemDetail;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.LifestyleApp.R;
 
 public class ItemDetailActivity extends AppCompatActivity {
 

@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:id="@+id/fl_frag_itemdetail_container_phone"
     android:padding="16dp"
+    android:background="@color/background"
     >
 
 </FrameLayout>

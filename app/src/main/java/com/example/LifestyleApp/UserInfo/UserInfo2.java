@@ -1,4 +1,4 @@
-package com.example.LifestyleApp;
+package com.example.LifestyleApp.UserInfo;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -11,25 +11,28 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.LifestyleApp.UserInfo.UserInfo3;
+import com.example.LifestyleApp.R;
+
+import java.io.Serializable;
 
 public class UserInfo2 extends AppCompatActivity implements View.OnClickListener{
     Button mContinueButton;
+//    TextView mLocationTextView;
     TextView mCity;
     TextView mCountry;
     TextView mWhoCanSeeTextView;
+    User user;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_info_2);
+        System.out.println("get user bmi <<<<<<<,");
 
-        //TODO: create intent and get member variables from UserInfo1
-        //TODO: get location and who can see this from user input
-        //TODO: Location and who can see this are currently typed in from the user,
-        // but we need to change them to onClick options with either drop downs or picker
+        user = (User) getIntent().getSerializableExtra("user");
 
         mContinueButton = findViewById(R.id.continueButton);
+//        mLocationTextView = findViewById(R.id.editTextCountry);
         mCity = findViewById(R.id.editTextCity);
         mCountry = findViewById(R.id.editTextCountry);
         mWhoCanSeeTextView = findViewById(R.id.editTextWhoCanSee);
@@ -38,15 +41,19 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
 
 
     private void continueToUserInfo3(String city, String country , String whoCanSee) {
-        Intent intentFromUserInfo1 = getIntent();
-        double bmi = intentFromUserInfo1.getDoubleExtra("bmi",0);
-        System.out.println("bmi from user1 in 2 " + bmi);
+//        Intent intentFromUserInfo1 = getIntent();
+//        double bmi = intentFromUserInfo1.getDoubleExtra("bmi",0);
+
 
         Intent intent = new Intent(this, UserInfo3.class);
-        intent.putExtra("city", city);
-        intent.putExtra("country", country);
-        intent.putExtra("whoCanSee", whoCanSee);
-        intent.putExtra("bmi", bmi);
+        user.setCity(city);
+        user.setCountry(country);
+        user.setWhoCanSee(whoCanSee);
+        intent.putExtra("user", user);
+//        intent.putExtra("city", city);
+//        intent.putExtra("country", country);
+//        intent.putExtra("whoCanSee", whoCanSee);
+//        intent.putExtra("bmi", user.getBmi());
         //TODO: pass all user information along to UserInfo3
         startActivity(intent);
     }

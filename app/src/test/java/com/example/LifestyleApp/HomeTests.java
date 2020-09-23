@@ -5,6 +5,9 @@ import android.os.Build;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.LifestyleApp.UserInfo.UserInfo1;
+import com.example.LifestyleApp.UserInfo.UserInfo3;
+
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -102,13 +105,6 @@ public class HomeTests {
                 "Weather".equals(customMasterList.getItemList().get(1).toString()));
         assertTrue("Hikes missing from custom master list",
                 "Hikes near me".equals(customMasterList.getItemList().get(2).toString()));
-
-    }
-
-    @Test
-    public void profilePictureNotNull() {
-
-        assertNotNull(home.mUserProfilePicture);
 
     }
 

@@ -1,4 +1,4 @@
-package com.example.LifestyleApp;
+package com.example.LifestyleApp.ItemDetail;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.LifestyleApp.R;
+
+import org.w3c.dom.Text;
 
 import util.GetWeatherDataUtil;
 
@@ -27,7 +31,8 @@ public class ItemDetailFragment extends Fragment {
         String detailString = getArguments().getString("item_detail");
         if (detailString != null && !detailString.equals("Weather")) {
             mTvItemDetail.setText(detailString);
-        }else if(detailString.equals("Weather")){ // if the detail is weather make api call to openweathermap
+        }
+        else if(detailString.equals("Weather")){ // if the detail is weather make api call to openweathermap
             GetWeatherDataUtil.getWeatherInfo(getContext(), mTvItemDetail);
         }
         return view;

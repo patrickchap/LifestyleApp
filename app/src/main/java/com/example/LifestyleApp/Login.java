@@ -1,5 +1,6 @@
 package com.example.LifestyleApp;
 
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -10,6 +11,8 @@ import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.LifestyleApp.UserInfo.UserInfo1;
 
 
 public class Login extends AppCompatActivity {

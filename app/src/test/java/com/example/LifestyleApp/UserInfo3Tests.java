@@ -7,6 +7,7 @@ import android.os.Build;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.LifestyleApp.UserInfo.UserInfo3;
 import org.json.JSONException;
 import org.junit.Test;
 import org.junit.Before;
@@ -15,7 +16,6 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;

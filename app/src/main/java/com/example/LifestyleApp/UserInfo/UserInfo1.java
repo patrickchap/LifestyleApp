@@ -1,4 +1,4 @@
-package com.example.LifestyleApp;
+package com.example.LifestyleApp.UserInfo;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -13,10 +13,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import com.example.LifestyleApp.R;
+
+import java.text.ParseException;
+import java.util.Date;
+
 import Dialogs.DatePickerDialogMyTheme;
 import Dialogs.GenderSpinnerDialog;
 import Dialogs.HeightPickerDialog;
 import Dialogs.WeightPickerDialog;
+
+import java.text.SimpleDateFormat;
+
 
 public class UserInfo1 extends AppCompatActivity  implements View.OnClickListener{
 
@@ -52,7 +60,13 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
         //TODO: handle onClick for Gender
     }
 
+<<<<<<< HEAD:app/src/main/java/com/example/LifestyleApp/UserInfo1.java
     private void continueToUserInfo2() {
+=======
+
+    private void continueToUserInfo2() throws ParseException {
+        String height = (String) mHeight.getText();
+>>>>>>> e92a521a4749fd0f8627955a9e12b0b0bb9e8676:app/src/main/java/com/example/LifestyleApp/UserInfo/UserInfo1.java
 
         int ft = Integer.parseInt(height.split(" ")[0]);
         int in = Integer.parseInt(height.split(" ")[2]);
@@ -63,9 +77,23 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
         //bmi Formula: 703 x weight (lbs) / [height (in)]2
         double bmi = ((703 * fWeight) / Math.pow(heightInInches,2));
 
+<<<<<<< HEAD:app/src/main/java/com/example/LifestyleApp/UserInfo1.java
+=======
+
+        //Create user
+        User user = new User();
+        user.setWeight(fWeight);
+        user.setBmi(bmi);
+        user.setHeight(heightInInches);
+        Date dob=new SimpleDateFormat("dd/MM/yyyy").parse(mDOB.getText().toString());
+        user.setDOB(dob);
+        user.setGender(mGenderTextView.toString());
+
+
+>>>>>>> e92a521a4749fd0f8627955a9e12b0b0bb9e8676:app/src/main/java/com/example/LifestyleApp/UserInfo/UserInfo1.java
         Intent intent = new Intent(this, UserInfo2.class);
-        intent.putExtra("bmi", bmi);
-        //TODO: pass Gender(String), Weight(float), Height(int ... inches), and DOB(date) along
+
+        intent.putExtra("user", user);
 
         startActivity(intent);
     }
@@ -82,7 +110,15 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
                 if (!height.equals("Height") && !weight.equals("Weight")
                 && !dob.equals("Birthday") && !gender.equals("Gender")){
 
+<<<<<<< HEAD:app/src/main/java/com/example/LifestyleApp/UserInfo1.java
                     continueToUserInfo2();
+=======
+                    try {
+                        continueToUserInfo2();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+>>>>>>> e92a521a4749fd0f8627955a9e12b0b0bb9e8676:app/src/main/java/com/example/LifestyleApp/UserInfo/UserInfo1.java
 
                 }
 
@@ -101,7 +137,10 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
 
                     AlertDialog dialog = builder.create();
                     dialog.show();
+<<<<<<< HEAD:app/src/main/java/com/example/LifestyleApp/UserInfo1.java
 
+=======
+>>>>>>> e92a521a4749fd0f8627955a9e12b0b0bb9e8676:app/src/main/java/com/example/LifestyleApp/UserInfo/UserInfo1.java
                 }
                 break;
             }
