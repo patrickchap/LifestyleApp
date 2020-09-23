@@ -1,10 +1,14 @@
 package com.example.LifestyleApp.UserInfo;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -31,7 +35,10 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
     //height is in inches
     TextView mHeight;
 
-
+    private String height;
+    private String weight;
+    private String dob;
+    private String gender;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,7 +51,6 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
         mHeight = findViewById(R.id.heightTextView);
         mGenderTextView = findViewById(R.id.genderTextView);
 
-
         mDOB.setOnClickListener(this);
         mContinueButton.setOnClickListener(this);
         mWeight.setOnClickListener(this);
@@ -54,16 +60,19 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
         //TODO: handle onClick for Gender
     }
 
+
     private void continueToUserInfo2() throws ParseException {
         String height = (String) mHeight.getText();
+
         int ft = Integer.parseInt(height.split(" ")[0]);
         int in = Integer.parseInt(height.split(" ")[2]);
         int heightInInches = (ft * 12) + in;
 
-        String weight = (String) mWeight.getText();
         float fWeight = Float.parseFloat(weight.split(" ")[0]);
+
         //bmi Formula: 703 x weight (lbs) / [height (in)]2
         double bmi = ((703 * fWeight) / Math.pow(heightInInches,2));
+
 
         //Create user
         User user = new User();
@@ -86,10 +95,37 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
         switch (v.getId()){
             case R.id.continueButton: {
 
-                try {
-                    continueToUserInfo2();
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                height = (String) mHeight.getText();
+                weight = (String) mWeight.getText();
+                dob = (String) mDOB.getText();
+                gender = (String) mGenderTextView.getText();
+
+                if (!height.equals("Height") && !weight.equals("Weight")
+                && !dob.equals("Birthday") && !gender.equals("Gender")){
+
+                    try {
+                        continueToUserInfo2();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                else {
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(UserInfo1.this);
+                    builder.setTitle("User Info Incomplete")
+                            .setMessage("Please finish entering your information")
+                            .setCancelable(false)
+                            .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finishActivity(this.hashCode());
+                        }
+                    });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
                 break;
             }
