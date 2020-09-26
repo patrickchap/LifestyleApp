@@ -39,11 +39,218 @@
         android:id="@+id/moduleButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/continue_button"
         android:text="@string/home_module_button"
+        android:textColor="@color/eWhite"
         app:layout_constraintBottom_toTopOf="@+id/guideline27"
         app:layout_constraintEnd_toStartOf="@+id/guideline28"
+        app:layout_constraintStart_toStartOf="@+id/guideline29" />
+
+    <ImageView
+        android:id="@+id/profilePictureIV"
+        android:layout_width="84dp"
+        android:layout_height="78dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline28"
+        app:layout_constraintTop_toTopOf="@+id/guideline24"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corner_box"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/moduleButton"
+        app:layout_constraintEnd_toStartOf="@+id/guideline28"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline29"
-        android:background="@drawable/continue_button"
-        android:textColor="@color/eWhite"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/profilePictureIV"
+        app:layout_constraintVertical_bias="0.96">
+
+        <TextView
+            android:id="@+id/measurmentHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="5dp"
+            android:paddingLeft="5dp"
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp"
+            android:text="@string/home_measurments"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/measurmentBMI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingStart="25dp"
+            android:paddingLeft="25dp"
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp"
+            android:text="@string/home_bmi"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/measurmentHeader" />
+
+        <TextView
+            android:id="@+id/measurmentWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingStart="25dp"
+            android:paddingLeft="25dp"
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp"
+            android:text="@string/home_weight"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/measurmentBMI" />
+
+        <TextView
+            android:id="@+id/measurmentHeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingStart="25dp"
+            android:paddingLeft="25dp"
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp"
+            android:text="@string/home_height"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/measurmentWeight" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingStart="25dp"
+            android:paddingLeft="25dp"
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp"
+            android:text="@string/home_goal_weight"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/measurmentHeight" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingStart="25dp"
+            android:paddingLeft="25dp"
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp"
+            android:text="@string/home_bmr"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="3dp"
+            android:paddingStart="25dp"
+            android:paddingLeft="25dp"
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp"
+            android:text="@string/home_activity"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+        <TextView
+            android:id="@+id/bmiValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="5dp"
+            android:paddingLeft="0dp"
+            android:paddingEnd="5dp"
+            android:paddingStart="0dp"
+            android:textSize="18sp"
+            android:text="@string/home_not_set"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/measurmentBMI"
+            />
+
+        <TextView
+            android:id="@+id/weightValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            android:paddingRight="5dp"
+            android:paddingLeft="0dp"
+            android:paddingEnd="5dp"
+            android:paddingStart="0dp"
+            android:text="@string/home_not_set"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bmiValue" />
+
+        <TextView
+            android:id="@+id/heightValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:paddingRight="5dp"
+            android:paddingLeft="0dp"
+            android:paddingEnd="5dp"
+            android:paddingStart="0dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/home_not_set"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/weightValue" />
+
+        <TextView
+            android:id="@+id/goalWeightValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:paddingRight="5dp"
+            android:paddingLeft="0dp"
+            android:paddingEnd="5dp"
+            android:paddingStart="0dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/home_not_set"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/heightValue" />
+
+        <TextView
+            android:id="@+id/bmrValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp"
+            android:paddingRight="5dp"
+            android:paddingLeft="0dp"
+            android:paddingEnd="5dp"
+            android:paddingStart="0dp"
+            android:text="@string/home_not_set"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/goalWeightValue" />
+
+        <TextView
+            android:id="@+id/activityLevelValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:paddingRight="5dp"
+            android:paddingLeft="0dp"
+            android:paddingEnd="5dp"
+            android:paddingStart="0dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/home_not_set"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bmrValue" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

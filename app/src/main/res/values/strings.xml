@@ -38,6 +38,14 @@
     <string name="gm_gpw">Choose Goal</string>
     <string name="gm_save_btn">Save Goal</string>
     <string name="home_module_button">Modules</string>
+    <string name="home_measurments">Current Measurments</string>
+    <string name="home_bmi">BMI</string>
+    <string name="home_weight">Weight</string>
+    <string name="home_height">Height</string>
+    <string name="home_goal_weight">Goal Weight</string>
+    <string name="home_bmr">BMR</string>
+    <string name="home_activity">Activity Level</string>
+    <string name="home_not_set">N/A</string>
 
     <string-array name="gender_array">
         <item>Male</item>
