@@ -24,4 +24,11 @@ public class GoalManagerActivity extends AppCompatActivity {
         fTrans.replace(R.id.fl_frag_itemdetail_container_phone, goalManagerFragment, "frag_itemdetail_gm");
         fTrans.commit();
     }
+
+
+
+    public void passData(String data) {
+        System.out.println(data);
+        goalManagerFragment.sendGoalWeight(data);
+    }
 }

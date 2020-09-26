@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.example.LifestyleApp.R;
 import com.example.LifestyleApp.UserInfo.User;
 
+import Dialogs.GoalWeightPicker;
 import Dialogs.HeightPickerDialog;
 import Dialogs.WeightPickerDialog;
 
@@ -29,6 +30,7 @@ public class GoalManagerFragment extends Fragment implements View.OnClickListene
     private Button mLose;
     private Button mMaintain;
     private Button mGain;
+
 
 
     @Nullable
@@ -117,6 +119,8 @@ public class GoalManagerFragment extends Fragment implements View.OnClickListene
                 break;
             }
             case R.id.goalWeightTextView: {
+                DialogFragment dialogFragment = new GoalWeightPicker();
+                dialogFragment.show(getFragmentManager(), "GoalWeightPicker");
                 //goalweight dialog
                 break;
             }
@@ -127,4 +131,10 @@ public class GoalManagerFragment extends Fragment implements View.OnClickListene
 
         }
     }
+
+
+    public void sendGoalWeight(String goalWeight){
+        mGoalWeight.setText(goalWeight);
+    }
+
 }
