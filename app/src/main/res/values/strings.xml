@@ -30,7 +30,7 @@
     <string name="gm_goal_weight_label">Goal Weight</string>
     <string name="gm_activity_level_label">Activity Level</string>
     <string name="gm_weight_tv">N/A</string>
-    <string name="gm_na">N/A</string>
+    <string name="gm_na">N/A ></string>
     <string name="gm_choose_goal_label">Choose Goal</string>
     <string name="gm_lose_btn">Lose Weight</string>
     <string name="gm_maintain_btn">Maintain Weight</string>
