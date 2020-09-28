@@ -195,7 +195,7 @@
         app:layout_constraintTop_toBottomOf="@+id/gainBtn" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/saveGoalButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/gm_save"

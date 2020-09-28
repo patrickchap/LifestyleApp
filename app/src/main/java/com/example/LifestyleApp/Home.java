@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -47,8 +48,18 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
         mHeight.setText(user.getHeight() + "");
 
         mGoalWeight = findViewById(R.id.goalWeightValue);
+
+        if(user.isGoalWeightSet()){
+            mGoalWeight.setText(user.getGoalWeight() + "");
+        }
         mBMR = findViewById(R.id.bmrValue);
+        if(user.isBMRSet()){
+            mBMR.setText(user.getBMR() +"");
+        }
         mActivityLevel = findViewById(R.id.activityLevelValue);
+        if(user.isActivitySet()){
+            mActivityLevel.setText(user.getActivity() +"");
+        }
 
 
 
@@ -59,6 +70,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
 
     }
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -68,5 +80,9 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
                 startActivity(intent);
             }
         }
+    }
+
+    public void getUser(User user){
+        System.out.println(user.getGoalWeight() + " getUser >>>>>");
     }
 }

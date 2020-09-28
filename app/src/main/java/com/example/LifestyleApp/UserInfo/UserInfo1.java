@@ -130,7 +130,7 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
                 break;
             }
             case R.id.birthdayTextView: {
-                System.out.println("Show picker");
+              //  System.out.println("Show picker");
                 DialogFragment dialogFragment = new DatePickerDialogMyTheme();
                 dialogFragment.show(getSupportFragmentManager(), "myTheme");
                 break;

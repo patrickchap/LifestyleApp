@@ -20,13 +20,61 @@ public class User implements Serializable {
 
     //additional info
     public float goalWeight;
+    public boolean goalWeightSet = false;
     public String activity; // sedentary  or active
+    public boolean activitySet = false;
     public String goal; // lose, gain, maintain
+    public boolean goalSet = false;
     public int perWeekPounds;
+    public float BMR;
+    public boolean BMRSet = false;
 
     public User() {
 
     }
+
+    public float getBMR() {
+        return BMR;
+    }
+
+    public void setBMR(float BMR) {
+        this.BMR = BMR;
+    }
+
+    public boolean isBMRSet() {
+        return BMRSet;
+    }
+
+    public void setBMRSet(boolean BMRSet) {
+        this.BMRSet = BMRSet;
+    }
+
+
+    public boolean isGoalWeightSet() {
+        return goalWeightSet;
+    }
+
+    public void setGoalWeightSet(boolean goalWeightSet) {
+        this.goalWeightSet = goalWeightSet;
+    }
+
+    public boolean isActivitySet() {
+        return activitySet;
+    }
+
+    public void setActivitySet(boolean activitySet) {
+        this.activitySet = activitySet;
+    }
+
+    public boolean isGoalSet() {
+        return goalSet;
+    }
+
+    public void setGoalSet(boolean goalSet) {
+        this.goalSet = goalSet;
+    }
+
+
 
     public int getPerWeekPounds() {
         return perWeekPounds;

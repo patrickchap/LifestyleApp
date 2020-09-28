@@ -31,4 +31,8 @@ public class GoalManagerActivity extends AppCompatActivity {
         System.out.println(data);
         goalManagerFragment.sendGoalWeight(data);
     }
+
+    public void passActivityLeve(String activityLevel){
+        goalManagerFragment.sendActivity(activityLevel);
+    }
 }
