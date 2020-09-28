@@ -178,13 +178,22 @@ public class GoalManagerFragment extends Fragment implements View.OnClickListene
                 user.setActivity(activityLevel);
                 user.setActivitySet(true);
                 //set user goal
-
                 user.setGoal(goal);
                 user.setGoalSet(true);
                 //set goalPerWeek
-
+                user.setPerWeekPounds(prog);
                 //calculate and set bmr
 
+                //men 66.47 + (6.24 * weight) + (12.7 * height) - (6.755 * age in years)
+                //women 655.1 + (4.35 * weight) + (4.7 * height) - (4.7 * age in years)
+
+                // sedentary = bmr * 1.2
+                // active = bmr * 1.5
+                if(user.getGender().equals("Male")){
+                   // 66.47 + (6.24 * fWeight) + (12.7 * heightInInches) - (6.755 * age in years)
+                }else{
+                    //655.1 + (4.35 * fWeight) + (4.7 * heightInInches) - (4.7 * age in years)
+                }
 
 
                 Intent intent = new Intent(getActivity(), Home.class);
