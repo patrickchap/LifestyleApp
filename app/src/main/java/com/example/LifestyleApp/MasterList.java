@@ -38,7 +38,9 @@ public class MasterList extends AppCompatActivity implements RvAdapter.DataPasse
         mCustomMasterList.addItem("BMI", bmi);
         mCustomMasterList.addItem("Weather", "Weather");
         mCustomMasterList.addItem("Hikes near me", "Hikes");
-        mCustomMasterList.addItem("Set Goal", "Goal");
+
+        String goalsName = user.isAllGoalsSet() ? "Update Goal" : "Set Goal";
+        mCustomMasterList.addItem(goalsName, "Goal");
 
         //create fragrament that holds the master list and send the custom list
         mMasterListFragment = new MasterListFragment();

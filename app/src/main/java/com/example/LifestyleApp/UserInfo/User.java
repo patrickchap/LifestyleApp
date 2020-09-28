@@ -28,10 +28,20 @@ public class User implements Serializable {
     public int perWeekPounds;
     public float BMR;
     public boolean BMRSet = false;
+    public boolean allGoalsSet = false;
 
     public User() {
 
     }
+
+    public boolean isAllGoalsSet() {
+        return allGoalsSet;
+    }
+
+    public void setAllGoalsSet(boolean allGoalsSet) {
+        this.allGoalsSet = allGoalsSet;
+    }
+
 
     public float getBMR() {
         return BMR;

@@ -1,6 +1,7 @@
 package com.example.LifestyleApp.GoalManager;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,17 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.example.LifestyleApp.Home;
 import com.example.LifestyleApp.R;
 import com.example.LifestyleApp.UserInfo.User;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 
 import Dialogs.ActivityLevelPicker;
 import Dialogs.GoalWeightPicker;
@@ -102,6 +108,7 @@ public class GoalManagerFragment extends Fragment implements View.OnClickListene
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onClick(View v) {
 
@@ -189,13 +196,21 @@ public class GoalManagerFragment extends Fragment implements View.OnClickListene
 
                 // sedentary = bmr * 1.2
                 // active = bmr * 1.5
+                Period period = Period.between(user.getDOB().toInstant()
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate(), LocalDate.now());
+                float BMR;
                 if(user.getGender().equals("Male")){
-                   // 66.47 + (6.24 * fWeight) + (12.7 * heightInInches) - (6.755 * age in years)
+                    BMR = (float) (66.47 + (6.24 * fWeight) + (12.7 * heightInInches) - (6.755 * period.getYears()));
                 }else{
-                    //655.1 + (4.35 * fWeight) + (4.7 * heightInInches) - (4.7 * age in years)
+                    BMR = (float) (655.1 + (4.35 * fWeight) + (4.7 * heightInInches) - (4.7 *period.getYears()));
                 }
+                BMR = (activityLevel == "Active") ? (BMR *= 1.5) :  (BMR *= 1.2);
 
+                user.setBMR(BMR);
+                user.setBMRSet(true);
 
+                user.setAllGoalsSet(true);
                 Intent intent = new Intent(getActivity(), Home.class);
                 intent.putExtra("user", user);
                 startActivity(intent);
