@@ -71,6 +71,13 @@ public class GoalManagerFragment extends Fragment implements View.OnClickListene
         int in = user.height%12;
         mHeight.setText(ft + " ft " + in + " in" + " >");
 
+        if(user.isGoalWeightSet()){
+            mGoalWeight.setText(user.getGoalWeight() + " >");
+        }
+        if(user.isActivitySet()){
+            mActivity.setText(user.getActivity() + " >");
+        }
+
         mWeight.setOnClickListener(this);
         mHeight.setOnClickListener(this);
         mGoalWeight.setOnClickListener(this);
