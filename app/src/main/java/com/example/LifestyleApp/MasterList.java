@@ -7,10 +7,14 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.LifestyleApp.GoalManager.GoalManagerFragment;
+import com.example.LifestyleApp.ItemDetail.ItemDetailFragment;
 import com.example.LifestyleApp.UserInfo.User;
 
+import util.GetFragmentUtil;
 import util.GetIntentUtil;
 
 
@@ -19,6 +23,9 @@ public class MasterList extends AppCompatActivity implements RvAdapter.DataPasse
     private MasterListFragment mMasterListFragment;
     private CustomMasterList mCustomMasterList = new CustomMasterList();
     private User user;
+    private String mGoalWeight;
+    private GoalManagerFragment mTabletFragement;
+
 
 
     @Override
@@ -50,6 +57,7 @@ public class MasterList extends AppCompatActivity implements RvAdapter.DataPasse
 
         FragmentTransaction fTrans = getSupportFragmentManager().beginTransaction();
         if(isTablet()){ // if tablet replace the left 1/3 of screen with master list fragment
+            fTrans.replace(R.id.fl_frag_masterlist_container_tablet, mMasterListFragment, "frag_masterlist_tab");
         }else {// if it is a phone replace the whole screen with the master list fragment
             fTrans.replace(R.id.master_list_phone, mMasterListFragment, "frag_masterlist");
         }
@@ -69,11 +77,24 @@ public class MasterList extends AppCompatActivity implements RvAdapter.DataPasse
         detailBundle.putString("item_detail",itemDetailString);
 
         if(isTablet()) {
-//            ItemDetailFragment itemDetailFragment = new ItemDetailFragment();
-//            itemDetailFragment.setArguments(detailBundle);
-//            FragmentTransaction fTrans = getSupportFragmentManager().beginTransaction();
-//            fTrans.replace(R.id.fl_frag_itemdetail_container_tablet, itemDetailFragment, "frag_itemdetail");
-//            fTrans.commit();
+            if(itemDetailString.equals("Hikes")){
+
+            }else if(itemDetailString.equals("Goal")){
+                mTabletFragement = new GoalManagerFragment();
+                Bundle bundle1 = new Bundle();
+                bundle1.putSerializable("user", user);
+                mTabletFragement.setArguments(bundle1);
+                FragmentTransaction fTrans = getSupportFragmentManager().beginTransaction();
+                fTrans.replace(R.id.fl_frag_itemdetail_container_tablet, mTabletFragement, "frag_itemdetail");
+                fTrans.commit();
+
+            }else{
+                ItemDetailFragment mTabletItemFragmetn = new ItemDetailFragment();
+                mTabletItemFragmetn.setArguments(detailBundle);
+                FragmentTransaction fTrans = getSupportFragmentManager().beginTransaction();
+                fTrans.replace(R.id.fl_frag_itemdetail_container_tablet, mTabletItemFragmetn, "frag_itemdetail");
+                fTrans.commit();
+            }
         }
         else{
             //Phones we will create a new activity that will be replaced by fragments for the detail
@@ -81,5 +102,15 @@ public class MasterList extends AppCompatActivity implements RvAdapter.DataPasse
 //            sendIntent.putExtras(detailBundle);
             startActivity(sendIntent);
         }
+    }
+
+    public void passGoalWeight(String data) {
+        //System.out.println(data);
+        mTabletFragement.sendGoalWeight(data);
+
+    }
+
+    public void passActivityLeve(String toString) {
+        mTabletFragement.sendActivity(toString);
     }
 }

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import com.example.LifestyleApp.GoalManager.GoalManagerActivity;
+import com.example.LifestyleApp.MasterList;
 import com.example.LifestyleApp.R;
 
 public class GoalWeightPicker extends DialogFragment {
@@ -32,7 +33,12 @@ public class GoalWeightPicker extends DialogFragment {
         builder.setView(view).setPositiveButton(R.string.weight_positive, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ((GoalManagerActivity)getActivity()).passData(number.getValue() + "." + decimal.getValue() + " lbs >");
+                if(isTablet()){
+                    ((MasterList)getActivity()).passGoalWeight(number.getValue() + "." + decimal.getValue() + " lbs >");
+                }else{
+                    ((GoalManagerActivity)getActivity()).passGoalWeight(number.getValue() + "." + decimal.getValue() + " lbs >");
+                }
+
             }
         }).setNegativeButton(R.string.weight_negative, new DialogInterface.OnClickListener() {
             @Override
@@ -42,5 +48,11 @@ public class GoalWeightPicker extends DialogFragment {
         });
 
         return builder.create();
+    }
+
+
+    boolean isTablet()
+    {
+        return getResources().getBoolean(R.bool.isTablet);
     }
 }

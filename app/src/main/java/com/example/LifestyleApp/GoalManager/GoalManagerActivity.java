@@ -27,8 +27,8 @@ public class GoalManagerActivity extends AppCompatActivity {
 
 
 
-    public void passData(String data) {
-        System.out.println(data);
+    public void passGoalWeight(String data) {
+        //System.out.println(data);
         goalManagerFragment.sendGoalWeight(data);
     }
 

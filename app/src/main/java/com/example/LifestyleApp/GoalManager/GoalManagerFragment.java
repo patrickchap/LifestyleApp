@@ -52,7 +52,9 @@ public class GoalManagerFragment extends Fragment implements View.OnClickListene
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.goal_manager, container, false);
 
-        user = (User) getArguments().getSerializable("user");
+        Bundle bundle =getArguments();
+
+        user = (User) bundle.getSerializable("user");
         mWeight = view.findViewById(R.id.weightTextView);
         seekBar = view.findViewById(R.id.seekBar);
         goalTV = view.findViewById(R.id.goalTextView);

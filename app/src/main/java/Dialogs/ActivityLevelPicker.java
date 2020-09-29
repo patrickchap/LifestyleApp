@@ -17,6 +17,7 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.LifestyleApp.GoalManager.GoalManagerActivity;
+import com.example.LifestyleApp.MasterList;
 import com.example.LifestyleApp.R;
 
 import java.util.Objects;
@@ -41,9 +42,13 @@ public class ActivityLevelPicker extends DialogFragment {
         builder.setPositiveButton(R.string.gender_positive, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ((GoalManagerActivity)getActivity()).passActivityLeve(spinner.getSelectedItem().toString());
-//                TextView gender = getActivity().findViewById(R.id.genderTextView);
-//                gender.setText(spinner.getSelectedItem().toString());
+                if(isTablet()){
+                    ((MasterList)getActivity()).passActivityLeve(spinner.getSelectedItem().toString());
+                }else {
+                    ((GoalManagerActivity)getActivity()).passActivityLeve(spinner.getSelectedItem().toString());
+                }
+
+
             }
         });
 
@@ -55,5 +60,10 @@ public class ActivityLevelPicker extends DialogFragment {
         });
 
         return builder.create();
+    }
+
+    boolean isTablet()
+    {
+        return getResources().getBoolean(R.bool.isTablet);
     }
 }
