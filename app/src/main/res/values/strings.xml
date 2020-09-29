@@ -47,6 +47,7 @@
     <string name="home_activity">Activity Level</string>
     <string name="home_not_set">N/A</string>
     <string name="activity_level_label">Activity Level</string>
+    <string name="home_calories">Calories</string>
 
     <string-array name="gender_array">
         <item>Male</item>

@@ -1,5 +1,7 @@
 package com.example.LifestyleApp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -27,6 +29,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
     TextView mGoalWeight;
     TextView mBMR;
     TextView mActivityLevel;
+    TextView mCalories;
 
 
     @Override
@@ -59,6 +62,58 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
         mActivityLevel = findViewById(R.id.activityLevelValue);
         if(user.isActivitySet()){
             mActivityLevel.setText(user.getActivity() +"");
+        }
+
+        mCalories = findViewById(R.id.calories_value);
+        if(user.isCaloriesSet()){
+            if(user.getGender().equals("Male") && user.getCalories() < 1200){
+                //alert for calories too low
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Calories are too low")
+                        .setMessage("Based on your goals, your calories will be below 1,200")
+                        .setCancelable(false)
+                        .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                 finishActivity(this.hashCode());
+                            }
+                        });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }else if(user.getGender().equals("Female") && user.getCalories() < 1000 ){
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Calories are too low")
+                        .setMessage("Based on your goals, your calories will be below 1,000")
+                        .setCancelable(false)
+                        .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finishActivity(this.hashCode());
+                            }
+                        });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+            }
+            mCalories.setText(user.getCalories() + "");
+        }
+
+        if(user.getPerWeekPounds() > 2){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("High goal")
+                    .setMessage("Your goal to " + user.getGoal() + " " + user.getPerWeekPounds() + "lbs per week is more than the recommended 2lbs per week")
+                    .setCancelable(false)
+                    .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finishActivity(this.hashCode());
+                        }
+                    });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
         }
 
 

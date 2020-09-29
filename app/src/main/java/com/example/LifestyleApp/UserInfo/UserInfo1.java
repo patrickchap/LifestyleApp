@@ -35,10 +35,13 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
     //height is in inches
     TextView mHeight;
 
+
     private String height;
     private String weight;
     private String dob;
     private String gender;
+
+    User user;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,7 +60,6 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
         mHeight.setOnClickListener(this);
         mGenderTextView.setOnClickListener(this);
 
-        //TODO: handle onClick for Gender
     }
 
 
@@ -75,13 +77,14 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
 
 
         //Create user
-        User user = new User();
+        user = new User();
         user.setWeight(fWeight);
         user.setBmi(bmi);
         user.setHeight(heightInInches);
         Date dob=new SimpleDateFormat("dd/MM/yyyy").parse(mDOB.getText().toString());
         user.setDOB(dob);
-        user.setGender(mGenderTextView.toString());
+        user.setGender(gender);
+
 
 
         Intent intent = new Intent(this, UserInfo2.class);
@@ -99,6 +102,7 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
                 weight = (String) mWeight.getText();
                 dob = (String) mDOB.getText();
                 gender = (String) mGenderTextView.getText();
+
 
                 if (!height.equals("Height") && !weight.equals("Weight")
                 && !dob.equals("Birthday") && !gender.equals("Gender")){

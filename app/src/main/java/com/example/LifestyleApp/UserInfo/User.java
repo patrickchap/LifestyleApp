@@ -17,6 +17,7 @@ public class User implements Serializable {
     public String whoCanSee;
     public  double bmi;
     public byte[] profilePicture;
+    public float calories;
 
     //additional info
     public float goalWeight;
@@ -28,7 +29,27 @@ public class User implements Serializable {
     public int perWeekPounds;
     public float BMR;
     public boolean BMRSet = false;
+    public boolean caloriesSet = false;
     public boolean allGoalsSet = false;
+
+    public float getCalories() {
+        return calories;
+    }
+
+    public void setCalories(float calories) {
+        this.calories = calories;
+    }
+
+    public boolean isCaloriesSet() {
+        return caloriesSet;
+    }
+
+    public void setCaloriesSet(boolean caloriesSet) {
+        this.caloriesSet = caloriesSet;
+    }
+
+
+
 
     public User() {
 

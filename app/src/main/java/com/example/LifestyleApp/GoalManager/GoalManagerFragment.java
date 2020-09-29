@@ -1,5 +1,7 @@
 package com.example.LifestyleApp.GoalManager;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import com.example.LifestyleApp.Home;
 import com.example.LifestyleApp.R;
 import com.example.LifestyleApp.UserInfo.User;
+import com.example.LifestyleApp.UserInfo.UserInfo1;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -218,6 +221,19 @@ public class GoalManagerFragment extends Fragment implements View.OnClickListene
 
                 user.setBMR(BMR);
                 user.setBMRSet(true);
+
+                //calculate calories
+                int diff = prog * 500;
+                float calories = BMR;
+
+                if(goal.equals("gain")) {
+                    calories += diff;
+                }else if (goal.equals("lose")){
+                    calories -= diff;
+                }
+
+                user.setCalories(calories);
+                user.setCaloriesSet(true);
 
                 user.setAllGoalsSet(true);
                 Intent intent = new Intent(getActivity(), Home.class);
