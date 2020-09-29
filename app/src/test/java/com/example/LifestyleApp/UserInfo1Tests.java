@@ -17,7 +17,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
 
-
 import java.io.IOException;
 import java.util.Map;
 
