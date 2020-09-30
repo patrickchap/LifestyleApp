@@ -9,15 +9,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.LifestyleApp.R;
-
 import java.io.IOException;
 import java.io.Serializable;
-
 import util.GetLocationUtil;
 
 public class UserInfo2 extends AppCompatActivity implements View.OnClickListener{
@@ -47,8 +43,20 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
             System.out.println("City " + address.getLocality() + " Country " + address.getCountryName());
             mCity.setText(address.getLocality());
             mCountry.setText(address.getCountryName());
-            ;
         } catch (IOException e) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(UserInfo2.this);
+            builder.setTitle("Cannot find location")
+                    .setMessage("Please enter your City and Country")
+                    .setCancelable(false)
+                    .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finishActivity(this.hashCode());
+                        }
+                    });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
             e.printStackTrace();
         }
 

@@ -63,7 +63,30 @@ public class GetWeatherDataUtil {
             // Add the request to the RequestQueue.
             queue.add(stringRequest);
         } catch (IOException e) {
-            textView.setText("Can't find Location");
+            String url = "http://api.openweathermap.org/data/2.5/weather?q=" + "Mountain View" + "&APPID="+weatherkey+"&units=imperial";
+
+            final Address finalAddress = address;
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject jsonObj = new JSONObject(response);
+                                textView.setText("The weather in " + "Mountain View"  + ", " + "US" + " is " +jsonObj.getJSONObject("main").getString("temp") + "°F");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("That didn't work " + error.getMessage());
+                }
+            });
+
+            // Add the request to the RequestQueue.
+            queue.add(stringRequest);
+//            textView.setText("Can't find Location");
             e.printStackTrace();
         }
 

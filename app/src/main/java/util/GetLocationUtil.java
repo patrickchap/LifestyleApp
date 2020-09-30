@@ -15,13 +15,43 @@ import android.widget.TextView;
 
 import androidx.core.app.ActivityCompat;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
 public class GetLocationUtil {
 
-    public static Location getLocation(Context context){
+    public static Location getLocation(Context context) {
+//        FusedLocationProviderClient fusedLocationClient;
+//        fusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
+//
+//        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(
+//                    (Activity) context,
+//                    new String [] { android.Manifest.permission.ACCESS_COARSE_LOCATION },
+//                    11
+//            );
+////            return;
+//        }
+//
+//        final Location[] location = new Location[1];
+//        fusedLocationClient.getLastLocation()
+//                .addOnSuccessListener((Activity) context, new OnSuccessListener<Location>() {
+//                    @Override
+//                    public void onSuccess(Location loc) {
+//                        // Got last known location. In some rare situations this can be null.
+//                        if (loc != null) {
+//                            location[0] = loc;
+//                            System.out.println(location);
+//                            // Logic to handle location object
+//                        }
+//                    }
+//                });
+
         LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
@@ -39,8 +69,6 @@ public class GetLocationUtil {
             latitude[0] = location.getLatitude();
             System.out.println("Long lat " + longitude[0] + " " + latitude[0]);
         }
-
-
 
 
         final LocationListener locationListener = new LocationListener() {
@@ -69,26 +97,13 @@ public class GetLocationUtil {
     }
 
     public static Address getCity(double lat, double lon, Context context) throws IOException {
-      // String ret = "";
-        //getBaseContext()
+
         Geocoder gcd = new Geocoder(context, Locale.getDefault());
 
         List<Address> addresses = gcd.getFromLocation(lat, lon,
                 1);
 
-//
-//        for (Address address: addresses){
-//            if(address != null){
-//                return address;
-//            }
-//        }
 
-//        ret = addresses.get(0).toString();
-
-//        for(Address add: addresses){
-//            String city = add.getLocality();
-//
-//        }
 
         return addresses.get(0);
     }
