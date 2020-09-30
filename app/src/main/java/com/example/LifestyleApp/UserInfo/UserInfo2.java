@@ -17,7 +17,6 @@ import java.io.Serializable;
 
 public class UserInfo2 extends AppCompatActivity implements View.OnClickListener{
     Button mContinueButton;
-//    TextView mLocationTextView;
     TextView mCity;
     TextView mCountry;
     TextView mWhoCanSeeTextView;
@@ -32,7 +31,6 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
         user = (User) getIntent().getSerializableExtra("user");
 
         mContinueButton = findViewById(R.id.continueButton);
-//        mLocationTextView = findViewById(R.id.editTextCountry);
         mCity = findViewById(R.id.editTextCity);
         mCountry = findViewById(R.id.editTextCountry);
         mWhoCanSeeTextView = findViewById(R.id.editTextWhoCanSee);
@@ -41,20 +39,12 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
 
 
     private void continueToUserInfo3(String city, String country , String whoCanSee) {
-//        Intent intentFromUserInfo1 = getIntent();
-//        double bmi = intentFromUserInfo1.getDoubleExtra("bmi",0);
-
 
         Intent intent = new Intent(this, UserInfo3.class);
         user.setCity(city);
         user.setCountry(country);
         user.setWhoCanSee(whoCanSee);
         intent.putExtra("user", user);
-//        intent.putExtra("city", city);
-//        intent.putExtra("country", country);
-//        intent.putExtra("whoCanSee", whoCanSee);
-//        intent.putExtra("bmi", user.getBmi());
-        //TODO: pass all user information along to UserInfo3
         startActivity(intent);
     }
 

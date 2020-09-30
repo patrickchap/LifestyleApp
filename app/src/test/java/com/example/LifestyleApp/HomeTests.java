@@ -2,12 +2,15 @@ package com.example.LifestyleApp;
 
 import android.content.Intent;
 import android.os.Build;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.LifestyleApp.UserInfo.User;
 import com.example.LifestyleApp.UserInfo.UserInfo1;
 import com.example.LifestyleApp.UserInfo.UserInfo3;
 
+import org.json.JSONException;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -16,6 +19,11 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.Map;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -26,61 +34,48 @@ import static org.robolectric.Shadows.shadowOf;
 
 public class HomeTests {
 
-    private UserInfo1 userInfo1;
-    private UserInfo2 userInfo2;
-    private UserInfo3 userInfo3;
+    private UserTestData userTestData;
+    private User user;
+    private double userInfo1BMI;
     private Home home;
 
-    private double userInfo1BMI;
-    private ImageView mProfilePictureImageView;
-
     @Before
-    public void setup() {
+    public void setup() throws IOException, JSONException, ParseException {
 
-        userInfo1 = Robolectric.setupActivity(UserInfo1.class);
+        userTestData = new UserTestData();
 
-        TextView gender = userInfo1.findViewById(R.id.genderTextView);
-        gender.setText("Male");
+        Map<String, String> userInfo1TestData = userTestData.getUserInfo1TestData();
 
-        TextView birthday = userInfo1.findViewById(R.id.birthdayTextView);
-        birthday.setText("9/19/2020");
+        String gender = userInfo1TestData.get("gender");
+        String dob = userInfo1TestData.get("dob");
+        String height = userInfo1TestData.get("height");
+        String weight = userInfo1TestData.get("weight");
 
-        TextView height = userInfo1.findViewById(R.id.heightTextView);
-        height.setText("9 ft 0 in");
-
-        TextView weight = userInfo1.findViewById(R.id.weightTextView);
-        weight.setText("900.0 lbs");
-
-        int ft = Integer.parseInt(height.getText().toString().split(" ")[0]);
-        int in = Integer.parseInt(height.getText().toString().split(" ")[2]);
+        int ft = Integer.parseInt(height.split(" ")[0]);
+        int in = Integer.parseInt(height.split(" ")[2]);
         int heightInInches = (ft * 12) + in;
 
-        float fWeight = Float.parseFloat(weight.getText().toString().split(" ")[0]);
+        float fWeight = Float.parseFloat(weight.split(" ")[0]);
 
         //bmi Formula: 703 x weight (lbs) / [height (in)]2
-        userInfo1BMI = ((703 * fWeight) / Math.pow(heightInInches,2));
+        userInfo1BMI = ((703 * fWeight) / Math.pow(heightInInches, 2));
 
-        userInfo1.findViewById(R.id.continueButton).performClick();
+        user = userTestData.generateUserFromInfo1(height, weight, dob, gender);
+        com.example.LifestyleApp.UserInfo.UserInfo2 userInfo2 = userTestData.generateUserInfo2(gender, dob, height, weight);
 
-        Intent userInfo2Intent = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
-        userInfo2 =  Robolectric.buildActivity(UserInfo2.class, userInfo2Intent).create().get();
+        Map<String, String> userInfo2TestData = userTestData.getUserInfo2TestData();
 
-        TextView cityView = userInfo2.findViewById(R.id.editTextCity);
-        TextView countryView = userInfo2.findViewById(R.id.editTextCountry);
-        TextView whoSeesView = userInfo2.findViewById(R.id.editTextWhoCanSee);
+        String city = userInfo2TestData.get("city");
+        String country = userInfo2TestData.get("country");
+        String whoSees = userInfo2TestData.get("whoSees");
 
-        cityView.setText("Salt Lake City");
-        countryView.setText("United States");
-        whoSeesView.setText("Me");
-
-        userInfo2.findViewById(R.id.continueButton).performClick();
-
-        Intent userInfo3Intent = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
-        userInfo3 =  Robolectric.buildActivity(UserInfo3.class, userInfo3Intent).create().get();
+        user = userTestData.generateUserFromInfo2(user, city, country, whoSees);
+        UserInfo3 userInfo3 = userTestData.generateUserInfo3(user, userInfo2, city, country, whoSees);
 
         userInfo3.findViewById(R.id.createButton).performClick();
         Intent homeIntent = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
-        home =  Robolectric.buildActivity(Home.class, homeIntent).create().get();
+        homeIntent.putExtra("user", user);
+        home = Robolectric.buildActivity(Home.class, homeIntent).create().get();
 
     }
 
@@ -93,7 +88,7 @@ public class HomeTests {
     public void masterListItemsCorrect() throws InstantiationException, IllegalAccessException {
 
         CustomMasterList customMasterList = new CustomMasterList();
-        String bmi = Double.toString(home.getIntent().getDoubleExtra("bmi", 0));
+        String bmi = user.getBmi() + "";
 
         customMasterList.addItem("BMI", bmi);
         customMasterList.addItem("Weather", "Weather");
@@ -109,12 +104,25 @@ public class HomeTests {
     }
 
     @Test
-    public void homeBMIMatchesUserInfo1() {
+    public void initialView_moduleButtonCorrectText() {
 
-        double homeBMI = home.getIntent().getDoubleExtra("bmi", 0);
+        Button moduleButton = (Button) home.findViewById(R.id.moduleButton);
 
-        assertTrue(userInfo1BMI == homeBMI);
+        assertTrue("Module button contains incorrect text",
+                "Modules".equals(moduleButton.getText().toString()));
 
     }
 
+    @Test
+    public void clickingModule_shouldContinueToMasterList() {
+
+        Intent masterListIntent = new Intent(home, MasterList.class);
+
+        home.findViewById(R.id.moduleButton).performClick();
+
+        Intent actual = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
+
+        assertEquals(masterListIntent.getComponent(), actual.getComponent());
+
+    }
 }

@@ -189,59 +189,6 @@ public class UserInfo1Tests {
         assertEquals("User Info Incomplete", dialog.getTitle());
     }
 
-//    @Test
-//    public void clickingContinueWithoutDOB_shouldPromptAlert() throws IOException, JSONException {
-//
-//        UserTestData userTestData = new UserTestData();
-//
-//        Map<String, String> userInfo1TestData = userTestData.getUserInfo1TestData();
-//
-//        String gender = userInfo1TestData.get("gender");
-//        String height = userInfo1TestData.get("height");
-//        String weight = userInfo1TestData.get("weight");
-//
-//        TextView genderTextView = userInfo1.findViewById(R.id.genderTextView);
-//        genderTextView.setText(gender);
-//
-//        TextView heightTextView = userInfo1.findViewById(R.id.heightTextView);
-//        heightTextView.setText(height);
-//
-//        TextView weightTextView = userInfo1.findViewById(R.id.weightTextView);
-//        weightTextView.setText(weight);
-//
-//        userInfo1.findViewById(R.id.continueButton).performClick();
-//
-//        ShadowAlertDialog dialog = shadowOf(RuntimeEnvironment.application).getLatestAlertDialog();
-//        assertEquals("User Info Incomplete", dialog.getTitle());
-//    }
-
-//    @Test
-//    public void clickingContinueWithoutGender_shouldPromptAlert() throws IOException, JSONException {
-//
-//        UserTestData userTestData = new UserTestData();
-//
-//        Map<String, String> userInfo1TestData = userTestData.getUserInfo1TestData();
-//
-//        String weight = userInfo1TestData.get("weight");
-//        String dob = userInfo1TestData.get("dob");
-//        String height = userInfo1TestData.get("height");
-//
-//        TextView weightTextView = userInfo1.findViewById(R.id.weightTextView);
-//        weightTextView.setText(weight);
-//
-//        TextView dobTextView = userInfo1.findViewById(R.id.birthdayTextView);
-//        dobTextView.setText(dob);
-//
-//        TextView heightTextView = userInfo1.findViewById(R.id.heightTextView);
-//        heightTextView.setText(height);
-//
-//        userInfo1.findViewById(R.id.continueButton).performClick();
-//        userInfo1.findViewById(R.id.continueButton).performClick();
-//
-//        ShadowAlertDialog dialog = shadowOf(RuntimeEnvironment.application).getLatestAlertDialog();
-//        assertEquals("User Info Incomplete", dialog.getTitle());
-//    }
-
     @Test
     public void clickingContinueWithoutDOB_shouldPromptAlert() throws IOException, JSONException {
 

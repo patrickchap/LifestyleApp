@@ -32,7 +32,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v){
 
-                    continueToUserInfo1();
+                continueToUserInfo1();
 
             }
         });

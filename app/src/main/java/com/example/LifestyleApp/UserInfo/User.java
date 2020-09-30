@@ -15,7 +15,7 @@ public class User implements Serializable {
     public String country;
     public String city;
     public String whoCanSee;
-    public  double bmi;
+    public double bmi;
     public byte[] profilePicture;
     public float calories;
 
@@ -47,8 +47,6 @@ public class User implements Serializable {
     public void setCaloriesSet(boolean caloriesSet) {
         this.caloriesSet = caloriesSet;
     }
-
-
 
 
     public User() {
@@ -104,7 +102,6 @@ public class User implements Serializable {
     public void setGoalSet(boolean goalSet) {
         this.goalSet = goalSet;
     }
-
 
 
     public int getPerWeekPounds() {
@@ -211,7 +208,7 @@ public class User implements Serializable {
         this.goal = goal;
     }
 
-    protected User(Parcel in){
+    protected User(Parcel in) {
         gender = in.readString();
         height = in.readInt();
         weight = in.readFloat();
@@ -224,37 +221,4 @@ public class User implements Serializable {
         activity = in.readString();
         goal = in.readString();
     }
-
-
-//    public static final Creator<User> CREATOR = new Creator<User>() {
-//        @Override
-//        public User createFromParcel(Parcel in) {
-//            return new User(in);
-//        }
-//
-//        @Override
-//        public User[] newArray(int size) {
-//            return new User[size];
-//        }
-//    };
-//
-//    @Override
-//    public int describeContents() {
-//        return 0;
-//    }
-//
-//    @Override
-//    public void writeToParcel(Parcel dest, int flags) {
-//        dest.writeString(gender);
-//        dest.writeInt(height);
-//        dest.writeFloat(weight);
-//        dest.writeString(country);
-//        dest.writeString(city);
-//        dest.writeString(whoCanSee);
-//        dest.writeDouble(bmi);
-//        dest.writeByteArray(profilePicture);
-//        dest.writeFloat(goalWeight);
-//        dest.writeString(activity);
-//        dest.writeString(goal);
-//    }
 }

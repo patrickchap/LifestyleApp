@@ -23,7 +23,6 @@ public class GetIntentUtil {
         }else if(detail.equals("Goal")){
             Intent returnIntent = new Intent(context, GoalManagerActivity.class);
             returnIntent.putExtra("user", user);
-//            returnIntent.putExtras(bundle);
             return returnIntent;
         }
 
