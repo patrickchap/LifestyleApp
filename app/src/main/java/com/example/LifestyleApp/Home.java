@@ -116,8 +116,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
             dialog.show();
         }
 
-
-
         mUserProfilePicture = findViewById(R.id.profilePictureIV);
         byte[] byteArray = user.getProfilePicture();//intent.getByteArrayExtra("profilePicture");
         Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);

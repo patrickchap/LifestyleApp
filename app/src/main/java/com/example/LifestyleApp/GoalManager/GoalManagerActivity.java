@@ -4,11 +4,10 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.example.LifestyleApp.R;
 
 public class GoalManagerActivity extends AppCompatActivity {
-
+    
     private GoalManagerFragment goalManagerFragment;
 
     @Override

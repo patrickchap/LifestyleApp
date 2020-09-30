@@ -40,7 +40,6 @@ public class Login extends AppCompatActivity {
     }
 
     private void continueToUserInfo1() {
-
         Intent intent = new Intent(this, UserInfo1.class);
         startActivity(intent);
     }

@@ -9,18 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
-
 import com.example.LifestyleApp.GoalManager.GoalManagerActivity;
 import com.example.LifestyleApp.MasterList;
 import com.example.LifestyleApp.R;
-
-import java.util.Objects;
 
 public class ActivityLevelPicker extends DialogFragment {
 
@@ -47,8 +42,6 @@ public class ActivityLevelPicker extends DialogFragment {
                 }else {
                     ((GoalManagerActivity)getActivity()).passActivityLeve(spinner.getSelectedItem().toString());
                 }
-
-
             }
         });
 
@@ -58,7 +51,6 @@ public class ActivityLevelPicker extends DialogFragment {
                 ActivityLevelPicker.this.getDialog().cancel();
             }
         });
-
         return builder.create();
     }
 

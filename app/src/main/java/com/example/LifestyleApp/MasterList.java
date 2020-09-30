@@ -7,16 +7,11 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.example.LifestyleApp.GoalManager.GoalManagerFragment;
 import com.example.LifestyleApp.ItemDetail.ItemDetailFragment;
 import com.example.LifestyleApp.UserInfo.User;
-
-import util.GetFragmentUtil;
 import util.GetIntentUtil;
-
 
 public class MasterList extends AppCompatActivity implements RvAdapter.DataPasser {
     ImageView mUserProfilePicture;
@@ -25,8 +20,6 @@ public class MasterList extends AppCompatActivity implements RvAdapter.DataPasse
     private User user;
     private String mGoalWeight;
     private GoalManagerFragment mTabletFragement;
-
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,7 +71,8 @@ public class MasterList extends AppCompatActivity implements RvAdapter.DataPasse
 
         if(isTablet()) {
             if(itemDetailString.equals("Hikes")){
-
+                Intent sendIntent = GetIntentUtil.getIntent(this, itemDetailString, detailBundle, user);
+                startActivity(sendIntent);
             }else if(itemDetailString.equals("Goal")){
                 mTabletFragement = new GoalManagerFragment();
                 Bundle bundle1 = new Bundle();
@@ -99,13 +93,11 @@ public class MasterList extends AppCompatActivity implements RvAdapter.DataPasse
         else{
             //Phones we will create a new activity that will be replaced by fragments for the detail
             Intent sendIntent = GetIntentUtil.getIntent(this, itemDetailString, detailBundle, user);
-//            sendIntent.putExtras(detailBundle);
             startActivity(sendIntent);
         }
     }
 
     public void passGoalWeight(String data) {
-        //System.out.println(data);
         mTabletFragement.sendGoalWeight(data);
 
     }
