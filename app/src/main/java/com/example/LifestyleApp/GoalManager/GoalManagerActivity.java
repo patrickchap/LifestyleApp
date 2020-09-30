@@ -4,14 +4,10 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.example.LifestyleApp.R;
-import com.example.LifestyleApp.UserInfo.User;
 
 public class GoalManagerActivity extends AppCompatActivity {
     private GoalManagerFragment goalManagerFragment;
-//    private User user;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

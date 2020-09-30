@@ -45,7 +45,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline26"
         app:layout_constraintStart_toStartOf="@+id/guideline25"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.01999998" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView6"
@@ -58,8 +58,8 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline26"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline25"
-        app:layout_constraintTop_toTopOf="@+id/guideline21"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/labelTextView"
+        app:layout_constraintVertical_bias="0.02" />
 
     <TextView
         android:id="@+id/textView7"
@@ -96,21 +96,28 @@
 
     <TextView
         android:id="@+id/weightTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="90dp"
+        android:textAlignment="textEnd"
+        android:gravity="end"
         android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corner_box"
         android:text="@string/gm_weight_tv"
         android:textColor="@color/eWhite"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline26"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline25"
-        app:layout_constraintTop_toTopOf="@+id/textView6" />
+        app:layout_constraintTop_toTopOf="@+id/textView6"
+         />
 
     <TextView
         android:id="@+id/heightTextView"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_width="90dp"
+        android:textAlignment="textEnd"
+        android:gravity="end"
         android:layout_marginTop="25dp"
+        android:background="@drawable/rounded_corner_box"
         android:text="@string/gm_na"
         android:textColor="@color/eWhite"
         android:textSize="18sp"
@@ -119,8 +126,11 @@
 
     <TextView
         android:id="@+id/goalWeightTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="90dp"
+        android:textAlignment="textEnd"
+        android:gravity="end"
         android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corner_box"
         android:layout_marginTop="25dp"
         android:text="@string/gm_na"
         android:textColor="@color/eWhite"
@@ -130,8 +140,11 @@
 
     <TextView
         android:id="@+id/activityLevelTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="90dp"
+        android:textAlignment="textEnd"
+        android:gravity="end"
         android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corner_box"
         android:layout_marginTop="25dp"
         android:text="@string/gm_na"
         android:textColor="@color/eWhite"
@@ -143,7 +156,7 @@
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="24dp"
         android:text="@string/gm_choose_goal_label"
         android:textColor="@color/eWhite"
         android:textSize="18sp"

@@ -3,6 +3,8 @@ package com.example.LifestyleApp.UserInfo;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.LifestyleApp.R;
 
+import java.io.IOException;
 import java.io.Serializable;
+
+import util.GetLocationUtil;
 
 public class UserInfo2 extends AppCompatActivity implements View.OnClickListener{
     Button mContinueButton;
@@ -27,34 +32,39 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_info_2);
-        System.out.println("get user bmi <<<<<<<,");
-
         user = (User) getIntent().getSerializableExtra("user");
-
         mContinueButton = findViewById(R.id.continueButton);
-//        mLocationTextView = findViewById(R.id.editTextCountry);
         mCity = findViewById(R.id.editTextCity);
         mCountry = findViewById(R.id.editTextCountry);
         mWhoCanSeeTextView = findViewById(R.id.editTextWhoCanSee);
         mContinueButton.setOnClickListener(this);
+
+        Location location = GetLocationUtil.getLocation(this);
+        Address address = null;
+        try {
+
+            address = GetLocationUtil.getCity(location.getLatitude(), location.getLongitude(), getBaseContext());
+            System.out.println("City " + address.getLocality() + " Country " + address.getCountryName());
+            mCity.setText(address.getLocality());
+            mCountry.setText(address.getCountryName());
+            ;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+
     }
 
 
     private void continueToUserInfo3(String city, String country , String whoCanSee) {
-//        Intent intentFromUserInfo1 = getIntent();
-//        double bmi = intentFromUserInfo1.getDoubleExtra("bmi",0);
-
 
         Intent intent = new Intent(this, UserInfo3.class);
         user.setCity(city);
         user.setCountry(country);
         user.setWhoCanSee(whoCanSee);
         intent.putExtra("user", user);
-//        intent.putExtra("city", city);
-//        intent.putExtra("country", country);
-//        intent.putExtra("whoCanSee", whoCanSee);
-//        intent.putExtra("bmi", user.getBmi());
-        //TODO: pass all user information along to UserInfo3
         startActivity(intent);
     }
 
@@ -69,7 +79,6 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
                 if (!city.equals("") && !country.equals("")
                         && !whoCanSee.equals("")){
 
-                    //TODO: pass along information from userInfo1
                     continueToUserInfo3(city, country, whoCanSee);
                 }
 
