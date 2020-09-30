@@ -53,26 +53,14 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
                 break;
             }
             case R.id.createButton: {
-<<<<<<< HEAD:app/src/main/java/com/example/LifestyleApp/UserInfo3.java
-
-                Intent intentFromUserInfo1 = getIntent();
-                double bmi = intentFromUserInfo1.getDoubleExtra("bmi",0);
-=======
->>>>>>> e92a521a4749fd0f8627955a9e12b0b0bb9e8676:app/src/main/java/com/example/LifestyleApp/UserInfo/UserInfo3.java
 
                 Intent intent = new Intent(this, Home.class);
                 Bitmap bmp = ((BitmapDrawable)mProfilePictureImageView.getDrawable()).getBitmap();
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
-<<<<<<< HEAD:app/src/main/java/com/example/LifestyleApp/UserInfo3.java
-                intent.putExtra("profilePicture", byteArray);
-
-                //TODO: create a user
-=======
                 user.setProfilePicture(byteArray);
                 intent.putExtra("user", user);
->>>>>>> e92a521a4749fd0f8627955a9e12b0b0bb9e8676:app/src/main/java/com/example/LifestyleApp/UserInfo/UserInfo3.java
                 startActivity(intent);
             }
         }
@@ -88,4 +76,3 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
         }
     }
 }
-

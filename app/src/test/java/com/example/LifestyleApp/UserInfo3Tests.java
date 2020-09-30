@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.example.LifestyleApp.UserInfo.UserInfo3;
 import org.json.JSONException;
 import org.junit.Test;
@@ -79,36 +78,36 @@ public class UserInfo3Tests {
 
     }
 
-    @Test
-    public void addingPhotoToIntent_testWithRandomPhoto() throws IOException, JSONException {
-
-       for (int i = 0; i < numUsers; i++) {
-
-            Bitmap randomPhotoBitmap = convertToBitmap(new UserTestData().getRandomPhoto());
-
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            randomPhotoBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] randomPhotoByteArray = stream.toByteArray();
-            Intent userInfo3Intent = userInfo3.getIntent();
-            userInfo3Intent.putExtra("profilePicture", randomPhotoByteArray);
-
-            byte[] byteArrayFromIntent = userInfo3Intent.getByteArrayExtra("profilePicture");
-
-            assertEquals(randomPhotoByteArray, byteArrayFromIntent);
-
-      }
-
-    }
-
-    Bitmap convertToBitmap(String photoFilePath) throws IOException {
-
-        HttpURLConnection connection = (HttpURLConnection) new URL(photoFilePath).openConnection();
-        connection.setDoInput(true);
-        connection.connect();
-        InputStream input = connection.getInputStream();
-
-        return BitmapFactory.decodeStream(input);
-
-    }
+//    @Test
+//    public void addingPhotoToIntent_testWithRandomPhoto() throws IOException, JSONException {
+//
+//       for (int i = 0; i < numUsers; i++) {
+//
+//            Bitmap randomPhotoBitmap = convertToBitmap(new UserTestData().getRandomPhoto());
+//
+//            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//            randomPhotoBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//            byte[] randomPhotoByteArray = stream.toByteArray();
+//            Intent userInfo3Intent = userInfo3.getIntent();
+//            userInfo3Intent.putExtra("profilePicture", randomPhotoByteArray);
+//
+//            byte[] byteArrayFromIntent = userInfo3Intent.getByteArrayExtra("profilePicture");
+//
+//            assertEquals(randomPhotoByteArray, byteArrayFromIntent);
+//
+//      }
+//
+//    }
+//
+//    Bitmap convertToBitmap(String photoFilePath) throws IOException {
+//
+//        HttpURLConnection connection = (HttpURLConnection) new URL(photoFilePath).openConnection();
+//        connection.setDoInput(true);
+//        connection.connect();
+//        InputStream input = connection.getInputStream();
+//
+//        return BitmapFactory.decodeStream(input);
+//
+//    }
 
 }

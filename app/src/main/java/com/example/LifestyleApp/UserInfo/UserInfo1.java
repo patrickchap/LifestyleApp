@@ -35,10 +35,13 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
     //height is in inches
     TextView mHeight;
 
+
     private String height;
     private String weight;
     private String dob;
     private String gender;
+
+    User user;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,16 +60,11 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
         mHeight.setOnClickListener(this);
         mGenderTextView.setOnClickListener(this);
 
-        //TODO: handle onClick for Gender
     }
 
-<<<<<<< HEAD:app/src/main/java/com/example/LifestyleApp/UserInfo1.java
-    private void continueToUserInfo2() {
-=======
 
     private void continueToUserInfo2() throws ParseException {
         String height = (String) mHeight.getText();
->>>>>>> e92a521a4749fd0f8627955a9e12b0b0bb9e8676:app/src/main/java/com/example/LifestyleApp/UserInfo/UserInfo1.java
 
         int ft = Integer.parseInt(height.split(" ")[0]);
         int in = Integer.parseInt(height.split(" ")[2]);
@@ -77,20 +75,18 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
         //bmi Formula: 703 x weight (lbs) / [height (in)]2
         double bmi = ((703 * fWeight) / Math.pow(heightInInches,2));
 
-<<<<<<< HEAD:app/src/main/java/com/example/LifestyleApp/UserInfo1.java
-=======
 
         //Create user
-        User user = new User();
+        user = new User();
         user.setWeight(fWeight);
         user.setBmi(bmi);
         user.setHeight(heightInInches);
         Date dob=new SimpleDateFormat("dd/MM/yyyy").parse(mDOB.getText().toString());
         user.setDOB(dob);
-        user.setGender(mGenderTextView.toString());
+        user.setGender(gender);
 
 
->>>>>>> e92a521a4749fd0f8627955a9e12b0b0bb9e8676:app/src/main/java/com/example/LifestyleApp/UserInfo/UserInfo1.java
+
         Intent intent = new Intent(this, UserInfo2.class);
 
         intent.putExtra("user", user);
@@ -107,18 +103,15 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
                 dob = (String) mDOB.getText();
                 gender = (String) mGenderTextView.getText();
 
-                if (!height.equals("Height") && !weight.equals("Weight")
-                && !dob.equals("Birthday") && !gender.equals("Gender")){
 
-<<<<<<< HEAD:app/src/main/java/com/example/LifestyleApp/UserInfo1.java
-                    continueToUserInfo2();
-=======
+                if (!height.equals("Height") && !weight.equals("Weight")
+                        && !dob.equals("Birthday") && !gender.equals("Gender")){
+
                     try {
                         continueToUserInfo2();
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
->>>>>>> e92a521a4749fd0f8627955a9e12b0b0bb9e8676:app/src/main/java/com/example/LifestyleApp/UserInfo/UserInfo1.java
 
                 }
 
@@ -129,23 +122,19 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
                             .setMessage("Please finish entering your information")
                             .setCancelable(false)
                             .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            finishActivity(this.hashCode());
-                        }
-                    });
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finishActivity(this.hashCode());
+                                }
+                            });
 
                     AlertDialog dialog = builder.create();
                     dialog.show();
-<<<<<<< HEAD:app/src/main/java/com/example/LifestyleApp/UserInfo1.java
-
-=======
->>>>>>> e92a521a4749fd0f8627955a9e12b0b0bb9e8676:app/src/main/java/com/example/LifestyleApp/UserInfo/UserInfo1.java
                 }
                 break;
             }
             case R.id.birthdayTextView: {
-                System.out.println("Show picker");
+                //  System.out.println("Show picker");
                 DialogFragment dialogFragment = new DatePickerDialogMyTheme();
                 dialogFragment.show(getSupportFragmentManager(), "myTheme");
                 break;
@@ -168,4 +157,3 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
         }
     }
 }
-

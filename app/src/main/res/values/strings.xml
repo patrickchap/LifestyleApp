@@ -30,7 +30,7 @@
     <string name="gm_goal_weight_label">Goal Weight</string>
     <string name="gm_activity_level_label">Activity Level</string>
     <string name="gm_weight_tv">N/A</string>
-    <string name="gm_na">N/A</string>
+    <string name="gm_na">N/A ></string>
     <string name="gm_choose_goal_label">Choose Goal</string>
     <string name="gm_lose_btn">Lose Weight</string>
     <string name="gm_maintain_btn">Maintain Weight</string>
@@ -38,10 +38,26 @@
     <string name="gm_gpw">Choose Goal</string>
     <string name="gm_save_btn">Save Goal</string>
     <string name="home_module_button">Modules</string>
+    <string name="home_measurments">Current Measurments</string>
+    <string name="home_bmi">BMI</string>
+    <string name="home_weight">Weight</string>
+    <string name="home_height">Height</string>
+    <string name="home_goal_weight">Goal Weight</string>
+    <string name="home_bmr">BMR</string>
+    <string name="home_activity">Activity Level</string>
+    <string name="home_not_set">N/A</string>
+    <string name="activity_level_label">Activity Level</string>
+    <string name="home_calories">Calories</string>
 
     <string-array name="gender_array">
         <item>Male</item>
         <item>Female</item>
+    </string-array>
+
+
+    <string-array name="activity_array">
+        <item>Sedentary</item>
+        <item>Active</item>
     </string-array>
 
 

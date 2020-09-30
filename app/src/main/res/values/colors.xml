@@ -11,4 +11,5 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="button_gray">#BFBFBF</color>
     <color name="button_green">#3F9C43</color>
+    <color name="home_box">#A5A4A4</color>
 </resources>

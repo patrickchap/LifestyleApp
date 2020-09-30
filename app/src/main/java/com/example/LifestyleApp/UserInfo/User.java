@@ -17,16 +17,95 @@ public class User implements Serializable {
     public String whoCanSee;
     public  double bmi;
     public byte[] profilePicture;
+    public float calories;
 
     //additional info
     public float goalWeight;
+    public boolean goalWeightSet = false;
     public String activity; // sedentary  or active
+    public boolean activitySet = false;
     public String goal; // lose, gain, maintain
+    public boolean goalSet = false;
     public int perWeekPounds;
+    public float BMR;
+    public boolean BMRSet = false;
+    public boolean caloriesSet = false;
+    public boolean allGoalsSet = false;
+
+    public float getCalories() {
+        return calories;
+    }
+
+    public void setCalories(float calories) {
+        this.calories = calories;
+    }
+
+    public boolean isCaloriesSet() {
+        return caloriesSet;
+    }
+
+    public void setCaloriesSet(boolean caloriesSet) {
+        this.caloriesSet = caloriesSet;
+    }
+
+
+
 
     public User() {
 
     }
+
+    public boolean isAllGoalsSet() {
+        return allGoalsSet;
+    }
+
+    public void setAllGoalsSet(boolean allGoalsSet) {
+        this.allGoalsSet = allGoalsSet;
+    }
+
+
+    public float getBMR() {
+        return BMR;
+    }
+
+    public void setBMR(float BMR) {
+        this.BMR = BMR;
+    }
+
+    public boolean isBMRSet() {
+        return BMRSet;
+    }
+
+    public void setBMRSet(boolean BMRSet) {
+        this.BMRSet = BMRSet;
+    }
+
+
+    public boolean isGoalWeightSet() {
+        return goalWeightSet;
+    }
+
+    public void setGoalWeightSet(boolean goalWeightSet) {
+        this.goalWeightSet = goalWeightSet;
+    }
+
+    public boolean isActivitySet() {
+        return activitySet;
+    }
+
+    public void setActivitySet(boolean activitySet) {
+        this.activitySet = activitySet;
+    }
+
+    public boolean isGoalSet() {
+        return goalSet;
+    }
+
+    public void setGoalSet(boolean goalSet) {
+        this.goalSet = goalSet;
+    }
+
+
 
     public int getPerWeekPounds() {
         return perWeekPounds;

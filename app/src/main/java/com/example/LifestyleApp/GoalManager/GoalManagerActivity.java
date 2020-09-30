@@ -10,9 +10,7 @@ import com.example.LifestyleApp.UserInfo.User;
 
 public class GoalManagerActivity extends AppCompatActivity {
     private GoalManagerFragment goalManagerFragment;
-//    private User user;
-
-
+    
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,5 +21,16 @@ public class GoalManagerActivity extends AppCompatActivity {
         FragmentTransaction fTrans = getSupportFragmentManager().beginTransaction();
         fTrans.replace(R.id.fl_frag_itemdetail_container_phone, goalManagerFragment, "frag_itemdetail_gm");
         fTrans.commit();
+    }
+
+
+
+    public void passGoalWeight(String data) {
+        //System.out.println(data);
+        goalManagerFragment.sendGoalWeight(data);
+    }
+
+    public void passActivityLeve(String activityLevel){
+        goalManagerFragment.sendActivity(activityLevel);
     }
 }
