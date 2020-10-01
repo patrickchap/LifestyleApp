@@ -49,8 +49,9 @@
 
     <ImageView
         android:id="@+id/appImageView2"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/goat_logo_circle"
         android:layout_marginTop="100dp"
         android:contentDescription="@string/lifestyle_app_logo"
         android:scaleType="centerInside"
@@ -59,22 +60,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
-
-    <EditText
-        android:id="@+id/editTextWhoCanSee"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="68dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/continueButton"
-        app:layout_constraintEnd_toStartOf="@+id/guideline16"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline15"
-        app:layout_constraintTop_toBottomOf="@+id/appImageView2"
-        app:layout_constraintVertical_bias="0.94" />
 
     <TextView
         android:id="@+id/textView2"
@@ -85,14 +70,14 @@
         app:layout_constraintBottom_toTopOf="@+id/editTextCountry"
         app:layout_constraintStart_toStartOf="@+id/guideline15" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/user_info_3_who_can_see"
-        android:textColor="@color/eWhite"
-        app:layout_constraintBottom_toTopOf="@+id/editTextWhoCanSee"
-        app:layout_constraintStart_toStartOf="@+id/guideline15" />
+<!--    <TextView-->
+<!--        android:id="@+id/textView3"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/user_info_3_who_can_see"-->
+<!--        android:textColor="@color/eWhite"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/editTextWhoCanSee"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/guideline15" />-->
 
     <TextView
         android:id="@+id/imageView"
@@ -102,11 +87,12 @@
         android:text="@string/user_info_prompt"
         android:textColor="@color/eWhite"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextCountry"
+        app:layout_constraintBottom_toTopOf="@+id/continueButton"
         app:layout_constraintEnd_toStartOf="@+id/guideline16"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline15"
-        app:layout_constraintTop_toTopOf="@+id/guideline13" />
+        app:layout_constraintTop_toTopOf="@+id/guideline13"
+        app:layout_constraintVertical_bias="0.39" />
 
     <TextView
         android:id="@+id/userInfoClickDirections"
@@ -125,23 +111,25 @@
         android:id="@+id/editTextCountry"
         android:layout_width="130dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="32dp"
+        android:background="@drawable/rounded_corner_box"
         android:ems="10"
         android:inputType="textPostalAddress"
-        app:layout_constraintBottom_toTopOf="@+id/editTextWhoCanSee"
-        app:layout_constraintEnd_toStartOf="@+id/editTextCity"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline15" />
+        android:textColor="@color/eWhite"
+        app:layout_constraintBottom_toTopOf="@+id/continueButton"
+        app:layout_constraintStart_toStartOf="@+id/guideline15"
+        app:layout_constraintTop_toBottomOf="@+id/userInfoClickDirections" />
 
     <EditText
         android:id="@+id/editTextCity"
         android:layout_width="130dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="32dp"
+        android:background="@drawable/rounded_corner_box"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editTextWhoCanSee"
-        app:layout_constraintEnd_toStartOf="@+id/guideline16" />
+        android:textColor="@color/eWhite"
+        app:layout_constraintBottom_toTopOf="@+id/continueButton"
+        app:layout_constraintEnd_toStartOf="@+id/guideline16"
+        app:layout_constraintTop_toBottomOf="@+id/userInfoClickDirections" />
 
     <TextView
         android:id="@+id/textView"

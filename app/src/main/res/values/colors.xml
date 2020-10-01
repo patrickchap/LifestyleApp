@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background">#747474</color>
-    <color name="eWhite">#eeeeee</color>
+    <color name="background">#3A3A3A</color>
+    <color name="eWhite">#DFDFDF</color>
     <color name="userInfoSkyBlue">#a8e5fc</color>
     <color name="clickable_box">#949494</color>
-    <color name="continue_blue">#017aa8</color>
+    <color name="continue_blue">#017AA8</color>
 
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="button_gray">#BFBFBF</color>
     <color name="button_green">#3F9C43</color>
-    <color name="home_box">#A5A4A4</color>
+    <color name="home_box">#CCCACA</color>
 </resources>

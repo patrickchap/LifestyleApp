@@ -21,7 +21,7 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
 //    TextView mLocationTextView;
     TextView mCity;
     TextView mCountry;
-    TextView mWhoCanSeeTextView;
+//    TextView mWhoCanSeeTextView;
     User user;
 
     @Override
@@ -32,7 +32,7 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
         mContinueButton = findViewById(R.id.continueButton);
         mCity = findViewById(R.id.editTextCity);
         mCountry = findViewById(R.id.editTextCountry);
-        mWhoCanSeeTextView = findViewById(R.id.editTextWhoCanSee);
+//        mWhoCanSeeTextView = findViewById(R.id.editTextWhoCanSee);
         mContinueButton.setOnClickListener(this);
 
         Location location = GetLocationUtil.getLocation(this);
@@ -66,12 +66,12 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
     }
 
 
-    private void continueToUserInfo3(String city, String country , String whoCanSee) {
+    private void continueToUserInfo3(String city, String country) {
 
         Intent intent = new Intent(this, UserInfo3.class);
         user.setCity(city);
         user.setCountry(country);
-        user.setWhoCanSee(whoCanSee);
+//        user.setWhoCanSee(whoCanSee);
         intent.putExtra("user", user);
         startActivity(intent);
     }
@@ -82,12 +82,11 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
             case R.id.continueButton: {
                 String city = mCity.getText().toString();
                 String country = mCountry.getText().toString();
-                String whoCanSee = mWhoCanSeeTextView.getText().toString();
+//                String whoCanSee = mWhoCanSeeTextView.getText().toString();
 
-                if (!city.equals("") && !country.equals("")
-                        && !whoCanSee.equals("")){
+                if (!city.equals("") && !country.equals("")){
 
-                    continueToUserInfo3(city, country, whoCanSee);
+                    continueToUserInfo3(city, country);
                 }
 
                 else {
