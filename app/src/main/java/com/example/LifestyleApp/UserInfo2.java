@@ -32,7 +32,7 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
         mContinueButton = findViewById(R.id.continueButton);
         mCity = findViewById(R.id.editTextCity);
         mCountry = findViewById(R.id.editTextCountry);
-        mWhoCanSeeTextView = findViewById(R.id.editTextWhoCanSee);
+       // mWhoCanSeeTextView = findViewById(R.id.editTextWhoCanSee);
         mContinueButton.setOnClickListener(this);
     }
 
