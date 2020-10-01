@@ -90,9 +90,9 @@ public class UserInfo2Tests {
             countryTextView.setText(country);
             assertEquals("Country text view has incorrect text", country, countryTextView.getText().toString());
 
-            TextView whoSeesTextView = (TextView) userInfo2.findViewById(R.id.editTextWhoCanSee);
-            whoSeesTextView.setText(whoSees);
-            assertEquals("Who Sees text view has incorrect text", whoSees, whoSeesTextView.getText().toString());
+//            TextView whoSeesTextView = (TextView) userInfo2.findViewById(R.id.editTextWhoCanSee);
+//            whoSeesTextView.setText(whoSees);
+//            assertEquals("Who Sees text view has incorrect text", whoSees, whoSeesTextView.getText().toString());
 
     }
 
@@ -111,8 +111,8 @@ public class UserInfo2Tests {
             TextView countryTextView = (TextView) userInfo2.findViewById(R.id.editTextCountry);
             countryTextView.setText(country);
 
-            TextView whoSeesTextView = (TextView) userInfo2.findViewById(R.id.editTextWhoCanSee);
-            whoSeesTextView.setText(whoSees);
+//            TextView whoSeesTextView = (TextView) userInfo2.findViewById(R.id.editTextWhoCanSee);
+//            whoSeesTextView.setText(whoSees);
 
             user.setCity(city);
             user.setCountry(country);
@@ -139,8 +139,8 @@ public class UserInfo2Tests {
             TextView countryTextView = (TextView) userInfo2.findViewById(R.id.editTextCountry);
             countryTextView.setText(country);
 
-            TextView whoSeesTextView = (TextView) userInfo2.findViewById(R.id.editTextWhoCanSee);
-            whoSeesTextView.setText(whoSees);
+//            TextView whoSeesTextView = (TextView) userInfo2.findViewById(R.id.editTextWhoCanSee);
+//            whoSeesTextView.setText(whoSees);
 
             user.setCountry(country);
             user.setWhoCanSee(whoSees);
@@ -166,8 +166,8 @@ public class UserInfo2Tests {
             TextView cityTextView = (TextView) userInfo2.findViewById(R.id.editTextCity);
             cityTextView.setText(city);
 
-            TextView whoSeesTextView = (TextView) userInfo2.findViewById(R.id.editTextWhoCanSee);
-            whoSeesTextView.setText(whoSees);
+//            TextView whoSeesTextView = (TextView) userInfo2.findViewById(R.id.editTextWhoCanSee);
+//            whoSeesTextView.setText(whoSees);
 
             user.setCity(city);
             user.setWhoCanSee(whoSees);
