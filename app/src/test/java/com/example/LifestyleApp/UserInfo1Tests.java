@@ -1,11 +1,11 @@
 package com.example.LifestyleApp;
+
 import android.content.Intent;
 import android.os.Build;
 import android.widget.Button;
 import android.widget.TextView;
 import com.example.LifestyleApp.UserInfo.UserInfo1;
 import com.example.LifestyleApp.UserInfo.UserInfo2;
-
 import org.json.JSONException;
 import org.junit.Test;
 import org.junit.Before;
@@ -62,9 +62,9 @@ public class UserInfo1Tests {
         TextView weight = (TextView) userInfo1.findViewById(R.id.weightTextView);
         assertEquals("Weight Text View contains incorrect text", "Weight", weight.getText().toString());
 
-
         TextView height = (TextView) userInfo1.findViewById(R.id.heightTextView);
-        assertEquals("Weight Text View contains incorrect text", "Height", height.getText().toString());
+        assertEquals("Height Text View contains incorrect text", "Height", height.getText().toString());
+
     }
 
     @Test

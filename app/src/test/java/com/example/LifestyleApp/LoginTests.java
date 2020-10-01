@@ -5,10 +5,11 @@ import android.os.Build;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.LifestyleApp.UserInfo.UserInfo1;
+
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -21,7 +22,6 @@ import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(maxSdk = Build.VERSION_CODES.P, minSdk = Build.VERSION_CODES.P)
-@PrepareForTest(Login.class)
 
 public class LoginTests {
 

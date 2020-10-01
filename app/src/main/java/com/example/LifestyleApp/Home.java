@@ -75,7 +75,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
                         .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                 finishActivity(this.hashCode());
+                                finishActivity(this.hashCode());
                             }
                         });
 

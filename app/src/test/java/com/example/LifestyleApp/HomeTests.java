@@ -2,8 +2,14 @@ package com.example.LifestyleApp;
 
 import android.content.Intent;
 import android.os.Build;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.example.LifestyleApp.UserInfo.User;
+import com.example.LifestyleApp.UserInfo.UserInfo1;
 import com.example.LifestyleApp.UserInfo.UserInfo3;
+
 import org.json.JSONException;
 import org.junit.Test;
 import org.junit.Before;
@@ -12,21 +18,26 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Map;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(maxSdk = Build.VERSION_CODES.P, minSdk = Build.VERSION_CODES.P)
 
-public class MasterListTests {
+public class HomeTests {
 
     private UserTestData userTestData;
     private User user;
-    private MasterList masterList;
+    private double userInfo1BMI;
+    private Home home;
 
     @Before
     public void setup() throws IOException, JSONException, ParseException {
@@ -39,6 +50,15 @@ public class MasterListTests {
         String dob = userInfo1TestData.get("dob");
         String height = userInfo1TestData.get("height");
         String weight = userInfo1TestData.get("weight");
+
+        int ft = Integer.parseInt(height.split(" ")[0]);
+        int in = Integer.parseInt(height.split(" ")[2]);
+        int heightInInches = (ft * 12) + in;
+
+        float fWeight = Float.parseFloat(weight.split(" ")[0]);
+
+        //bmi Formula: 703 x weight (lbs) / [height (in)]2
+        userInfo1BMI = ((703 * fWeight) / Math.pow(heightInInches, 2));
 
         user = userTestData.generateUserFromInfo1(height, weight, dob, gender);
         com.example.LifestyleApp.UserInfo.UserInfo2 userInfo2 = userTestData.generateUserInfo2(gender, dob, height, weight);
@@ -55,18 +75,13 @@ public class MasterListTests {
         userInfo3.findViewById(R.id.createButton).performClick();
         Intent homeIntent = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
         homeIntent.putExtra("user", user);
-        Home home = Robolectric.buildActivity(Home.class, homeIntent).create().get();
-
-        home.findViewById(R.id.moduleButton).performClick();
-        Intent masterListIntent = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
-        masterListIntent.putExtra("user", user);
-        masterList = Robolectric.buildActivity(MasterList.class, masterListIntent).create().get();
+        home = Robolectric.buildActivity(Home.class, homeIntent).create().get();
 
     }
 
     @Test
-    public void masterListShouldNotBeNull() throws Exception {
-        assertNotNull(masterList);
+    public void homeShouldNotBeNull() throws Exception {
+        assertNotNull(home);
     }
 
     @Test
@@ -88,4 +103,26 @@ public class MasterListTests {
 
     }
 
+    @Test
+    public void initialView_moduleButtonCorrectText() {
+
+        Button moduleButton = (Button) home.findViewById(R.id.moduleButton);
+
+        assertTrue("Module button contains incorrect text",
+                "Modules".equals(moduleButton.getText().toString()));
+
+    }
+
+    @Test
+    public void clickingModule_shouldContinueToMasterList() {
+
+        Intent masterListIntent = new Intent(home, MasterList.class);
+
+        home.findViewById(R.id.moduleButton).performClick();
+
+        Intent actual = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
+
+        assertEquals(masterListIntent.getComponent(), actual.getComponent());
+
+    }
 }

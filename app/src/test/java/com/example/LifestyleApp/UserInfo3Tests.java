@@ -1,26 +1,22 @@
 package com.example.LifestyleApp;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.widget.Button;
 import android.widget.TextView;
+import com.example.LifestyleApp.UserInfo.User;
+import com.example.LifestyleApp.UserInfo.UserInfo2;
 import com.example.LifestyleApp.UserInfo.UserInfo3;
 import org.json.JSONException;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
+import java.text.ParseException;
+import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -30,24 +26,43 @@ import static org.robolectric.Shadows.shadowOf;
 @Config(maxSdk = Build.VERSION_CODES.P, minSdk = Build.VERSION_CODES.P)
 public class UserInfo3Tests {
 
+    private UserTestData userTestData;
+    private User user;
     private UserInfo3 userInfo3;
-    private int numUsers = 1;
 
     @Before
-    public void setup() {
+    public void setup() throws IOException, JSONException, ParseException {
 
-        userInfo3 = Robolectric.setupActivity(UserInfo3.class);
+        userTestData = new UserTestData();
+
+        Map<String, String> userInfo1TestData = userTestData.getUserInfo1TestData();
+
+        String gender = userInfo1TestData.get("gender");
+        String dob = userInfo1TestData.get("dob");
+        String height = userInfo1TestData.get("height");
+        String weight = userInfo1TestData.get("weight");
+
+        user = userTestData.generateUserFromInfo1(height, weight, dob, gender);
+        UserInfo2 userInfo2 = userTestData.generateUserInfo2(gender, dob, height, weight);
+
+        Map<String, String> userInfo2TestData = userTestData.getUserInfo2TestData();
+
+        String city = userInfo2TestData.get("city");
+        String country = userInfo2TestData.get("country");
+        String whoSees = userInfo2TestData.get("whoSees");
+
+        user = userTestData.generateUserFromInfo2(user, city, country, whoSees);
+        userInfo3 = userTestData.generateUserInfo3(user, userInfo2, city, country, whoSees);
 
     }
 
     @Test
-    public void initialView_loginShouldNotBeNull() throws Exception
-    {
-        assertNotNull( userInfo3 );
+    public void initialView_userInfo3ShouldNotBeNull() throws Exception {
+        assertNotNull(userInfo3);
     }
 
     @Test
-    public void initalView_createButtonCorrectText() {
+    public void initialView_createButtonCorrectText() {
 
         Button createButton = (Button) userInfo3.findViewById(R.id.createButton);
 
@@ -67,47 +82,15 @@ public class UserInfo3Tests {
     }
 
     @Test
-    public void clickingContinue_shouldContinueToHome() {
+    public void clickingCreate_shouldContinueToHome() {
 
         Intent homeIntent = new Intent(userInfo3, Home.class);
 
         userInfo3.findViewById(R.id.createButton).performClick();
+
         Intent actual = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
 
         assertEquals(homeIntent.getComponent(), actual.getComponent());
 
     }
-
-    @Test
-    public void addingPhotoToIntent_testWithRandomPhoto() throws IOException, JSONException {
-
-       for (int i = 0; i < numUsers; i++) {
-
-            Bitmap randomPhotoBitmap = convertToBitmap(new UserTestData().getRandomPhoto());
-
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            randomPhotoBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] randomPhotoByteArray = stream.toByteArray();
-            Intent userInfo3Intent = userInfo3.getIntent();
-            userInfo3Intent.putExtra("profilePicture", randomPhotoByteArray);
-
-            byte[] byteArrayFromIntent = userInfo3Intent.getByteArrayExtra("profilePicture");
-
-            assertEquals(randomPhotoByteArray, byteArrayFromIntent);
-
-      }
-
-    }
-
-    Bitmap convertToBitmap(String photoFilePath) throws IOException {
-
-        HttpURLConnection connection = (HttpURLConnection) new URL(photoFilePath).openConnection();
-        connection.setDoInput(true);
-        connection.connect();
-        InputStream input = connection.getInputStream();
-
-        return BitmapFactory.decodeStream(input);
-
-    }
-
 }

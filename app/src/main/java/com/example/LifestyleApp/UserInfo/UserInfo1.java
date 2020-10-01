@@ -105,7 +105,7 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
 
 
                 if (!height.equals("Height") && !weight.equals("Weight")
-                && !dob.equals("Birthday") && !gender.equals("Gender")){
+                        && !dob.equals("Birthday") && !gender.equals("Gender")){
 
                     try {
                         continueToUserInfo2();
@@ -122,11 +122,11 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
                             .setMessage("Please finish entering your information")
                             .setCancelable(false)
                             .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            finishActivity(this.hashCode());
-                        }
-                    });
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finishActivity(this.hashCode());
+                                }
+                            });
 
                     AlertDialog dialog = builder.create();
                     dialog.show();
@@ -134,7 +134,7 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
                 break;
             }
             case R.id.birthdayTextView: {
-              //  System.out.println("Show picker");
+                //  System.out.println("Show picker");
                 DialogFragment dialogFragment = new DatePickerDialogMyTheme();
                 dialogFragment.show(getSupportFragmentManager(), "myTheme");
                 break;
@@ -157,4 +157,3 @@ public class UserInfo1 extends AppCompatActivity  implements View.OnClickListene
         }
     }
 }
-

@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Build;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.LifestyleApp.UserInfo.User;
+import com.example.LifestyleApp.UserInfo.UserInfo1;
 import com.example.LifestyleApp.UserInfo.UserInfo2;
 import com.example.LifestyleApp.UserInfo.UserInfo3;
 
@@ -18,6 +21,9 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -29,13 +35,25 @@ import static org.robolectric.Shadows.shadowOf;
 @Config(maxSdk = Build.VERSION_CODES.P, minSdk = Build.VERSION_CODES.P)
 public class UserInfo2Tests {
 
+    private UserTestData userTestData;
     private UserInfo2 userInfo2;
     private int numUsers = 10;
+    User user;
 
     @Before
-    public void setup() {
+    public void setup() throws IOException, JSONException, ParseException {
 
-        userInfo2 = Robolectric.setupActivity(UserInfo2.class);
+        userTestData = new UserTestData();
+
+        Map<String, String> userInfo1TestData = userTestData.getUserInfo1TestData();
+
+        String gender = userInfo1TestData.get("gender");
+        String dob = userInfo1TestData.get("dob");
+        String height = userInfo1TestData.get("height");
+        String weight = userInfo1TestData.get("weight");
+
+        user = userTestData.generateUserFromInfo1(height, weight, dob, gender);
+        userInfo2 = userTestData.generateUserInfo2(gender, dob, height, weight);
 
     }
 
@@ -58,10 +76,6 @@ public class UserInfo2Tests {
     @Test
     public void inputtingUserData_shouldMatchRandomData() throws IOException, JSONException {
 
-        for (int i = 0; i < numUsers; i++) {
-
-            UserTestData userTestData = new UserTestData();
-
             Map<String, String> userInfo2TestData = userTestData.getUserInfo2TestData();
 
             String city = userInfo2TestData.get("city");
@@ -80,14 +94,10 @@ public class UserInfo2Tests {
             whoSeesTextView.setText(whoSees);
             assertEquals("Who Sees text view has incorrect text", whoSees, whoSeesTextView.getText().toString());
 
-        }
     }
 
     @Test
     public void clickingContinueWithUserInfoComplete_shouldContinueToUserInfo3() throws IOException, JSONException {
-        for (int i = 0; i < numUsers; i++) {
-
-            UserTestData userTestData = new UserTestData();
 
             Map<String, String> userInfo2TestData = userTestData.getUserInfo2TestData();
 
@@ -104,21 +114,22 @@ public class UserInfo2Tests {
             TextView whoSeesTextView = (TextView) userInfo2.findViewById(R.id.editTextWhoCanSee);
             whoSeesTextView.setText(whoSees);
 
+            user.setCity(city);
+            user.setCountry(country);
+            user.setWhoCanSee(whoSees);
+
             Intent userInfo3Intent = new Intent(userInfo2, UserInfo3.class);
+            userInfo3Intent.putExtra("user", user);
 
             userInfo2.findViewById(R.id.continueButton).performClick();
             Intent actual = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
 
             assertEquals(userInfo3Intent.getComponent(), actual.getComponent());
-        }
 
     }
 
     @Test
     public void clickingContinueWithOutCity_shouldPromptAlert() throws IOException, JSONException {
-        for (int i = 0; i < numUsers; i++) {
-
-            UserTestData userTestData = new UserTestData();
 
             Map<String, String> userInfo2TestData = userTestData.getUserInfo2TestData();
 
@@ -131,19 +142,21 @@ public class UserInfo2Tests {
             TextView whoSeesTextView = (TextView) userInfo2.findViewById(R.id.editTextWhoCanSee);
             whoSeesTextView.setText(whoSees);
 
+            user.setCountry(country);
+            user.setWhoCanSee(whoSees);
+
+            Intent userInfo3Intent = new Intent(userInfo2, UserInfo3.class);
+            userInfo3Intent.putExtra("user", user);
+
             userInfo2.findViewById(R.id.continueButton).performClick();
 
             ShadowAlertDialog dialog = shadowOf(RuntimeEnvironment.application).getLatestAlertDialog();
             assertEquals("User Info Incomplete", dialog.getTitle());
-        }
 
     }
 
     @Test
     public void clickingContinueWithOutCountry_shouldPromptAlert() throws IOException, JSONException {
-        for (int i = 0; i < numUsers; i++) {
-
-            UserTestData userTestData = new UserTestData();
 
             Map<String, String> userInfo2TestData = userTestData.getUserInfo2TestData();
 
@@ -156,19 +169,21 @@ public class UserInfo2Tests {
             TextView whoSeesTextView = (TextView) userInfo2.findViewById(R.id.editTextWhoCanSee);
             whoSeesTextView.setText(whoSees);
 
+            user.setCity(city);
+            user.setWhoCanSee(whoSees);
+
+            Intent userInfo3Intent = new Intent(userInfo2, UserInfo3.class);
+            userInfo3Intent.putExtra("user", user);
+
             userInfo2.findViewById(R.id.continueButton).performClick();
 
             ShadowAlertDialog dialog = shadowOf(RuntimeEnvironment.application).getLatestAlertDialog();
             assertEquals("User Info Incomplete", dialog.getTitle());
-        }
 
     }
 
     @Test
     public void clickingContinueWithOutWhoSees_shouldPromptAlert() throws IOException, JSONException {
-        for (int i = 0; i < numUsers; i++) {
-
-            UserTestData userTestData = new UserTestData();
 
             Map<String, String> userInfo2TestData = userTestData.getUserInfo2TestData();
 
@@ -181,11 +196,16 @@ public class UserInfo2Tests {
             TextView countryTextView = (TextView) userInfo2.findViewById(R.id.editTextCountry);
             countryTextView.setText(country);
 
+            user.setCity(city);
+            user.setCountry(country);
+
+            Intent userInfo3Intent = new Intent(userInfo2, UserInfo3.class);
+            userInfo3Intent.putExtra("user", user);
+
             userInfo2.findViewById(R.id.continueButton).performClick();
 
             ShadowAlertDialog dialog = shadowOf(RuntimeEnvironment.application).getLatestAlertDialog();
             assertEquals("User Info Incomplete", dialog.getTitle());
-        }
     }
 
 }

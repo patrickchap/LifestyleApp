@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.LifestyleApp.R;
 
 public class GoalManagerActivity extends AppCompatActivity {
+    
     private GoalManagerFragment goalManagerFragment;
 
     @Override
@@ -20,8 +21,6 @@ public class GoalManagerActivity extends AppCompatActivity {
         fTrans.replace(R.id.fl_frag_itemdetail_container_phone, goalManagerFragment, "frag_itemdetail_gm");
         fTrans.commit();
     }
-
-
 
     public void passGoalWeight(String data) {
         //System.out.println(data);

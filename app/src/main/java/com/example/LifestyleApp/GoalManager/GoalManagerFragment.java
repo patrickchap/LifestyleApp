@@ -32,6 +32,7 @@ import Dialogs.HeightPickerDialog;
 import Dialogs.WeightPickerDialog;
 
 public class GoalManagerFragment extends Fragment implements View.OnClickListener {
+
     private SeekBar seekBar;
     private TextView goalTV;
     private TextView mWeight;
@@ -48,14 +49,12 @@ public class GoalManagerFragment extends Fragment implements View.OnClickListene
     private String goal = "";
     private int prog = 0;
 
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.goal_manager, container, false);
 
-        Bundle bundle =getArguments();
+        Bundle bundle = getArguments();
 
         user = (User) bundle.getSerializable("user");
         mWeight = view.findViewById(R.id.weightTextView);
