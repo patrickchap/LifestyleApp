@@ -32,9 +32,9 @@ public class ItemDetailFragment extends Fragment {
         if (detailString != null && !detailString.equals("Weather")) {
             mTvItemDetail.setText(detailString);
         }
-        else if(detailString.equals("Weather")){ // if the detail is weather make api call to openweathermap
-            GetWeatherDataUtil.getWeatherInfo(getContext(), mTvItemDetail);
-        }
+//        else if(detailString.equals("Weather")){ // if the detail is weather make api call to openweathermap
+//            GetWeatherDataUtil.getWeatherInfo(getContext(), mTvItemDetail);
+//        }
         return view;
     }
 }

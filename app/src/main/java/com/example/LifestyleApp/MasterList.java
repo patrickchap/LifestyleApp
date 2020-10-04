@@ -11,6 +11,10 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.LifestyleApp.GoalManager.GoalManagerFragment;
 import com.example.LifestyleApp.ItemDetail.ItemDetailFragment;
 import com.example.LifestyleApp.UserInfo.User;
+import com.example.LifestyleApp.Weather.WeatherFragment;
+
+import org.json.JSONException;
+
 import util.GetIntentUtil;
 
 public class MasterList extends AppCompatActivity implements RvAdapter.DataPasser {
@@ -20,6 +24,7 @@ public class MasterList extends AppCompatActivity implements RvAdapter.DataPasse
     private User user;
     private String mGoalWeight;
     private GoalManagerFragment mTabletFragement;
+    private WeatherFragment weatherFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,6 +87,12 @@ public class MasterList extends AppCompatActivity implements RvAdapter.DataPasse
                 fTrans.replace(R.id.fl_frag_itemdetail_container_tablet, mTabletFragement, "frag_itemdetail");
                 fTrans.commit();
 
+            }else if(itemDetailString.equals("Weather")){
+                weatherFragment = new WeatherFragment();
+                weatherFragment.setArguments(getIntent().getExtras());
+                FragmentTransaction fTrans = getSupportFragmentManager().beginTransaction();
+                fTrans.replace(R.id.fl_frag_itemdetail_container_tablet, weatherFragment, "frag_weather");
+                fTrans.commit();
             }else{
                 ItemDetailFragment mTabletItemFragmetn = new ItemDetailFragment();
                 mTabletItemFragmetn.setArguments(detailBundle);
@@ -104,5 +115,9 @@ public class MasterList extends AppCompatActivity implements RvAdapter.DataPasse
 
     public void passActivityLeve(String toString) {
         mTabletFragement.sendActivity(toString);
+    }
+
+    public void passResponse(String response) throws JSONException {
+         weatherFragment.getResponse(response);
     }
 }
