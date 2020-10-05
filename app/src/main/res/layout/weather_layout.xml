@@ -27,9 +27,13 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="50dp"
         android:layout_marginRight="50dp"
-        android:text="Button"
+        android:background="@drawable/continue_button"
+        android:textColor="@color/eWhite"
+        android:text="@string/weather_search"
         app:layout_constraintBottom_toBottomOf="@+id/locationName"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@+id/locationName" />
 
     <TextView
         android:id="@+id/tempTitle"

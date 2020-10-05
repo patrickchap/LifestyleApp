@@ -1,19 +1,35 @@
 package com.example.LifestyleApp.UserInfo;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.example.LifestyleApp.R;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
+
 import java.io.IOException;
-import java.io.Serializable;
+
 import util.GetLocationUtil;
 
 public class UserInfo2 extends AppCompatActivity implements View.OnClickListener{
@@ -23,6 +39,8 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
 //    TextView mWhoCanSeeTextView;
     User user;
 
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,17 +49,22 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
         mContinueButton = findViewById(R.id.continueButton);
         mCity = findViewById(R.id.editTextCity);
         mCountry = findViewById(R.id.editTextCountry);
-//        mWhoCanSeeTextView = findViewById(R.id.editTextWhoCanSee);
         mContinueButton.setOnClickListener(this);
 
         Location location = GetLocationUtil.getLocation(this);
+
+
         Address address = null;
         try {
+            if(location != null){
+                address = GetLocationUtil.getAddress(location.getLatitude(), location.getLongitude(), getBaseContext());
+                // System.out.println("City " + address.getLocality() + " Country " + address.getCountryName());
+                mCity.setText(address.getLocality());
+                mCountry.setText(address.getCountryName());
+            }else{
+                throw new IOException("Location is null");
+            }
 
-            address = GetLocationUtil.getCity(location.getLatitude(), location.getLongitude(), getBaseContext());
-            System.out.println("City " + address.getLocality() + " Country " + address.getCountryName());
-            mCity.setText(address.getLocality());
-            mCountry.setText(address.getCountryName());
         } catch (IOException e) {
             AlertDialog.Builder builder = new AlertDialog.Builder(UserInfo2.this);
             builder.setTitle("Cannot find location")
@@ -58,12 +81,7 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
             dialog.show();
             e.printStackTrace();
         }
-
-
-
-
     }
-
 
     private void continueToUserInfo3(String city, String country) {
 
@@ -84,10 +102,8 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
 //                String whoCanSee = mWhoCanSeeTextView.getText().toString();
 
                 if (!city.equals("") && !country.equals("")){
-
                     continueToUserInfo3(city, country);
                 }
-
                 else {
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(UserInfo2.this);
@@ -100,12 +116,9 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
                                     finishActivity(this.hashCode());
                                 }
                             });
-
                     AlertDialog dialog = builder.create();
                     dialog.show();
-
                 }
-
             }
         }
     }

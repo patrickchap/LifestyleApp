@@ -34,7 +34,7 @@ public class GetWeatherDataUtil {
         String url = "http://api.openweathermap.org/data/2.5/weather?q=" + location + "&APPID=3e827fa26d3a6b13a5408c6c46ff8469&units=imperial";
 
 
-
+        System.out.println(url);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -56,6 +56,7 @@ public class GetWeatherDataUtil {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                System.out.println("err <<< + " + error);
             }
         });
 

@@ -1,5 +1,7 @@
 package com.example.LifestyleApp.Weather;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.location.Address;
 import android.location.Location;
 import android.os.Bundle;
@@ -14,6 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.LifestyleApp.R;
+import com.example.LifestyleApp.UserInfo.UserInfo2;
+
 import org.json.JSONException;
 import java.io.IOException;
 import util.GetLocationUtil;
@@ -39,11 +43,29 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
         Location location = GetLocationUtil.getLocation(getContext());
         Address address = null;
         try {
-            address = GetLocationUtil.getCity(location.getLatitude(), location.getLongitude(), getContext());
-            mLocation.setText(address.getLocality() + ", " + address.getCountryCode());
-            String cityCountry = address.getLocality() + "," + address.getCountryCode();
-            GetWeatherDataUtil.getWeatherInfo(getContext(), cityCountry, isTablet());
+            if(location != null){
+                address = GetLocationUtil.getAddress(location.getLatitude(), location.getLongitude(), getContext());
+                mLocation.setText(address.getLocality() + ", " + address.getCountryCode());
+                String cityCountry = address.getLocality() + "," + address.getCountryCode();
+                GetWeatherDataUtil.getWeatherInfo(getContext(), cityCountry, isTablet());
+            }else{
+                throw new IOException("location is null");
+            }
+
         } catch (IOException e) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Cannot find location")
+                    .setMessage("Please enter your City,CountryCode")
+                    .setCancelable(false)
+                    .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
             e.printStackTrace();
         }
 
@@ -54,7 +76,7 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
     public void getResponse(String response) throws JSONException {
         weatherData = GetWeatherDataUtil.createWeatherDate(response);
         if(weatherData != null){
-            mTemp.setText(weatherData.getmTemp());
+            mTemp.setText(weatherData.getmTemp() + " °F");
         }
     }
 
