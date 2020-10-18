@@ -1,4 +1,4 @@
-package com.example.LifestyleApp;
+package com.example.LifestyleApp.MasterList;
 
 import android.os.Parcel;
 import android.os.Parcelable;

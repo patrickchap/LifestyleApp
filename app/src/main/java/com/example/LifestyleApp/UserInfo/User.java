@@ -8,6 +8,8 @@ import java.util.Date;
 
 public class User implements Serializable {
     //user info
+    public String mEmail;
+    public String mPassword;
     public String gender;
     public Date DOB;
     public int height; //inches
@@ -49,8 +51,9 @@ public class User implements Serializable {
     }
 
 
-    public User() {
-
+    public User(String email, String password) {
+        mEmail = email;
+        mPassword = password;
     }
 
     public boolean isAllGoalsSet() {

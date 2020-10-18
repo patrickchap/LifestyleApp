@@ -6,23 +6,26 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
+
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.LifestyleApp.Home;
+import com.example.LifestyleApp.Home.Home;
 import com.example.LifestyleApp.R;
 import java.io.ByteArrayOutputStream;
-
+import java.util.UUID;
 
 
 public class UserInfo3 extends AppCompatActivity implements View.OnClickListener{
-    TextView mSnapSelfieTextView;
-    ImageView mProfilePictureImageView;
-    Button mCreateButton;
-    User user;
+    private TextView mSnapSelfieTextView;
+    private ImageView mProfilePictureImageView;
+    private Button mCreateButton;
+    private String mEmail;
+    private UserInfo3ViewModel mUserInfo3ViewModel;
 
     //Define a request code for the camera
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -30,7 +33,6 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        user = (User) getIntent().getSerializableExtra("user");
         setContentView(R.layout.user_info_3);
 
         mSnapSelfieTextView = findViewById(R.id.snapSelfie);
@@ -40,6 +42,7 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
         mSnapSelfieTextView.setOnClickListener(this);
         mCreateButton.setOnClickListener(this);
 
+        mUserInfo3ViewModel = ViewModelProviders.of(this).get(UserInfo3ViewModel.class);
     }
 
     @Override
@@ -49,18 +52,15 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if(cameraIntent.resolveActivity(getPackageManager())!=null){
                     startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
+                    mEmail = UUID.randomUUID().toString();
+                    mUserInfo3ViewModel.setViews(mEmail, mProfilePictureImageView);
                 }
                 break;
             }
             case R.id.createButton: {
-
+//                mEmail = UUID.randomUUID().toString();
+//                mUserInfo3ViewModel.setViews(mEmail, mProfilePictureImageView);
                 Intent intent = new Intent(this, Home.class);
-                Bitmap bmp = ((BitmapDrawable)mProfilePictureImageView.getDrawable()).getBitmap();
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                byte[] byteArray = stream.toByteArray();
-                user.setProfilePicture(byteArray);
-                intent.putExtra("user", user);
                 startActivity(intent);
             }
         }

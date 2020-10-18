@@ -8,7 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 
-import com.example.LifestyleApp.GoalManager.GoalManagerActivity;
+//import com.example.LifestyleApp.GoalManager.GoalManagerActivity;
 import com.example.LifestyleApp.ItemDetail.ItemDetailActivity;
 import com.example.LifestyleApp.UserInfo.User;
 import com.example.LifestyleApp.Weather.WeatherActivity;
@@ -29,10 +29,10 @@ public class GetIntentUtil {
             if (mapIntent.resolveActivity(context.getPackageManager()) != null) {
                 return mapIntent;
             }
-        }else if(detail.equals("Goal")){
-            Intent returnIntent = new Intent(context, GoalManagerActivity.class);
-            returnIntent.putExtra("user", user);
-            return returnIntent;
+//        }else if(detail.equals("Goal")){
+//            Intent returnIntent = new Intent(context, GoalManagerActivity.class);
+//            returnIntent.putExtra("user", user);
+//            return returnIntent;
         }else if(detail.equals("Weather")){
             Intent returnIntent = new Intent(context, WeatherActivity.class);
             //returnIntent.putExtra("user", user);

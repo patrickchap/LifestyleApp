@@ -24,10 +24,18 @@ public class GetLocationUtil {
 
 
         LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+
+        if (ActivityCompat.checkSelfPermission(context,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(context,
+                        Manifest.permission.ACCESS_COARSE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
                     (Activity) context,
-                    new String [] { android.Manifest.permission.ACCESS_COARSE_LOCATION },
+                    new String [] {
+                            android.Manifest.permission.ACCESS_COARSE_LOCATION },
                     1
             );
         }
@@ -60,7 +68,8 @@ public class GetLocationUtil {
             }
         };
 
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                0, 0, locationListener);
 
         return location;
     }
@@ -73,6 +82,31 @@ public class GetLocationUtil {
 
         return addresses.get(0);
     }
+
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        System.out.println("IN ONREQUESTPERMISSIONSRESULT");
+
+        switch (requestCode) {
+            case 1: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    System.out.println("PERMISSION GRANTED");
+
+                } else {
+                    System.out.println("PERMISSION DENIED");
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+
+
 
 
 }

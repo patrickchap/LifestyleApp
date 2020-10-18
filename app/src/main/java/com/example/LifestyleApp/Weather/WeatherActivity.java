@@ -11,7 +11,6 @@ import com.example.LifestyleApp.R;
 import org.json.JSONException;
 
 public class WeatherActivity extends AppCompatActivity {
-    WeatherData weatherData;
     WeatherFragment weatherFragment;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,10 +23,5 @@ public class WeatherActivity extends AppCompatActivity {
         fTrans.replace(R.id.fl_frag_itemdetail_container_phone, weatherFragment, "frag_itemdetail_gm");
         fTrans.commit();
 
-
-    }
-
-    public void passResponse(String response) throws JSONException {
-        weatherFragment.getResponse(response);
     }
 }

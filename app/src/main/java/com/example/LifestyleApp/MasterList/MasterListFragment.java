@@ -1,4 +1,4 @@
-package com.example.LifestyleApp;
+package com.example.LifestyleApp.MasterList;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,6 +11,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.LifestyleApp.R;
+import com.example.LifestyleApp.RvAdapter;
 
 import java.util.List;
 
@@ -42,4 +45,5 @@ public class MasterListFragment extends Fragment {
 
         return fragmentView;
     }
+
 }
