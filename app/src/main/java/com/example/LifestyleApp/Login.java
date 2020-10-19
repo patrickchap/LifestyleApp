@@ -9,13 +9,11 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.LifestyleApp.UserInfo.User;
 import com.example.LifestyleApp.UserInfo.UserInfo1;
 
 
 public class Login extends AppCompatActivity {
     Button mSubmit, mSignUp;
-    String mPassword, mEmail;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,10 +36,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void continueToUserInfo1() {
-
-        User user = new User(mEmail, mPassword);
         Intent intent = new Intent(this, UserInfo1.class);
-        intent.putExtra("user", user);
         startActivity(intent);
     }
 

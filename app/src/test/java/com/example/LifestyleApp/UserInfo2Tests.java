@@ -5,7 +5,6 @@ import android.os.Build;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.LifestyleApp.UserInfo.User;
 import com.example.LifestyleApp.UserInfo.UserInfo2;
 import com.example.LifestyleApp.UserInfo.UserInfo3;
 

@@ -8,37 +8,43 @@ import org.json.JSONObject;
 //Declare methods as static. We don't want to create objects of this class.
 public class JSONUserInputUtils {
 
-    public static UserData getUserInfoData(String data, UserData currentUser) throws JSONException {
+    public static UserData getUserInfoData(String data) throws JSONException {
+
+        UserData userData = new UserData();
 
         //Start parsing JSON data
         JSONObject jsonObject = new JSONObject(data); //Must throw JSONException
 
+        UserData.UserData1 userData1 = userData.getUserData1();
+
         int height = jsonObject.getInt("height");
         if(height != 0){
-            currentUser.setHeight(height);
+            userData1.setHeight(height);
         }
         float weight = (float) jsonObject.getDouble("weight");
         if(weight != 0){
-            currentUser.setWeight(weight);
+            userData1.setWeight(weight);
         }
         double bmi = jsonObject.getDouble("bmi");
         if(bmi != 0){
-            currentUser.setBmi(bmi);
+            userData1.setBmi(bmi);
         }
         String gender = jsonObject.getString("gender");
         if(!gender.equals("")){
-            currentUser.setGender(gender);
+            userData1.setGender(gender);
         }
         Long dob = jsonObject.getLong("dob");
         if(!dob.equals(Long.valueOf(0))){
-            currentUser.setDob(dob);
-        }
-        String profilePicture = jsonObject.getString("profilePicture");
-        System.out.println("JSON USER INPUT UTILS: SETTING PROFILE PICTURE");
-        if(!profilePicture.equals("")){
-            currentUser.setProfilePicture(profilePicture);
+            userData1.setDob(dob);
         }
 
-        return currentUser;
+        UserData.UserData3 userData3 = userData.getUserData3();
+
+        String profilePicture = jsonObject.getString("profilePicture");
+        if(!profilePicture.equals("")){
+            userData3.setProfilePicture(profilePicture);
+        }
+
+        return userData;
     }
 }

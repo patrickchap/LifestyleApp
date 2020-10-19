@@ -9,7 +9,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {UserInfoTable.class}, version = 1, exportSchema = false)
+@Database(entities = {UserInfoTable.class}, version = 2, exportSchema = false)
 
 public abstract class UserInfoDatabase extends RoomDatabase {
 
@@ -20,7 +20,7 @@ public abstract class UserInfoDatabase extends RoomDatabase {
     public static synchronized UserInfoDatabase getDatabase(final Context context){
         if(mInstance==null) {
             mInstance = Room.databaseBuilder(context.getApplicationContext(),
-                    UserInfoDatabase.class, "userInfo.db").addCallback(sRoomDatabaseCallback).build();
+                    UserInfoDatabase.class, "userInfo.db").addCallback(sRoomDatabaseCallback).fallbackToDestructiveMigration().build();
         }
         return mInstance;
     }

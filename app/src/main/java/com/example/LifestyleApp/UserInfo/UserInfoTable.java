@@ -13,110 +13,30 @@ public class UserInfoTable {
 
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "email")
-    private String email;
+    @ColumnInfo(name = "userInfoLevel")
+    private String userInfoLevel;
 
     @NonNull
-    @ColumnInfo(name = "userInfoData")
+    @ColumnInfo(name = "jsonData")
     private String userInfoJson;
 
-//    @NonNull
-//    @ColumnInfo(name = "height")
-//    private int userHeight;
-//
-//    @NonNull
-//    @ColumnInfo(name = "weight")
-//    private float userWeight;
-//
-//    @NonNull
-//    @ColumnInfo(name = "bmi")
-//    private double userBMI;
-//
-//    @NonNull
-//    @ColumnInfo(name = "gender")
-//    private String userGender;
-//
-//    @NonNull
-//    @ColumnInfo(name = "dob")
-//    private Long userDOB;
-
-    public UserInfoTable(@NonNull String email, @NonNull String userInfoJson){
-        this.email = email;
+    public UserInfoTable(@NonNull String userInfoLevel, @NonNull String userInfoJson){
+        this.userInfoLevel = userInfoLevel;
         this.userInfoJson = userInfoJson;
     }
 
-    public void setEmail(String email){
-        this.email = email;
+    public void setUserInfoLevel(String userInfoLevel){
+        this.userInfoLevel = userInfoLevel;
     }
 
     public void setUserInfoJson(String userInfoJson){
         this.userInfoJson = userInfoJson;
     }
 
-    public String getEmail(){ return email; }
+    public String getUserInfoLevel(){ return userInfoLevel; }
 
     public String getUserInfoJson(){
         return userInfoJson;
     }
-
-//    public UserInfo1Table(@NonNull String email,
-//                          @NonNull int userHeight,
-//                          @NonNull float userWeight,
-//                          @NonNull double userBMI,
-//                          @NonNull String userGender,
-//                          @NonNull Long userDOB){
-//        this.email = email;
-//        this.userHeight = userHeight;
-//        this.userWeight = userWeight;
-//        this.userBMI = userBMI;
-//        this.userGender = userGender;
-//        this.userDOB = userDOB;
-//    }
-//
-//    public void setEmail(String email){
-//        this.email = email;
-//    }
-//
-//    public void setUserHeight(int userHeight){
-//        this.userHeight = userHeight;
-//    }
-//
-//    public void setUserWeight(float userWeight){
-//        this.userWeight = userWeight;
-//    }
-//
-//    public void setUserBMI(double userBMI){
-//        this.userBMI = userBMI;
-//    }
-//
-//    public void setUserGender(String userGender){
-//        this.userGender = userGender;
-//    }
-//
-//    public void setUserDOB(Long userDOB){
-//        this.userDOB = userDOB;
-//    }
-//
-//    public String getEmail(){ return email; }
-//
-//    public int getUserHeight(){
-//        return userHeight;
-//    }
-//
-//    public float getUserWeight(){
-//        return userWeight;
-//    }
-//
-//    public double getUserBMI(){
-//        return userBMI;
-//    }
-//
-//    public String getUserGender(){
-//        return userGender;
-//    }
-//
-//    public Long getUserDOB(){
-//        return userDOB;
-//    }
 
 }

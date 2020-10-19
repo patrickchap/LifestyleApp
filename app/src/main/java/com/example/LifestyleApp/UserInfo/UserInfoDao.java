@@ -23,4 +23,5 @@ public interface UserInfoDao {
 
     @Query("SELECT * from userInfo_table")
     LiveData<List<UserInfoTable>> getAll();
+
 }

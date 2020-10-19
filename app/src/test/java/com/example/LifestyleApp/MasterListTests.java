@@ -6,7 +6,6 @@ import android.os.Build;
 import com.example.LifestyleApp.Home.Home;
 import com.example.LifestyleApp.MasterList.CustomMasterList;
 import com.example.LifestyleApp.MasterList.MasterList;
-import com.example.LifestyleApp.UserInfo.User;
 import com.example.LifestyleApp.UserInfo.UserInfo3;
 import org.json.JSONException;
 import org.junit.Test;
