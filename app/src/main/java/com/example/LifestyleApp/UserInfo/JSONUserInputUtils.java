@@ -8,7 +8,7 @@ public class JSONUserInputUtils {
     public static UserData getUserInfoData(String data, UserData oldData) throws JSONException {
 
         UserData userData = new UserData();
-        JSONObject jsonObject = new JSONObject(data); //Must throw JSONException
+        JSONObject jsonObject = new JSONObject(data);
 
         if (oldData == null) {
             return addData(userData, jsonObject);

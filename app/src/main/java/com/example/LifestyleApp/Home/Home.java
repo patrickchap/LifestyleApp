@@ -63,22 +63,21 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
             if (userData != null) {
                 String bmi = userData.getUserData1().getBmi() + "";
                 if (!bmi.equals("")) {
-                    mWeight.setText(bmi);
+                    mBMI.setText(bmi);
                 }
                 String weight = userData.getUserData1().getWeight() + "";
                 if (!weight.equals("")) {
-                    mHeight.setText(weight);
+                    mWeight.setText(weight);
                 }
                 String height = userData.getUserData1().getHeight() + "";
                 if (!height.equals("")) {
-                    mBMI.setText(height);
+                    mHeight.setText(height);
                 }
                 String profilePicture = userData.getUserData3().getProfilePicture();
                 if (!profilePicture.equals("")) {
                     byte[] byteArray = Base64.decode(profilePicture, Base64.DEFAULT);
                     Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
                     mUserProfilePicture.setImageBitmap(bmp);
-
                 }
             }
         }

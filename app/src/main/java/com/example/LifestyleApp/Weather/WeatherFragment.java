@@ -34,21 +34,17 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
         mSearchWeather = view.findViewById(R.id.searchWeatherData);
         mSearchWeather.setOnClickListener(this);
 
-        //Create the view model
         mWeatherViewModel = ViewModelProviders.of(this).get(WeatherViewModel.class);
 
-        //Set the observer
-        (mWeatherViewModel.getData()).observe(this, nameObserver);
+        (mWeatherViewModel.getData()).observe(this, weatherDataObserver);
 
         return view;
 
     }
 
-    //create an observer that watches the LiveData<WeatherData> object
-    final Observer<WeatherData> nameObserver  = new Observer<WeatherData>() {
+    final Observer<WeatherData> weatherDataObserver  = new Observer<WeatherData>() {
         @Override
         public void onChanged(@Nullable final WeatherData weatherData) {
-            // Update the UI if this data variable changes
             if(weatherData!=null) {
                 mTemp.setText("" + Math.round(weatherData.getTemperature().getTemp() - 273.15) + " C");
             }
@@ -59,8 +55,6 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.searchWeatherData:{
-                System.out.println("Search");
-                //Get the string from the edit text and sanitize the input
                 String inputFromEt = mLocation.getText().toString().replace(' ','&');
                 loadWeatherData(inputFromEt);
             }
@@ -68,10 +62,7 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    //Hand location down to repository.
     void loadWeatherData(String location){
-
-        //pass the location in to the view model
         mWeatherViewModel.setLocation(location);
     }
 

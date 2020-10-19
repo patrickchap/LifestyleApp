@@ -18,11 +18,11 @@ public class HomeViewModel extends AndroidViewModel {
         super(application);
         userInfoRepository = UserInfoRepository.getInstance(this.getApplication().getApplicationContext());
         userData = userInfoRepository.getUserData();
-        userInfoRepository.refreshData();
+//        userInfoRepository.refreshData();
     }
 
     public LiveData<UserData> getUserData(){
-        userInfoRepository.removeObserver();
+//        userInfoRepository.removeObserver();
         return userData;
     }
 

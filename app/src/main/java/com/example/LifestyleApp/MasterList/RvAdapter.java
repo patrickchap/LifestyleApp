@@ -1,4 +1,4 @@
-package com.example.LifestyleApp;
+package com.example.LifestyleApp.MasterList;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.LifestyleApp.R;
+
 import java.util.List;
 
 public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder>{

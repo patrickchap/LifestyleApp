@@ -2,6 +2,7 @@ package com.example.LifestyleApp.MasterList;
 
 import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.example.LifestyleApp.UserInfo.UserData;
 import com.example.LifestyleApp.UserInfo.UserInfoRepository;
@@ -15,10 +16,11 @@ public class MasterListViewModel extends AndroidViewModel {
         super(application);
         userInfoRepository = UserInfoRepository.getInstance(this.getApplication().getApplicationContext());
         userData = userInfoRepository.getUserData();
-        userInfoRepository.refreshData();
+//        userInfoRepository.refreshData();
     }
 
-    public MutableLiveData<UserData> getData(){
+    public LiveData<UserData> getUserData(){
+//        userInfoRepository.removeObserver();
         return userData;
     }
 

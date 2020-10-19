@@ -37,13 +37,13 @@ public class UserInfoRepository {
         return userData;
     }
 
-    public void refreshData() {
-        userInfoDao.getAll().observeForever(userInfoObserver);
-    }
-
-    public void removeObserver() {
-        userInfoDao.getAll().removeObserver(userInfoObserver);
-    }
+//    public void refreshData() {
+//        userInfoDao.getAll().observeForever(userInfoObserver);
+//    }
+//
+//    public void removeObserver() {
+//        userInfoDao.getAll().removeObserver(userInfoObserver);
+//    }
 
     final Observer<List<UserInfoTable>> userInfoObserver = new Observer<List<UserInfoTable>>() {
         @Override
