@@ -64,7 +64,7 @@ public class UserInfo1ViewModel extends AndroidViewModel {
             this.bmi = bmi;
             this.gender = gender;
             this.dob = dob;
-            this.profilePicture = "";
+            profilePicture = "";
         }
     }
 }

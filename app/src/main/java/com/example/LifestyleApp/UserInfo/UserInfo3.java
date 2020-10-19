@@ -24,8 +24,7 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
     private TextView mSnapSelfieTextView;
     private ImageView mProfilePictureImageView;
     private Button mCreateButton;
-    private String mEmail;
-//    private UserInfo3ViewModel mUserInfo3ViewModel;
+    private UserInfo3ViewModel userInfo3ViewModel;
 
     //Define a request code for the camera
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -42,7 +41,7 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
         mSnapSelfieTextView.setOnClickListener(this);
         mCreateButton.setOnClickListener(this);
 
-//        mUserInfo3ViewModel = ViewModelProviders.of(this).get(UserInfo3ViewModel.class);
+        userInfo3ViewModel = ViewModelProviders.of(this).get(UserInfo3ViewModel.class);
     }
 
     @Override
@@ -52,14 +51,15 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if(cameraIntent.resolveActivity(getPackageManager())!=null){
                     startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
-//                    mEmail = "userInfo3";
-//                    mUserInfo3ViewModel.setViews(mEmail, mProfilePictureImageView);
                 }
                 break;
             }
             case R.id.createButton: {
-//                mEmail = UUID.randomUUID().toString();
-//                mUserInfo3ViewModel.setViews(mEmail, mProfilePictureImageView);
+                Bitmap bmp = ((BitmapDrawable)mProfilePictureImageView.getDrawable()).getBitmap();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+                userInfo3ViewModel.insert(byteArray);
                 Intent intent = new Intent(this, Home.class);
                 startActivity(intent);
             }

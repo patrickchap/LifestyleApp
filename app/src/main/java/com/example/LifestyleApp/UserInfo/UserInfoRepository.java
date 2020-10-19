@@ -53,7 +53,7 @@ public class UserInfoRepository {
                 String userInfoJson = userInfoTable.getUserInfoJson();
                 UserData userDataParsed = null;
                 try {
-                    userDataParsed = JSONUserInputUtils.getUserInfoData(userInfoJson);
+                    userDataParsed = JSONUserInputUtils.getUserInfoData(userInfoJson, userData.getValue());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -65,7 +65,8 @@ public class UserInfoRepository {
     };
 
     public void insert(String userInfoLevel, String userInfoJson) throws JSONException {
-        UserData userDataParsed = JSONUserInputUtils.getUserInfoData(userInfoJson);
+        UserData oldData = userData.getValue();
+        UserData userDataParsed = JSONUserInputUtils.getUserInfoData(userInfoJson, oldData);
         userData.setValue(userDataParsed);
         UserInfoTable userInfoTable = new UserInfoTable(userInfoLevel, userInfoJson);
         userInfoTable.setUserInfoLevel(userInfoLevel);

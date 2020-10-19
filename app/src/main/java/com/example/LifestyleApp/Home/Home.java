@@ -10,11 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
 import com.example.LifestyleApp.MasterList.MasterList;
 import com.example.LifestyleApp.R;
 import com.example.LifestyleApp.UserInfo.UserData;
@@ -71,12 +73,13 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
                 if (!height.equals("")) {
                     mBMI.setText(height);
                 }
-//                String profilePicture = userData.getUserData3().getProfilePicture();
-//                if (!profilePicture.equals("")) {
-//                    byte[] byteArray = Base64.decode(profilePicture, Base64.DEFAULT);
-//                    Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-//                    mUserProfilePicture.setImageBitmap(bmp);
-//                }
+                String profilePicture = userData.getUserData3().getProfilePicture();
+                if (!profilePicture.equals("")) {
+                    byte[] byteArray = Base64.decode(profilePicture, Base64.DEFAULT);
+                    Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                    mUserProfilePicture.setImageBitmap(bmp);
+
+                }
             }
         }
     };

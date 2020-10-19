@@ -2,16 +2,16 @@ package com.example.LifestyleApp.UserInfo;
 
 public class UserData {
 
-    private String mEmail;
-
-    private int height; //inches
-    private float weight;
-    private double bmi;
-    private String gender;
-    private Long DOB;
-    private String city;
-    private String country;
-    private String profilePicture;
+//    private String mEmail;
+//
+//    private int height; //inches
+//    private float weight;
+//    private double bmi;
+//    private String gender;
+//    private Long DOB;
+//    private String city;
+//    private String country;
+//    private String profilePicture;
 
     private UserData1 userData1 = new UserData1();
     private UserData2 userData2 = new UserData2();
@@ -20,6 +20,11 @@ public class UserData {
     private UserActivity userActivity = new UserActivity();
 
     public UserData() {
+        userData1 = null;
+        userData2 = null;
+        userData3 = null;
+        userGoals = null;
+        userActivity = null;
 //        weight = 0;
 //        bmi = 0;
 //        gender = "";
@@ -35,6 +40,8 @@ public class UserData {
         private double bmi;
         private String gender;
         private Long DOB;
+
+        public UserData1(){}
 
         public int getHeight() {
             return height;
@@ -103,6 +110,8 @@ public class UserData {
     public class UserData3 {
 
     private String profilePicture;
+
+    public UserData3(){}
 
     public String getProfilePicture() {
         return profilePicture;
@@ -197,24 +206,38 @@ public class UserData {
     }
 
     public UserData1 getUserData1(){
+        if (userData1 == null){
+            userData1 = new UserData1();
+        }
         return userData1;
     }
 
     public UserData2 getUserData2(){
+        if (userData2 == null){
+            userData2 = new UserData2();
+        }
         return userData2;
     }
 
     public UserData3 getUserData3(){
+        if (userData3 == null){
+            userData3 = new UserData3();
+        }
         return userData3;
     }
 
     public UserGoals getUserGoals(){
+        if (userGoals == null){
+            userGoals = new UserGoals();
+        }
         return userGoals;
     }
 
     public UserActivity getUserActivity(){
+        if (userActivity == null){
+            userActivity = new UserActivity();
+        }
         return userActivity;
     }
-
 
 }
