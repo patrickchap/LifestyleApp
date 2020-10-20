@@ -37,13 +37,10 @@ public class MasterList extends AppCompatActivity implements RvAdapter.DataPasse
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.master_list);
-
         userInfoViewModel = ViewModelProviders.of(this).get(UserInfoViewModel.class);
         userInfoViewModel.loadUserData();
         userInfoViewModel.getUserData().observe(this, userInfoObserver);
 
-        bmi = "";
-        mCustomMasterList.addItem("BMI", bmi);
         mCustomMasterList.addItem("Weather", "Weather");
         mCustomMasterList.addItem("Hikes near me", "Hikes");
 
@@ -66,6 +63,7 @@ public class MasterList extends AppCompatActivity implements RvAdapter.DataPasse
         @Override
         public void onChanged(@Nullable final UserData userData) {
             if (userData != null) {
+
                 mUserProfilePicture = findViewById(R.id.profilePictureIV);
                 String profilePicture = userData.getUserData3().getProfilePicture();
                 if (!profilePicture.equals("")) {
@@ -74,6 +72,7 @@ public class MasterList extends AppCompatActivity implements RvAdapter.DataPasse
                     mUserProfilePicture.setImageBitmap(bmp);
                 }
                 bmi = userData.getUserData1().getBmi() + "";
+                mCustomMasterList.addItem("BMI", bmi);
             }
         }
     };
