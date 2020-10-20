@@ -3,21 +3,12 @@ package com.example.LifestyleApp.UserInfo;
 import android.app.Application;
 import android.util.Base64;
 import android.widget.TextView;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
-
-import com.example.LifestyleApp.R;
 import com.google.gson.Gson;
-
 import org.json.JSONException;
-
 import java.util.Date;
-import java.util.List;
 
 public class UserInfoViewModel extends AndroidViewModel {
     private MutableLiveData<UserData> userData = new MutableLiveData<UserData>();
@@ -131,28 +122,16 @@ public class UserInfoViewModel extends AndroidViewModel {
             this.dob = dob;
         }
 
+        private void setCity(String city) {
+            this.city = city;
+        }
+
+        private void setCountry(String country) {
+            this.country = country;
+        }
+
         private void setProfilePicture(String profilePicture) {
             this.profilePicture = profilePicture;
-        }
-
-        private int getHeight() {
-            return this.height;
-        }
-
-        private float getWeight() {
-            return this.weight;
-        }
-
-        private double getBMI() {
-            return this.bmi;
-        }
-
-        private String getGender() {
-            return this.gender;
-        }
-
-        private Long getDOB() {
-            return this.dob;
         }
 
     }
