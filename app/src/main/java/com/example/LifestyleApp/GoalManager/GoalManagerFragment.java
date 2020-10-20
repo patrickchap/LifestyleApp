@@ -21,6 +21,8 @@ import com.example.LifestyleApp.Home;
 import com.example.LifestyleApp.R;
 import com.example.LifestyleApp.UserInfo.UserData;
 
+import java.time.Period;
+
 import Dialogs.ActivityLevelPicker;
 import Dialogs.GoalWeightPicker;
 import Dialogs.HeightPickerDialog;
@@ -50,7 +52,7 @@ public class GoalManagerFragment extends Fragment implements View.OnClickListene
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.goal_manager, container, false);
 
-        Bundle bundle = getArguments();
+//        Bundle bundle = getArguments();
 
         mWeight = view.findViewById(R.id.weightTextView);
         seekBar = view.findViewById(R.id.seekBar);
@@ -198,7 +200,7 @@ public class GoalManagerFragment extends Fragment implements View.OnClickListene
                 float BMR;
 //                if (user.getGender().equals("Male")) {
 //                    BMR = (float) (66.47 + (6.24 * fWeight) + (12.7 * heightInInches) - (6.755 * period.getYears()));
-//                } else {
+////                } else {
 //                    BMR = (float) (655.1 + (4.35 * fWeight) + (4.7 * heightInInches) - (4.7 * period.getYears()));
 //                }
 //                BMR = (activityLevel == "Active") ? (BMR *= 1.5) : (BMR *= 1.2);
