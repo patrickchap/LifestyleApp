@@ -41,7 +41,7 @@ public class MasterList extends AppCompatActivity implements RvAdapter.DataPasse
         userInfoViewModel.getUserData().observe(this, userInfoObserver);
 
         mCustomMasterList.addItem("Weather", "Weather");
-        mCustomMasterList.addItem("Hikes near me", "Hikes");
+//        mCustomMasterList.addItem("Hikes near me", "Hikes");
 
         //create fragment that holds the master list and send the custom list
         mMasterListFragment = new MasterListFragment();

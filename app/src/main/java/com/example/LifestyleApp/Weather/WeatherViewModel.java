@@ -8,27 +8,23 @@ import androidx.lifecycle.MutableLiveData;
 
 
 public class WeatherViewModel extends AndroidViewModel {
-    private MutableLiveData<WeatherData> jsonData;
+    private MutableLiveData<WeatherData> weatherData;
     private WeatherRepository mWeatherRepository;
 
     public WeatherViewModel(Application application){
         super(application);
 
         mWeatherRepository = new WeatherRepository(application);
-        jsonData = mWeatherRepository.getData();
+        weatherData = mWeatherRepository.getData();
 
     }
 
     public void setLocation(String location){
-
         mWeatherRepository.setLocation(location);
     }
 
     public LiveData<WeatherData> getData(){
-
-        return jsonData;
-
+        return weatherData;
     }
-
 
 }

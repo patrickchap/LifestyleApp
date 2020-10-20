@@ -20,7 +20,9 @@ public class UserInfoViewModel extends AndroidViewModel {
     }
 
     public void loadUserData(){
+        userInfoRepository.refreshData();
         userData = userInfoRepository.getUserData();
+        userInfoRepository.removeObserver();
     }
 
     public LiveData<UserData> getUserData(){

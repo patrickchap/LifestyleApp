@@ -47,7 +47,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
 
         mBMI = findViewById(R.id.bmiValue);
         mWeight = findViewById(R.id.weightValue);
-        ;
         mHeight = findViewById(R.id.heightValue);
         mGoalWeight = findViewById(R.id.goalWeightValue);
         mBMR = findViewById(R.id.bmrValue);

@@ -26,9 +26,6 @@ public class NetworkUtils {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {
             InputStream inputStream = urlConnection.getInputStream();
-
-            //The scanner trick: search for the next "beginning" of the input stream
-            //No need to user BufferedReader
             Scanner scanner = new Scanner(inputStream);
             scanner.useDelimiter("\\A");
 

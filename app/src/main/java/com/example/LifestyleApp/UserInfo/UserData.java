@@ -2,22 +2,11 @@ package com.example.LifestyleApp.UserInfo;
 
 public class UserData {
 
-//    private String mEmail;
-//
-//    private int height; //inches
-//    private float weight;
-//    private double bmi;
-//    private String gender;
-//    private Long DOB;
-//    private String city;
-//    private String country;
-//    private String profilePicture;
-
-    private UserData1 userData1 = new UserData1();
-    private UserData2 userData2 = new UserData2();
-    private UserData3 userData3 = new UserData3();
-    private UserGoals userGoals = new UserGoals();
-    private UserActivity userActivity = new UserActivity();
+    private UserData1 userData1;
+    private UserData2 userData2;
+    private UserData3 userData3;
+    private UserGoals userGoals;
+    private UserActivity userActivity;
 
     public UserData() {
         userData1 = null;
@@ -25,13 +14,6 @@ public class UserData {
         userData3 = null;
         userGoals = null;
         userActivity = null;
-//        weight = 0;
-//        bmi = 0;
-//        gender = "";
-//        DOB = Long.valueOf(0);
-//        city = "";
-//        country = "";
-//        profilePicture = "";
     }
 
     public class UserData1 {

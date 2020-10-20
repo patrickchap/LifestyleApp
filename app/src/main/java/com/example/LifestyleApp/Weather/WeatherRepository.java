@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.List;
 
 public class WeatherRepository {
-    private final MutableLiveData<WeatherData> jsonData =
+    private final MutableLiveData<WeatherData> weatherData =
             new MutableLiveData<WeatherData>();
     private String mLocation;
     private String mJsonString;
@@ -36,7 +36,7 @@ public class WeatherRepository {
     }
 
     public MutableLiveData<WeatherData> getData() {
-        return jsonData;
+        return weatherData;
     }
 
     private void loadData()
@@ -55,15 +55,10 @@ public class WeatherRepository {
 
         @Override
         protected String doInBackground(String... strings) {
-
             String location = strings[0];
             URL weatherDataURL = null;
             String retrievedJsonData = null;
-
-            //checks if location already has been searched for (maintain local list of locations).
             if(location!=null) {
-
-                //If not, get that data from the internet.
                 weatherDataURL = NetworkUtils.buildURLFromString(location);
                 try {
                     retrievedJsonData = NetworkUtils.getDataFromURL(weatherDataURL);
@@ -71,8 +66,6 @@ public class WeatherRepository {
                     e.printStackTrace();
                 }
             }
-
-            //If location has already been searched for, repository hands that up to ViewModel.
             return retrievedJsonData;
         }
 
@@ -80,20 +73,14 @@ public class WeatherRepository {
         protected void onPostExecute(String returnedJson) {
             WeatherRepository localWRvar = mRepoWReference.get();
             if(returnedJson!=null) {
-
-                //Put it into database.
                 localWRvar.mJsonString = returnedJson;
                 localWRvar.insert();
-
                 try {
-                    //Hands it to ViewModel.
-                    localWRvar.jsonData.setValue(JSONWeatherUtils.getWeatherData(returnedJson));
-
+                    localWRvar.weatherData.setValue(JSONWeatherUtils.getWeatherData(returnedJson));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-
         }
     }
 

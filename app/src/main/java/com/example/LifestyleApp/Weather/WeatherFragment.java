@@ -18,7 +18,6 @@ import androidx.lifecycle.ViewModelProviders;
 
 public class WeatherFragment extends Fragment implements View.OnClickListener {
 
-    WeatherData weatherData;
     TextView mTemp;
     TextView mLocation;
     Button mSearchWeather;

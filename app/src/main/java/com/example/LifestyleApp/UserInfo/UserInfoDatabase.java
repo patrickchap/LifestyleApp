@@ -9,7 +9,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {UserInfoTable.class}, version = 2, exportSchema = false)
+@Database(entities = {UserInfoTable.class}, version = 3, exportSchema = false)
 
 public abstract class UserInfoDatabase extends RoomDatabase {
 

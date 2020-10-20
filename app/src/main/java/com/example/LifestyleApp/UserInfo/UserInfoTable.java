@@ -13,27 +13,27 @@ public class UserInfoTable {
 
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "userInfoLevel")
-    private String userInfoLevel;
+    @ColumnInfo(name = "userInfoPage")
+    private String userInfoPage;
 
     @NonNull
     @ColumnInfo(name = "jsonData")
     private String userInfoJson;
 
-    public UserInfoTable(@NonNull String userInfoLevel, @NonNull String userInfoJson){
-        this.userInfoLevel = userInfoLevel;
+    public UserInfoTable(@NonNull String userInfoPage, @NonNull String userInfoJson){
+        this.userInfoPage = userInfoPage;
         this.userInfoJson = userInfoJson;
     }
 
-    public void setUserInfoLevel(String userInfoLevel){
-        this.userInfoLevel = userInfoLevel;
+    public void setUserInfoPage(String userInfoPage){
+        this.userInfoPage = userInfoPage;
     }
 
     public void setUserInfoJson(String userInfoJson){
         this.userInfoJson = userInfoJson;
     }
 
-    public String getUserInfoLevel(){ return userInfoLevel; }
+    public String getUserInfoPage(){ return userInfoPage; }
 
     public String getUserInfoJson(){
         return userInfoJson;
