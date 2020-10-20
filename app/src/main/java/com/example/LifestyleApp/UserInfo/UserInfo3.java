@@ -14,17 +14,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.LifestyleApp.Home.Home;
+import com.example.LifestyleApp.Home;
 import com.example.LifestyleApp.R;
 import java.io.ByteArrayOutputStream;
-import java.util.UUID;
 
 
 public class UserInfo3 extends AppCompatActivity implements View.OnClickListener{
     private TextView mSnapSelfieTextView;
     private ImageView mProfilePictureImageView;
     private Button mCreateButton;
-    private UserInfo3ViewModel userInfo3ViewModel;
+    private UserInfoViewModel userInfoViewModel;
 
     //Define a request code for the camera
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -41,7 +40,7 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
         mSnapSelfieTextView.setOnClickListener(this);
         mCreateButton.setOnClickListener(this);
 
-        userInfo3ViewModel = ViewModelProviders.of(this).get(UserInfo3ViewModel.class);
+        userInfoViewModel = ViewModelProviders.of(this).get(UserInfoViewModel.class);
     }
 
     @Override
@@ -59,7 +58,7 @@ public class UserInfo3 extends AppCompatActivity implements View.OnClickListener
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
-                userInfo3ViewModel.insert(byteArray);
+                userInfoViewModel.insertUserInfo3(byteArray);
                 Intent intent = new Intent(this, Home.class);
                 startActivity(intent);
             }

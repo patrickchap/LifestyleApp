@@ -14,10 +14,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.LifestyleApp.GoalManager.GoalManagerFragment;
-import com.example.LifestyleApp.Home.HomeViewModel;
-import com.example.LifestyleApp.ItemDetail.ItemDetailFragment;
-import com.example.LifestyleApp.MasterList.MasterListFragment;
 import com.example.LifestyleApp.UserInfo.UserData;
+import com.example.LifestyleApp.UserInfo.UserInfoViewModel;
 import com.example.LifestyleApp.Weather.WeatherFragment;
 import com.example.LifestyleApp.R;
 
@@ -32,7 +30,7 @@ public class MasterList extends AppCompatActivity implements RvAdapter.DataPasse
     private String mGoalWeight;
     private GoalManagerFragment mTabletFragement;
     private WeatherFragment weatherFragment;
-    private MasterListViewModel masterListViewModel;
+    private UserInfoViewModel userInfoViewModel;
     private String bmi;
 
     @Override
@@ -40,9 +38,11 @@ public class MasterList extends AppCompatActivity implements RvAdapter.DataPasse
         super.onCreate(savedInstanceState);
         setContentView(R.layout.master_list);
 
-        masterListViewModel = ViewModelProviders.of(this).get(MasterListViewModel.class);
-        masterListViewModel.getUserData().observe(this, userInfoObserver);
+        userInfoViewModel = ViewModelProviders.of(this).get(UserInfoViewModel.class);
+        userInfoViewModel.loadUserData();
+        userInfoViewModel.getUserData().observe(this, userInfoObserver);
 
+        bmi = "";
         mCustomMasterList.addItem("BMI", bmi);
         mCustomMasterList.addItem("Weather", "Weather");
         mCustomMasterList.addItem("Hikes near me", "Hikes");

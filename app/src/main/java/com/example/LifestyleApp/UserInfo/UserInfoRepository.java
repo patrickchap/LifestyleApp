@@ -45,24 +45,24 @@ public class UserInfoRepository {
 //        userInfoDao.getAll().removeObserver(userInfoObserver);
 //    }
 
-    final Observer<List<UserInfoTable>> userInfoObserver = new Observer<List<UserInfoTable>>() {
-        @Override
-        public void onChanged(@Nullable final List<UserInfoTable> userInfoTables) {
-            if (userInfoTables != null) {
-                UserInfoTable userInfoTable = userInfoTables.get(0);
-                String userInfoJson = userInfoTable.getUserInfoJson();
-                UserData userDataParsed = null;
-                try {
-                    userDataParsed = JSONUserInputUtils.getUserInfoData(userInfoJson, userData.getValue());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                if (userDataParsed != null) {
-                    userData.setValue(userDataParsed);
-                }
-            }
-        }
-    };
+//    final Observer<List<UserInfoTable>> userInfoObserver = new Observer<List<UserInfoTable>>() {
+//        @Override
+//        public void onChanged(@Nullable final List<UserInfoTable> userInfoTables) {
+//            if (userInfoTables != null) {
+//                UserInfoTable userInfoTable = userInfoTables.get(0);
+//                String userInfoJson = userInfoTable.getUserInfoJson();
+//                UserData userDataParsed = null;
+//                try {
+//                    userDataParsed = JSONUserInputUtils.getUserInfoData(userInfoJson, userData.getValue());
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//                if (userDataParsed != null) {
+//                    userData.setValue(userDataParsed);
+//                }
+//            }
+//        }
+//    };
 
     public void insert(String userInfoLevel, String userInfoJson) throws JSONException {
         UserData oldData = userData.getValue();

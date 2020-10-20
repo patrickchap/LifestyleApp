@@ -39,10 +39,6 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
     private TextView mCity;
     private TextView mCountry;
 
-    private String mEmail;
-
-//    private UserInfo2ViewModel mUserInfo2ViewModel;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,8 +48,6 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
         mCity = findViewById(R.id.editTextCity);
         mCountry = findViewById(R.id.editTextCountry);
         mContinueButton.setOnClickListener(this);
-
-//        mUserInfo2ViewModel = ViewModelProviders.of(this).get(UserInfo2ViewModel.class);
     }
 
     private void continueToUserInfo3() {
@@ -65,12 +59,7 @@ public class UserInfo2 extends AppCompatActivity implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.continueButton: {
-
-//                mEmail = "userInfo2";
-//                mUserInfo2ViewModel.setViews(mEmail, mCity, mCountry);
-//                (mUserInfo2ViewModel.getData()).observe(this, userInfo1Observer);
                 continueToUserInfo3();
-
             }
         }
     }

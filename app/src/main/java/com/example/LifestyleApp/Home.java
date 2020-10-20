@@ -1,4 +1,4 @@
-package com.example.LifestyleApp.Home;
+package com.example.LifestyleApp;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.LifestyleApp.MasterList.MasterList;
 import com.example.LifestyleApp.R;
 import com.example.LifestyleApp.UserInfo.UserData;
+import com.example.LifestyleApp.UserInfo.UserInfoViewModel;
 
 public class Home extends AppCompatActivity implements View.OnClickListener {
     Button moduleBtn;
@@ -32,7 +33,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
     TextView mActivityLevel;
     TextView mCalories;
 
-    private HomeViewModel homeViewModel;
+    private UserInfoViewModel userInfoViewModel;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -53,8 +54,9 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         mActivityLevel = findViewById(R.id.activityLevelValue);
         mCalories = findViewById(R.id.calories_value);
 
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
-        homeViewModel.getUserData().observe(this, userInfoObserver);
+        userInfoViewModel = ViewModelProviders.of(this).get(UserInfoViewModel.class);
+        userInfoViewModel.loadUserData();
+        userInfoViewModel.getUserData().observe(this, userInfoObserver);
     }
 
     final Observer<UserData> userInfoObserver = new Observer<UserData>() {

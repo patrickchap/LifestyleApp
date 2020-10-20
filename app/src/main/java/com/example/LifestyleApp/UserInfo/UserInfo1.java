@@ -25,7 +25,7 @@ public class UserInfo1 extends AppCompatActivity implements View.OnClickListener
     private TextView mGenderTextView;
     private TextView mDOBTextView;
 
-    private UserInfo1ViewModel userInfo1ViewModel;
+    private UserInfoViewModel userInfoViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,14 +47,14 @@ public class UserInfo1 extends AppCompatActivity implements View.OnClickListener
         mWeightTextView.setOnClickListener(this);
         mHeightTextView.setOnClickListener(this);
 
-        userInfo1ViewModel = ViewModelProviders.of(this).get(UserInfo1ViewModel.class);
+        userInfoViewModel = ViewModelProviders.of(this).get(UserInfoViewModel.class);
 
     }
 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.continueButton: {
-                userInfo1ViewModel.insert(mHeightTextView, mWeightTextView, mGenderTextView, mDOBTextView);
+                userInfoViewModel.insertUserInfo1(mHeightTextView, mWeightTextView, mGenderTextView, mDOBTextView);
                 Intent intent = new Intent(this, UserInfo2.class);
                 startActivity(intent);
                 break;

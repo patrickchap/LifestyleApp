@@ -1,11 +1,8 @@
 package com.example.LifestyleApp.GoalManager;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,15 +17,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.LifestyleApp.Home.Home;
-import com.example.LifestyleApp.Home.HomeViewModel;
-import com.example.LifestyleApp.MasterList.MasterListViewModel;
+import com.example.LifestyleApp.Home;
 import com.example.LifestyleApp.R;
 import com.example.LifestyleApp.UserInfo.UserData;
-
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
 
 import Dialogs.ActivityLevelPicker;
 import Dialogs.GoalWeightPicker;
