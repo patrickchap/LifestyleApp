@@ -5,9 +5,9 @@ import org.json.JSONObject;
 
 public class JSONUserInputUtils {
 
-    public static UserData getUserInfoData(String data, UserData oldData) throws JSONException {
+    public static UserData getUserInfoData(String userID, String data, UserData oldData) throws JSONException {
 
-        UserData userData = new UserData();
+        UserData userData = new UserData(userID);
         JSONObject jsonObject = new JSONObject(data);
 
         if (oldData == null) {

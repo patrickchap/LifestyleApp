@@ -80,6 +80,22 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
                     Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
                     mUserProfilePicture.setImageBitmap(bmp);
                 }
+                float goalWeight = userData.getUserGoals().getGoalWeight();
+                if (goalWeight != 0) {
+                    mGoalWeight.setText(""+goalWeight);
+                }
+                String activity = userData.getUserGoals().getActivity();
+                if (activity != "") {
+                    mActivityLevel.setText(activity);
+                }
+                float bmr = userData.getUserGoals().getBmr();
+                if(bmr != 0){
+                    mBMR.setText(""+bmr);
+                }
+                float calories = userData.getUserGoals().getCalories();
+                if(calories != 0){
+                    mCalories.setText(""+calories);
+                }
             }
         }
     };

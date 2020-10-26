@@ -19,9 +19,12 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.LifestyleApp.Home;
 import com.example.LifestyleApp.R;
+import com.example.LifestyleApp.UserInfo.TypeConverters;
 import com.example.LifestyleApp.UserInfo.UserData;
+import com.example.LifestyleApp.UserInfo.UserInfoViewModel;
 
 import java.time.Period;
+import java.util.Date;
 
 import Dialogs.ActivityLevelPicker;
 import Dialogs.GoalWeightPicker;
@@ -42,10 +45,15 @@ public class GoalManagerFragment extends Fragment implements View.OnClickListene
     private Button mGain;
     private Button mSave;
 
+    private float weight;
+    private int height;
+    private Date dob;
+    private String gender;
+
     private String goal = "";
     private int prog = 0;
 
-    private GoalManagerViewModel goalManagerViewModel;
+    private UserInfoViewModel userInfoViewModel;
 
     @Nullable
     @Override
@@ -75,9 +83,6 @@ public class GoalManagerFragment extends Fragment implements View.OnClickListene
         mSave.setOnClickListener(this);
         seekBar.setMax(5);
 
-        goalManagerViewModel = ViewModelProviders.of(this).get(GoalManagerViewModel.class);
-        goalManagerViewModel.getUserData().observe(this, goalManagerObserver);
-
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -98,22 +103,31 @@ public class GoalManagerFragment extends Fragment implements View.OnClickListene
             }
         });
 
+        userInfoViewModel = ViewModelProviders.of(this).get(UserInfoViewModel.class);
+        userInfoViewModel.loadUserData();
+        userInfoViewModel.getUserData().observe(this, goalManagerObserver);
+
         return view;
     }
 
     final Observer<UserData> goalManagerObserver = new Observer<UserData>() {
         @Override
         public void onChanged(@Nullable final UserData userData) {
-            mWeight.setText(userData.getUserData1().getWeight() + " lbs >");
-            int ft = userData.getUserData1().getHeight()/12;
-            int in = userData.getUserData1().getHeight()%12;
+            weight = userData.getUserData1().getWeight();
+            mWeight.setText(weight + " lbs >");
+            height = userData.getUserData1().getHeight();
+            int ft = height/12;
+            int in = height%12;
             mHeight.setText(ft + " ft " + in + " in" + " >");
-
-            if(userData.getUserGoals().isGoalWeightSet()){
-                mGoalWeight.setText(userData.getUserGoals().getGoalWeight() + " >");
+            dob = TypeConverters.fromTimestamp(userData.getUserData1().getDob());
+            gender = userData.getUserData1().getGender();
+            float goalWeight = userData.getUserGoals().getGoalWeight();
+            if(goalWeight != 0){
+                mGoalWeight.setText(goalWeight + " >");
             }
-            if(userData.getUserActivity().isActivitySet()){
-                mActivity.setText(userData.getUserActivity().getActivity() + " >");
+            String activityLevel  = userData.getUserGoals().getActivity();
+            if(!activityLevel.equals("")){
+                mActivity.setText(activityLevel + " >");
             }
         }
     };
@@ -129,6 +143,8 @@ public class GoalManagerFragment extends Fragment implements View.OnClickListene
                 mGain.setBackgroundColor(getResources().getColor(R.color.button_gray));
                 goal = "lose";
                 goalTV.setText(goal + " " + prog + "lb per week");
+
+//                goalManagerViewModel.insertSetGoal("lose");
                 //user.setGoal("lose");
                 break;
             }
@@ -138,6 +154,8 @@ public class GoalManagerFragment extends Fragment implements View.OnClickListene
                 mGain.setBackgroundColor(getResources().getColor(R.color.button_gray));
                 goal = "maintain";
                 goalTV.setText(goal + " weight");
+
+//                goalManagerViewModel.insertSetGoal("maintain");
                 //user.setGoal("maintain");
                 break;
             }
@@ -147,6 +165,8 @@ public class GoalManagerFragment extends Fragment implements View.OnClickListene
                 mGain.setBackgroundColor(getResources().getColor(R.color.continue_blue));
                 goal = "gain";
                 goalTV.setText(goal + " " + prog + "lb per week");
+
+//                goalManagerViewModel.insertSetGoal("gain");
                 //user.setGoal("gain");
                 break;
             }
@@ -176,47 +196,11 @@ public class GoalManagerFragment extends Fragment implements View.OnClickListene
                 break;
             }
             case R.id.saveGoalButton: {
+//                userInfoViewModel.insertGoalInfo(prog, fGWeight, heightInInches,
+//                        fGWeight, true, activityLevel, true, goal,
+//                        true, prog, BMR, true, calories, true);
 
-                float fWeight = Float.parseFloat(mWeight.getText().toString().split(" ")[0]);
-                String height = (String) mHeight.getText();
-
-                int ft = Integer.parseInt(height.split(" ")[0]);
-                int in = Integer.parseInt(height.split(" ")[2]);
-                int heightInInches = (ft * 12) + in;
-
-                float fGWeight = Float.parseFloat(mGoalWeight.getText().toString().split(" ")[0]);
-                String activityLevel = mActivity.getText().toString();
-
-                //men 66.47 + (6.24 * weight) + (12.7 * height) - (6.755 * age in years)
-                //women 655.1 + (4.35 * weight) + (4.7 * height) - (4.7 * age in years)
-
-                // sedentary = bmr * 1.2
-                // active = bmr * 1.5
-//                Period period = Period.between(user.getDOB().toInstant()
-//                        .atZone(ZoneId.systemDefault())
-//                        .toLocalDate(), LocalDate.now());
-                float BMR;
-//                if (user.getGender().equals("Male")) {
-//                    BMR = (float) (66.47 + (6.24 * fWeight) + (12.7 * heightInInches) - (6.755 * period.getYears()));
-////                } else {
-//                    BMR = (float) (655.1 + (4.35 * fWeight) + (4.7 * heightInInches) - (4.7 * period.getYears()));
-//                }
-//                BMR = (activityLevel == "Active") ? (BMR *= 1.5) : (BMR *= 1.2);
-                BMR = 0;
-                //calculate calories
-                int diff = prog * 500;
-                float calories = BMR;
-
-                if (goal.equals("gain")) {
-                    calories += diff;
-                } else if (goal.equals("lose")) {
-                    calories -= diff;
-                }
-
-                goalManagerViewModel.insert(prog, fGWeight, heightInInches,
-                        fGWeight, true, activityLevel, true, goal,
-                        true, prog, BMR, true, calories, true);
-
+                userInfoViewModel.insertGoalInfo(prog, goal, weight, height, mGoalWeight, mActivity, dob, gender);
                 Intent intent = new Intent(getActivity(), Home.class);
                 startActivity(intent);
                 break;
@@ -224,11 +208,11 @@ public class GoalManagerFragment extends Fragment implements View.OnClickListene
         }
     }
 
-    public void sendGoalWeight(String goalWeight){
-        mGoalWeight.setText(goalWeight);
-    }
-    public void sendActivity(String activityLevel){
-        mActivity.setText(activityLevel);
-    }
+//    public void sendGoalWeight(String goalWeight){
+//        mGoalWeight.setText(goalWeight);
+//    }
+//    public void sendActivity(String activityLevel){
+//        mActivity.setText(activityLevel);
+//    }
 
 }

@@ -43,6 +43,10 @@ public class MasterList extends AppCompatActivity implements RvAdapter.DataPasse
         mCustomMasterList.addItem("Weather", "Weather");
 //        mCustomMasterList.addItem("Hikes near me", "Hikes");
 
+//        String goalsName = user.isAllGoalsSet() ? "Update Goal" : "Set Goal";
+        String goalsName ="Set Goal";
+        mCustomMasterList.addItem(goalsName, "Goal");
+
         //create fragment that holds the master list and send the custom list
         mMasterListFragment = new MasterListFragment();
         Bundle fragmentBundle = new Bundle();
@@ -118,10 +122,10 @@ public class MasterList extends AppCompatActivity implements RvAdapter.DataPasse
         }
     }
 
-    public void passGoalWeight(String data) {
-        mTabletFragement.sendGoalWeight(data);
-
-    }
+//    public void passGoalWeight(String data) {
+//        mTabletFragement.sendGoalWeight(data);
+//
+//    }
 
 //    public void passActivityLevel(String toString) {
 //        mTabletFragement.sendActivity(toString);

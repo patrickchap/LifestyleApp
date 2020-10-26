@@ -1,14 +1,25 @@
 package com.example.LifestyleApp.UserInfo;
 
 import android.app.Application;
+import android.os.Build;
 import android.util.Base64;
+import android.widget.SeekBar;
 import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+
 import com.google.gson.Gson;
+
 import org.json.JSONException;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
+import java.util.UUID;
 
 public class UserInfoViewModel extends AndroidViewModel {
     private MutableLiveData<UserData> userData = new MutableLiveData<UserData>();
@@ -19,15 +30,20 @@ public class UserInfoViewModel extends AndroidViewModel {
         userInfoRepository = UserInfoRepository.getInstance(this.getApplication().getApplicationContext());
     }
 
-    public void loadUserData(){
+    public void loadUserData() {
         userInfoRepository.refreshData();
         userData = userInfoRepository.getUserData();
         userInfoRepository.removeObserver();
     }
 
-    public LiveData<UserData> getUserData(){
+    public LiveData<UserData> getUserData() {
         return userData;
     }
+
+    public void insertUserID(String userID) {
+        userInfoRepository.createNewUser(userID);
+    }
+
 
     public void insertUserInfo1(TextView heightTextView, TextView weightTextView, TextView genderTextView, TextView dobTextView) {
 
@@ -38,30 +54,59 @@ public class UserInfoViewModel extends AndroidViewModel {
             String gender = genderTextView.getText().toString();
             String dob = dobTextView.getText().toString();
 
-            if (!height.equals("Height") && !weight.equals("Weight") && !gender.equals("Gender") && !dob.equals("Birthday")) {
+            int heightInInches = 0;
+            float fWeight = 0;
+
+            if (!height.equals("Height")) {
 
                 int ft = Integer.parseInt(height.split(" ")[0]);
                 int in = Integer.parseInt(height.split(" ")[2]);
-                int heightInInches = (ft * 12) + in;
+                heightInInches = (ft * 12) + in;
 
-                float fWeight = Float.parseFloat(weight.split(" ")[0]);
+                try {
+                    userInfoRepository.insertUserHeight(heightInInches);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
 
-                double bmi = ((703 * fWeight) / Math.pow(heightInInches, 2));
+            if (!weight.equals("Weight")) {
+
+                fWeight = Float.parseFloat(weight.split(" ")[0]);
+
+                try {
+                    userInfoRepository.insertUserWeight(fWeight);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (!gender.equals("Gender")) {
+
+                try {
+                    userInfoRepository.insertUserGender(gender);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (!dob.equals("Birthday")) {
 
                 Long dobDate = TypeConverters.dateToTimestamp(new Date(dob));
 
-                UserInfoInput inputObject = new UserInfoInput();
+                try {
+                    userInfoRepository.insertUserDob(dobDate);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
 
-                inputObject.setHeight(heightInInches);
-                inputObject.setWeight(fWeight);
-                inputObject.setDOB(dobDate);
-                inputObject.setGender(gender);
-                inputObject.setBmi(bmi);
+            if (heightInInches != 0 && fWeight != 0) {
 
-                String userInputJson = new Gson().toJson(inputObject);
+                double bmi = ((703 * fWeight) / Math.pow(heightInInches, 2));
 
                 try {
-                    userInfoRepository.insert("userInfo1", userInputJson);
+                    userInfoRepository.insertBMI(bmi);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -72,69 +117,72 @@ public class UserInfoViewModel extends AndroidViewModel {
     public void insertUserInfo3(byte[] imageBytes) {
         if (imageBytes != null) {
             String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-            UserInfoInput inputObject = new UserInfoInput();
-            inputObject.setProfilePicture(imageString);
-            String userInputJson = new Gson().toJson(inputObject);
-            try {
-                userInfoRepository.insert("userInfo3", userInputJson);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            userInfoRepository.insertProfilePicture(imageString);
         }
     }
 
-    private static class UserInfoInput {
-        private String city;
-        private String country;
-        private int height;
-        private float weight;
-        private double bmi;
-        private String gender;
-        private Long dob;
-        private String profilePicture;
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void insertGoalInfo(int prog,
+                               String goal,
+                               float weight,
+                               int height,
+                               TextView goalWeightTextView,
+                               TextView activityTextView, Date userDOB, String gender) {
 
-        public UserInfoInput() {
-            city = "";
-            country = "";
-            height = 0;
-            weight = 0;
-            bmi = 0;
-            gender = "";
-            dob = Long.valueOf(0);
-            profilePicture = "";
+        if (!goal.equals(null)) {
+            userInfoRepository.insertGoal(goal);
+            if (prog != 0) {
+                if(!goal.equals("maintain")) {
+                        userInfoRepository.insertPerWeekPounds(prog);
+                }
+
+
+            }
+        String goalWeightText = goalWeightTextView.getText().toString();
+        float goalWeight;
+        if (!goalWeightText.equals("N/A >")) {
+            goalWeight = Float.parseFloat(goalWeightText.split(" ")[0]);
+                userInfoRepository.insertGoalWeight(goalWeight);
         }
 
-        private void setHeight(int height) {
-            this.height = height;
+        String activity = activityTextView.getText().toString();
+        if (!activity.equals("N/A >")) {
+                userInfoRepository.insertActivity(activity);
         }
-
-        private void setWeight(float weight) {
-            this.weight = weight;
+        float BMR = 0;
+        if (userDOB != null) {
+            Period period = Period.between(userDOB.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate(), LocalDate.now());
+            if (!gender.equals(null)) {
+                if (gender.equals("Male")) {
+                    //        men 66.47 + (6.24 * weight) + (12.7 * height) - (6.755 * age in years)
+                    BMR = (float) (66.47 + (6.24 * weight) + (12.7 * height) - (6.755 * period.getYears()));
+                } else {
+                    //        women 655.1 + (4.35 * weight) + (4.7 * height) - (4.7 * age in years)
+                    BMR = (float) (655.1 + (4.35 * weight) + (4.7 * height) - (4.7 * period.getYears()));
+                }
+                //         sedentary = bmr * 1.2
+                //         active = bmr * 1.5
+                BMR = (activity == "Active") ? (BMR *= 1.5) : (BMR *= 1.2);
+                if (BMR != 0) {
+                    userInfoRepository.insertBmr(BMR);
+                }
+            }
         }
+            //calculate calories
+            int diff = prog * 500;
+            float calories = BMR;
 
-        private void setBmi(double bmi) {
-            this.bmi = bmi;
+            if (goal.equals("gain")) {
+                calories += diff;
+            } else if (goal.equals("lose")) {
+                calories -= diff;
+            }
+
+        if (calories != 0) {
+                userInfoRepository.insertCalories(calories);
         }
-
-        private void setGender(String gender) {
-            this.gender = gender;
         }
-
-        private void setDOB(Long dob) {
-            this.dob = dob;
-        }
-
-        private void setCity(String city) {
-            this.city = city;
-        }
-
-        private void setCountry(String country) {
-            this.country = country;
-        }
-
-        private void setProfilePicture(String profilePicture) {
-            this.profilePicture = profilePicture;
-        }
-
     }
 }

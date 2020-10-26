@@ -6,14 +6,14 @@ public class UserData {
     private UserData2 userData2;
     private UserData3 userData3;
     private UserGoals userGoals;
-    private UserActivity userActivity;
+    private String userID;
 
-    public UserData() {
+    public UserData(String userID) {
+        this.userID = userID;
         userData1 = null;
         userData2 = null;
         userData3 = null;
         userGoals = null;
-        userActivity = null;
     }
 
     public class UserData1 {
@@ -106,13 +106,17 @@ public class UserData {
 
     public class UserGoals {
 
-        public float goalWeight;
-        public boolean goalWeightSet = false;
-        public boolean allGoalsSet = false;
-        public String goal; // lose, gain, maintain
-        public boolean goalSet = false;
-        public int perWeekPounds;
-
+        private float goalWeight = 0;
+        private boolean goalWeightSet = false;
+        private boolean allGoalsSet = false;
+        private String goal = ""; // lose, gain, maintain
+        private boolean goalSet = false;
+        private int perWeekPounds = 0;
+        private String activity = ""; // sedentary  or active
+        private boolean activitySet = false;
+        private float bmr = 0;
+        private boolean bmrSet = false;
+        private float calories = 0;
 
         public boolean isAllGoalsSet() {
             return allGoalsSet;
@@ -145,44 +149,60 @@ public class UserData {
             this.goalWeight = goalWeight;
         }
 
-        public String getGoal() {
-            return goal;
+        public void setPerWeekPounds(int perWeekPounds) {
+            this.perWeekPounds = perWeekPounds;
         }
 
         public void setGoal(String goal) {
             this.goal = goal;
         }
 
-        public int getPerWeekPounds() {
-            return perWeekPounds;
-        }
-
-        public void setPerWeekPounds(int perWeekPounds) {
-            this.perWeekPounds = perWeekPounds;
-        }
-
-
-    }
-
-    public class UserActivity{
-
-        public String activity; // sedentary  or active
-        public boolean activitySet = false;
-
-        public boolean isActivitySet() {
-            return activitySet;
+        public void setActivity(String activity) {
+            this.activity = activity;
         }
 
         public void setActivitySet(boolean activitySet) {
             this.activitySet = activitySet;
         }
 
+        public void setBmr(float bmr) {
+            this.bmr = bmr;
+        }
+
+        public void setBmrSet(boolean bmrSet) {
+            this.bmrSet = bmrSet;
+        }
+
+        public void setCalories(float calories) {
+            this.calories = calories;
+        }
+
+        public String getGoal() {
+            return goal;
+        }
+
+        public int getPerWeekPounds() {
+            return perWeekPounds;
+        }
+
         public String getActivity() {
             return activity;
         }
 
-        public void setActivity(String activity) {
-            this.activity = activity;
+        public boolean getActivitySet() {
+            return activitySet;
+        }
+
+        public float getBmr() {
+            return bmr;
+        }
+
+        public boolean getBmrSet() {
+            return bmrSet;
+        }
+
+        public float getCalories() {
+            return calories;
         }
 
     }
@@ -213,13 +233,6 @@ public class UserData {
             userGoals = new UserGoals();
         }
         return userGoals;
-    }
-
-    public UserActivity getUserActivity(){
-        if (userActivity == null){
-            userActivity = new UserActivity();
-        }
-        return userActivity;
     }
 
 }

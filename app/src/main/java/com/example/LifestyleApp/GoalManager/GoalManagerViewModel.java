@@ -1,12 +1,15 @@
 package com.example.LifestyleApp.GoalManager;
 
 import android.app.Application;
+
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+
 import com.example.LifestyleApp.UserInfo.UserData;
 import com.example.LifestyleApp.UserInfo.UserInfoRepository;
 import com.google.gson.Gson;
+
 import org.json.JSONException;
 
 public class GoalManagerViewModel extends AndroidViewModel {
@@ -26,6 +29,15 @@ public class GoalManagerViewModel extends AndroidViewModel {
         return userData;
     }
 
+    public void insertSetGoal(String goal) {
+//        try {
+//            userInfoRepository.insert("setGoal", goal);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+    }
+
+
     public void insert(int progress, float weight, int height, float goalWeight, boolean isGoalWeightSet,
                        String activityLevel, boolean isActivitySet, String goal,
                        boolean isGoalSet, int prog, float BMR, boolean isBMRSet, float calories, boolean isCaloriesSet) {
@@ -36,14 +48,14 @@ public class GoalManagerViewModel extends AndroidViewModel {
 
         String userInputJson = new Gson().toJson(goalInfoObject);
 
-        try {
-            userInfoRepository.insert("userGoals_table", userInputJson);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            userInfoRepository.insert("userGoals_table", userInputJson);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
     }
 
-    private class GoalInfo{
+    private class GoalInfo {
         int progress;
         float weight;
         int height;
@@ -61,7 +73,7 @@ public class GoalManagerViewModel extends AndroidViewModel {
 
         private GoalInfo(int progress, float weight, int height, float goalWeight, boolean isGoalWeightSet,
                          String activityLevel, boolean isActivitySet, String goal,
-                         boolean isGoalSet, int prog, float BMR, boolean isBMRSet, float calories, boolean isCaloriesSet){
+                         boolean isGoalSet, int prog, float BMR, boolean isBMRSet, float calories, boolean isCaloriesSet) {
 
             this.progress = progress;
             this.weight = weight;

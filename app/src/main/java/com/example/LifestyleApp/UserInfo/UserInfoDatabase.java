@@ -9,13 +9,19 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {UserInfoTable.class}, version = 3, exportSchema = false)
+import com.example.LifestyleApp.Tables.UserIDTable;
+import com.example.LifestyleApp.Tables.UserInfoTable;
+import com.example.LifestyleApp.daos.UserIDDao;
+
+@Database(entities = {UserInfoTable.class, UserIDTable.class}, version = 8, exportSchema = false)
 
 public abstract class UserInfoDatabase extends RoomDatabase {
 
     private static volatile UserInfoDatabase mInstance;
 
     public abstract UserInfoDao mUserInfoDao();
+    public abstract UserIDDao mUserIDDao();
+
 
     public static synchronized UserInfoDatabase getDatabase(final Context context){
         if(mInstance==null) {
@@ -34,18 +40,27 @@ public abstract class UserInfoDatabase extends RoomDatabase {
     };
 
     private static class PopulateDbAsync extends AsyncTask<Void,Void,Void> {
-        private final UserInfoDao mDao;
+        private final UserInfoDao userInfoDao;
+        private final UserIDDao userIDDao;
+
 
         PopulateDbAsync(UserInfoDatabase db){
-            mDao = db.mUserInfoDao();
+
+            userInfoDao = db.mUserInfoDao();
+            userIDDao = db.mUserIDDao();
+
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
-            mDao.deleteAll();
-            UserInfoTable userInfoTable = new UserInfoTable("dummy_email",
-                    "dummy_json");
-            mDao.insert(userInfoTable);
+            userInfoDao.deleteAll();
+            UserInfoTable userInfoTable = new UserInfoTable("dummy_userID");
+            userInfoDao.insert(userInfoTable);
+
+            userIDDao.deleteAll();
+            UserIDTable userIDTable = new UserIDTable(0,
+                    "dummy_userID");
+            userIDDao.insert(userIDTable);
             return null;
         }
     }

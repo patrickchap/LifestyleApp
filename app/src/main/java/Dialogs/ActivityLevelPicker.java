@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.NumberPicker;
 import android.widget.Spinner;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -37,6 +40,8 @@ public class ActivityLevelPicker extends DialogFragment {
         builder.setPositiveButton(R.string.gender_positive, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                TextView activityLevel = getActivity().findViewById(R.id.activityLevelTextView);
+                activityLevel.setText(spinner.getSelectedItem().toString());
 //                if(isTablet()){
 //                    ((MasterList)getActivity()).passActivityLeve(spinner.getSelectedItem().toString());
 //                }

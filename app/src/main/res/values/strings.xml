@@ -35,7 +35,7 @@
     <string name="gm_gpw">Choose Goal</string>
     <string name="gm_save_btn">Save Goal</string>
     <string name="home_module_button">Modules</string>
-    <string name="home_measurments">Current Measurments</string>
+    <string name="home_measurements">Current Measurments</string>
     <string name="home_bmi">BMI</string>
     <string name="home_weight">Weight</string>
     <string name="home_height">Height</string>

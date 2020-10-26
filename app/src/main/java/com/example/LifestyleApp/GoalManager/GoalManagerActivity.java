@@ -22,11 +22,11 @@ public class GoalManagerActivity extends AppCompatActivity {
         fTrans.commit();
     }
 
-    public void passGoalWeight(String data) {
-        goalManagerFragment.sendGoalWeight(data);
-    }
-
-    public void passActivityLevel(String activityLevel){
-        goalManagerFragment.sendActivity(activityLevel);
-    }
+//    public void passGoalWeight(String data) {
+//        goalManagerFragment.sendGoalWeight(data);
+//    }
+//
+//    public void passActivityLevel(String activityLevel){
+//        goalManagerFragment.sendActivity(activityLevel);
+//    }
 }

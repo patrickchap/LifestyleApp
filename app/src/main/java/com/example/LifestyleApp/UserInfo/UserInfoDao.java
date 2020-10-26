@@ -6,6 +6,8 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import com.example.LifestyleApp.Tables.UserInfoTable;
+
 import java.util.List;
 
 @Dao
@@ -23,5 +25,11 @@ public interface UserInfoDao {
 
     @Query("SELECT * from userInfo_table")
     LiveData<List<UserInfoTable>> getAll();
+
+//    @Query("SELECT goal from userInfo_table")
+//    LiveData<List<UserInfoTable>> getGoal();
+//
+//    @Query("SELECT goalSet from userInfo_table")
+//    LiveData<List<UserInfoTable>> getGoalSet();
 
 }
