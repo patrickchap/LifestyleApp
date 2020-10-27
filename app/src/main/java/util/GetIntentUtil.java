@@ -2,22 +2,19 @@ package util;
 
 import android.content.Context;
 import android.content.Intent;
-import android.location.Address;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 
 
+//import com.example.LifestyleApp.GoalManager.GoalManagerActivity;
 import com.example.LifestyleApp.GoalManager.GoalManagerActivity;
 import com.example.LifestyleApp.ItemDetail.ItemDetailActivity;
-import com.example.LifestyleApp.UserInfo.User;
 import com.example.LifestyleApp.Weather.WeatherActivity;
-
-import java.io.IOException;
 
 public class GetIntentUtil {
 
-    public static Intent getIntent(Context context, String detail, Bundle bundle, User user){
+    public static Intent getIntent(Context context, String detail, Bundle bundle){
         if(detail.equals("Hikes")){
             Location location = GetLocationUtil.getLocation(context);
 
@@ -31,7 +28,7 @@ public class GetIntentUtil {
             }
         }else if(detail.equals("Goal")){
             Intent returnIntent = new Intent(context, GoalManagerActivity.class);
-            returnIntent.putExtra("user", user);
+//            returnIntent.putExtra("user", user);
             return returnIntent;
         }else if(detail.equals("Weather")){
             Intent returnIntent = new Intent(context, WeatherActivity.class);

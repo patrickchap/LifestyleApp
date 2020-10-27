@@ -1,9 +1,4 @@
 package com.example.LifestyleApp.Weather;
-
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.location.Address;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,19 +11,18 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.LifestyleApp.R;
-import com.example.LifestyleApp.UserInfo.UserInfo2;
 
-import org.json.JSONException;
-import java.io.IOException;
-import util.GetLocationUtil;
-import util.GetWeatherDataUtil;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
 
 public class WeatherFragment extends Fragment implements View.OnClickListener {
 
-    WeatherData weatherData;
     TextView mTemp;
     TextView mLocation;
     Button mSearchWeather;
+
+    private WeatherViewModel mWeatherViewModel;
 
     @Nullable
     @Override
@@ -39,56 +33,36 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
         mSearchWeather = view.findViewById(R.id.searchWeatherData);
         mSearchWeather.setOnClickListener(this);
 
+        mWeatherViewModel = ViewModelProviders.of(this).get(WeatherViewModel.class);
 
-        Location location = GetLocationUtil.getLocation(getContext());
-        Address address = null;
-        try {
-            if(location != null){
-                address = GetLocationUtil.getAddress(location.getLatitude(), location.getLongitude(), getContext());
-                mLocation.setText(address.getLocality() + ", " + address.getCountryCode());
-                String cityCountry = address.getLocality() + "," + address.getCountryCode();
-                GetWeatherDataUtil.getWeatherInfo(getContext(), cityCountry, isTablet());
-            }else{
-                throw new IOException("location is null");
-            }
-
-        } catch (IOException e) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setTitle("Cannot find location")
-                    .setMessage("Please enter your City,CountryCode")
-                    .setCancelable(false)
-                    .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
-
-            AlertDialog dialog = builder.create();
-            dialog.show();
-            e.printStackTrace();
-        }
-
+        (mWeatherViewModel.getData()).observe(this, weatherDataObserver);
 
         return view;
+
     }
 
-    public void getResponse(String response) throws JSONException {
-        weatherData = GetWeatherDataUtil.createWeatherDate(response);
-        if(weatherData != null){
-            mTemp.setText(weatherData.getmTemp() + " °F");
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.searchWeatherData : {
-                System.out.println("Search");
-                GetWeatherDataUtil.getWeatherInfo(getContext(), mLocation.getText().toString(), isTablet());
+    final Observer<WeatherData> weatherDataObserver  = new Observer<WeatherData>() {
+        @Override
+        public void onChanged(@Nullable final WeatherData weatherData) {
+            if(weatherData!=null) {
+                mTemp.setText("" + Math.round(weatherData.getTemperature().getTemp() - 273.15) + " C");
             }
         }
+    };
 
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.searchWeatherData:{
+                String inputFromEt = mLocation.getText().toString().replace(' ','&');
+                loadWeatherData(inputFromEt);
+            }
+            break;
+        }
+    }
+
+    void loadWeatherData(String location){
+        mWeatherViewModel.setLocation(location);
     }
 
     boolean isTablet()

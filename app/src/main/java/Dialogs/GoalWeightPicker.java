@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.NumberPicker;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import com.example.LifestyleApp.GoalManager.GoalManagerActivity;
-import com.example.LifestyleApp.MasterList;
+import com.example.LifestyleApp.MasterList.MasterList;
 import com.example.LifestyleApp.R;
 
 public class GoalWeightPicker extends DialogFragment {
@@ -33,12 +35,14 @@ public class GoalWeightPicker extends DialogFragment {
         builder.setView(view).setPositiveButton(R.string.weight_positive, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(isTablet()){
-                    ((MasterList)getActivity()).passGoalWeight(number.getValue() + "." + decimal.getValue() + " lbs >");
-                }else{
-                    ((GoalManagerActivity)getActivity()).passGoalWeight(number.getValue() + "." + decimal.getValue() + " lbs >");
-                }
+                TextView goalWeight = getActivity().findViewById(R.id.goalWeightTextView);
+                goalWeight.setText(number.getValue() + "." + decimal.getValue() + " lbs >");
 
+//                if(isTablet()){
+//                    ((MasterList)getActivity()).passGoalWeight(number.getValue() + "." + decimal.getValue() + " lbs >");
+//                }else{
+//                    ((GoalManagerActivity)getActivity()).passGoalWeight(number.getValue() + "." + decimal.getValue() + " lbs >");
+//                }
             }
         }).setNegativeButton(R.string.weight_negative, new DialogInterface.OnClickListener() {
             @Override

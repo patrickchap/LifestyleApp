@@ -5,8 +5,6 @@ import android.os.Build;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.LifestyleApp.UserInfo.User;
-import com.example.LifestyleApp.UserInfo.UserInfo1;
 import com.example.LifestyleApp.UserInfo.UserInfo2;
 import com.example.LifestyleApp.UserInfo.UserInfo3;
 
@@ -14,7 +12,6 @@ import org.json.JSONException;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -22,8 +19,6 @@ import org.robolectric.shadows.ShadowAlertDialog;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;

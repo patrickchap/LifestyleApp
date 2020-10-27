@@ -23,7 +23,7 @@
         <activity android:name="com.example.LifestyleApp.UserInfo.UserInfo2" />
         <activity android:name="com.example.LifestyleApp.UserInfo.UserInfo3" />
         <activity android:name=".Weather.WeatherActivity" />
-        <activity android:name=".MasterList" />
+        <activity android:name=".MasterList.MasterList" />
         <activity android:name=".ItemDetail.ItemDetailActivity"/>
         <activity android:name=".GoalManager.GoalManagerActivity"/>
         <activity android:name=".Home"/>

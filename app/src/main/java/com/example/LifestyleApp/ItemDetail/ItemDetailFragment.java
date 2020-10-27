@@ -14,7 +14,7 @@ import com.example.LifestyleApp.R;
 
 import org.w3c.dom.Text;
 
-import util.GetWeatherDataUtil;
+//import util.GetWeatherDataUtil;
 
 public class ItemDetailFragment extends Fragment {
 
