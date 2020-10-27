@@ -1,5 +1,7 @@
 package com.example.LifestyleApp.Weather;
 
+import com.example.LifestyleApp.BuildConfig;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -10,7 +12,7 @@ import java.util.Scanner;
 public class NetworkUtils {
     private static String BASE_URL = "http://api.openweathermap.org/data/2.5/weather?q=";
     private static String APPIDQUERY = "&appid=";
-    private static final String app_id="99ea8382701bd7481e5ea568772f739a";
+    private static final String app_id= BuildConfig.WEATHERKEY;
 
     public static URL buildURLFromString(String location){
         URL myURL = null;
