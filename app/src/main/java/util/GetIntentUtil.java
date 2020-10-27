@@ -17,8 +17,6 @@ public class GetIntentUtil {
     public static Intent getIntent(Context context, String detail, Bundle bundle){
         if(detail.equals("Hikes")){
             Location location = GetLocationUtil.getLocation(context);
-
-
             String uri = "geo:" + location.getLatitude() + ","  + location.getLongitude() + "?q=hikes";
             Uri gmmIntentUri = Uri.parse(uri);
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);

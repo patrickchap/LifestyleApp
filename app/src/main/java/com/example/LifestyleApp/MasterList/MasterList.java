@@ -41,7 +41,7 @@ public class MasterList extends AppCompatActivity implements RvAdapter.DataPasse
         userInfoViewModel.getUserData().observe(this, userInfoObserver);
 
         mCustomMasterList.addItem("Weather", "Weather");
-//        mCustomMasterList.addItem("Hikes near me", "Hikes");
+        mCustomMasterList.addItem("Hikes near me", "Hikes");
 
 //        String goalsName = user.isAllGoalsSet() ? "Update Goal" : "Set Goal";
         String goalsName ="Set Goal";
