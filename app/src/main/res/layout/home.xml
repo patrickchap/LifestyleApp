@@ -90,7 +90,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/stepsGraphBox"
             app:layout_constraintTop_toBottomOf="@+id/stepCounterHeader"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/stepsInstruction"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
@@ -122,7 +122,9 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp" >
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp">
 
             <com.jjoe64.graphview.GraphView
                 android:id="@+id/stepsGraph"
@@ -133,6 +135,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/stepsInstruction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/shake_instructions"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stepsGraphBox"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
+            android:paddingRight="10dp"
+            android:paddingEnd="10dp"
+            android:textStyle="italic" />
 
 
 
