@@ -27,7 +27,7 @@ import static org.robolectric.Shadows.shadowOf;
 public class UserInfo3Tests {
 
     private UserTestData userTestData;
-    private User user;
+//    private User user;
     private UserInfo3 userInfo3;
 
     @Before
@@ -42,7 +42,7 @@ public class UserInfo3Tests {
         String height = userInfo1TestData.get("height");
         String weight = userInfo1TestData.get("weight");
 
-        user = userTestData.generateUserFromInfo1(height, weight, dob, gender);
+//        user = userTestData.generateUserFromInfo1(height, weight, dob, gender);
         UserInfo2 userInfo2 = userTestData.generateUserInfo2(gender, dob, height, weight);
 
         Map<String, String> userInfo2TestData = userTestData.getUserInfo2TestData();
@@ -51,8 +51,8 @@ public class UserInfo3Tests {
         String country = userInfo2TestData.get("country");
         String whoSees = userInfo2TestData.get("whoSees");
 
-        user = userTestData.generateUserFromInfo2(user, city, country, whoSees);
-        userInfo3 = userTestData.generateUserInfo3(user, userInfo2, city, country, whoSees);
+//        user = userTestData.generateUserFromInfo2(user, city, country, whoSees);
+//        userInfo3 = userTestData.generateUserInfo3(user, userInfo2, city, country, whoSees);
 
     }
 

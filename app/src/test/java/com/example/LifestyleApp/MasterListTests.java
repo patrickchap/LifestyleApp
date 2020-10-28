@@ -27,7 +27,7 @@ import static org.robolectric.Shadows.shadowOf;
 public class MasterListTests {
 
     private UserTestData userTestData;
-    private User user;
+//    private User user;
     private MasterList masterList;
 
     @Before
@@ -42,7 +42,7 @@ public class MasterListTests {
         String height = userInfo1TestData.get("height");
         String weight = userInfo1TestData.get("weight");
 
-        user = userTestData.generateUserFromInfo1(height, weight, dob, gender);
+//        user = userTestData.generateUserFromInfo1(height, weight, dob, gender);
         com.example.LifestyleApp.UserInfo.UserInfo2 userInfo2 = userTestData.generateUserInfo2(gender, dob, height, weight);
 
         Map<String, String> userInfo2TestData = userTestData.getUserInfo2TestData();
@@ -51,17 +51,17 @@ public class MasterListTests {
         String country = userInfo2TestData.get("country");
         String whoSees = userInfo2TestData.get("whoSees");
 
-        user = userTestData.generateUserFromInfo2(user, city, country, whoSees);
-        UserInfo3 userInfo3 = userTestData.generateUserInfo3(user, userInfo2, city, country, whoSees);
+//        user = userTestData.generateUserFromInfo2(user, city, country, whoSees);
+//        UserInfo3 userInfo3 = userTestData.generateUserInfo3(user, userInfo2, city, country, whoSees);
 
-        userInfo3.findViewById(R.id.createButton).performClick();
+//        userInfo3.findViewById(R.id.createButton).performClick();
         Intent homeIntent = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
-        homeIntent.putExtra("user", user);
+//        homeIntent.putExtra("user", user);
         Home home = Robolectric.buildActivity(Home.class, homeIntent).create().get();
 
         home.findViewById(R.id.moduleButton).performClick();
         Intent masterListIntent = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
-        masterListIntent.putExtra("user", user);
+//        masterListIntent.putExtra("user", user);
         masterList = Robolectric.buildActivity(MasterList.class, masterListIntent).create().get();
 
     }
@@ -75,9 +75,9 @@ public class MasterListTests {
     public void masterListItemsCorrect() throws InstantiationException, IllegalAccessException {
 
         CustomMasterList customMasterList = new CustomMasterList();
-        String bmi = user.getBmi() + "";
+//        String bmi = user.getBmi() + "";
 
-        customMasterList.addItem("BMI", bmi);
+//        customMasterList.addItem("BMI", bmi);
         customMasterList.addItem("Weather", "Weather");
         customMasterList.addItem("Hikes near me", "Hikes");
 

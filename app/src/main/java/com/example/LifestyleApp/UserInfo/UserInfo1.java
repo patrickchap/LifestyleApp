@@ -1,5 +1,7 @@
 package com.example.LifestyleApp.UserInfo;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProviders;
 import com.example.LifestyleApp.R;
+
+import java.text.ParseException;
+
 import Dialogs.DatePickerDialogMyTheme;
 import Dialogs.GenderSpinnerDialog;
 import Dialogs.HeightPickerDialog;
@@ -54,9 +59,32 @@ public class UserInfo1 extends AppCompatActivity implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.continueButton: {
-                userInfoViewModel.insertUserInfo1(mHeightTextView, mWeightTextView, mGenderTextView, mDOBTextView);
-                Intent intent = new Intent(this, UserInfo2.class);
-                startActivity(intent);
+
+                if (!mHeightTextView.getText().equals("Height") && !mWeightTextView.getText().equals("Weight")
+                        && !mDOBTextView.getText().equals("Birthday") && !mGenderTextView.getText().equals("Gender")){
+                    userInfoViewModel.insertUserInfo1(mHeightTextView, mWeightTextView, mGenderTextView, mDOBTextView);
+                    Intent intent = new Intent(this, UserInfo2.class);
+                    startActivity(intent);
+                }
+
+                else {
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(UserInfo1.this);
+                    builder.setTitle("User Info Incomplete")
+                            .setMessage("Please finish entering your information")
+                            .setCancelable(false)
+                            .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finishActivity(this.hashCode());
+                                }
+                            });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+
+
                 break;
             }
 
