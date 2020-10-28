@@ -109,10 +109,10 @@ public class MasterList extends AppCompatActivity implements RvAdapter.DataPasse
                 fTrans.replace(R.id.fl_frag_itemdetail_container_tablet, weatherFragment, "frag_weather");
                 fTrans.commit();
             } else {
-                ItemDetailFragment mTabletItemFragmetn = new ItemDetailFragment();
-                mTabletItemFragmetn.setArguments(detailBundle);
+                ItemDetailFragment mTabletItemFragment = new ItemDetailFragment();
+                mTabletItemFragment.setArguments(detailBundle);
                 FragmentTransaction fTrans = getSupportFragmentManager().beginTransaction();
-                fTrans.replace(R.id.fl_frag_itemdetail_container_tablet, mTabletItemFragmetn, "frag_itemdetail");
+                fTrans.replace(R.id.fl_frag_itemdetail_container_tablet, mTabletItemFragment, "frag_itemdetail");
                 fTrans.commit();
             }
         } else {
