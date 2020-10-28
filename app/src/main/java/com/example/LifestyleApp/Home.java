@@ -1,11 +1,15 @@
 package com.example.LifestyleApp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.GestureDetector;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,6 +23,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.LifestyleApp.MasterList.MasterList;
 import com.example.LifestyleApp.R;
+import com.example.LifestyleApp.StepCounter.ShakeDetector;
+import com.example.LifestyleApp.StepCounter.StepCounterUtility;
 import com.example.LifestyleApp.UserInfo.UserData;
 import com.example.LifestyleApp.UserInfo.UserInfoViewModel;
 
@@ -35,11 +41,29 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
 
     private UserInfoViewModel userInfoViewModel;
 
+    private StepCounterUtility stepUtility;
+    private SensorManager mSensorManager;
+    private ShakeDetector mSensorListener;
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+
+        // ShakeDetector Initialization
+        mSensorManager  = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mSensorListener = new ShakeDetector();
+        mSensorListener.setOnShakeListener(new ShakeDetector.OnShakeListener() {
+
+            // Turn on step counter when phone has been shaken
+            @Override
+            public void onShake() {
+
+            }
+        });
+
+
         moduleBtn = findViewById(R.id.moduleButton);
         moduleBtn.setOnClickListener(this);
 
@@ -108,5 +132,19 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
                 startActivity(intent);
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSensorManager.registerListener(mSensorListener,
+                                        mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                                        SensorManager.SENSOR_DELAY_UI);
+    }
+
+    @Override
+    protected void onPause() {
+        mSensorManager.unregisterListener(mSensorListener);
+        super.onPause();
     }
 }
