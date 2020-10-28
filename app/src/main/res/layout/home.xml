@@ -55,6 +55,90 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/stepCounterLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/rounded_corner_box"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/profilePictureIV"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="@+id/guideline29"
+        app:layout_constraintEnd_toEndOf="@+id/guideline28" >
+
+        <TextView
+            android:id="@+id/stepCounterHeader"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="5dp"
+            android:paddingLeft="5dp"
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp"
+            android:text="@string/home_steps"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@id/stepsGraphBox"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="center"
+            android:layout_marginTop="25dp"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/stepsCountBox"
+            android:layout_width="130dp"
+            android:layout_height="75dp"
+            android:background="@drawable/home_rounded_corner_box"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/stepsGraphBox"
+            app:layout_constraintTop_toBottomOf="@+id/stepCounterHeader"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp" >
+
+            <TextView
+                android:id="@+id/stepsNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/home_steps"
+                android:textSize="18sp"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/stepsGraphBox"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/home_rounded_corner_box"
+            app:layout_constraintStart_toEndOf="@id/stepsCountBox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" >
+
+            <com.jjoe64.graphview.GraphView
+                android:id="@+id/stepsGraph"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -63,9 +147,9 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/moduleButton"
         app:layout_constraintEnd_toStartOf="@+id/guideline28"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline29"
-        app:layout_constraintTop_toBottomOf="@+id/profilePictureIV"
+        app:layout_constraintTop_toBottomOf="@+id/stepCounterLayout"
         app:layout_constraintVertical_bias="0.918">
 
         <TextView
@@ -279,5 +363,5 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
->>>>>>> 842c562ee5a2bc7d352f51b2e5d4667774ec8431
+    >>>>>>> 842c562ee5a2bc7d352f51b2e5d4667774ec8431
 </androidx.constraintlayout.widget.ConstraintLayout>

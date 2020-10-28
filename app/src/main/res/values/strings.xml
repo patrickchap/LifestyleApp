@@ -47,6 +47,7 @@
     <string name="home_calories">Calories</string>
     <string name="weather_temp_title">"Temp: "</string>
     <string name="weather_search">Search</string>
+    <string name="home_steps">"Today's Steps"</string>
 
     <string-array name="gender_array">
         <item>Male</item>
