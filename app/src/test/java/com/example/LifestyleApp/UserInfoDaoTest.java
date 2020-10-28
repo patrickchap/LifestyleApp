@@ -3,6 +3,7 @@ package com.example.LifestyleApp;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Looper;
 
 import androidx.room.Room;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -64,6 +65,8 @@ public class UserInfoDaoTest {
 
 
 
+
+
     private UserInfoDatabase userInfoDatabase;
     private UserInfoDao userInfoDao;
     private  UserIDDao userIDDao;
@@ -90,6 +93,7 @@ public class UserInfoDaoTest {
 
     @Test
     public void insert() throws InterruptedException {
+
 
         String userID = UUID.randomUUID().toString();
         UserInfoTable userInfoTable = new UserInfoTable(userID);
