@@ -48,6 +48,7 @@
     <string name="weather_temp_title">"Temp: "</string>
     <string name="weather_search">Search</string>
     <string name="home_steps">"Today's Steps"</string>
+    <string name="shake_instructions">To turn on your step counter, shake the phone 3 times</string>
 
     <string-array name="gender_array">
         <item>Male</item>
