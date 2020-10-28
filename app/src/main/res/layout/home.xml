@@ -44,20 +44,25 @@
         android:textColor="@color/eWhite"
         app:layout_constraintBottom_toTopOf="@+id/guideline27"
         app:layout_constraintEnd_toStartOf="@+id/guideline28"
-        app:layout_constraintStart_toStartOf="@+id/guideline29" />
+        app:layout_constraintStart_toStartOf="@+id/guideline29"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout"
+        android:layout_marginTop="15dp"/>
 
     <ImageView
         android:id="@+id/profilePictureIV"
         android:layout_width="84dp"
         android:layout_height="78dp"
+        android:layout_marginBottom="15dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline28"
         app:layout_constraintTop_toTopOf="@+id/guideline24"
+        app:layout_constraintBottom_toTopOf="@+id/stepCounterLayout"
         tools:srcCompat="@tools:sample/avatars" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/stepCounterLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
         android:background="@drawable/rounded_corner_box"
         android:orientation="vertical"

@@ -9,7 +9,6 @@ import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
-import android.view.GestureDetector;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -24,7 +23,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.LifestyleApp.MasterList.MasterList;
 import com.example.LifestyleApp.R;
 import com.example.LifestyleApp.StepCounter.ShakeDetector;
-import com.example.LifestyleApp.StepCounter.StepCounterUtility;
+import com.example.LifestyleApp.StepCounter.StepCounterListener;
 import com.example.LifestyleApp.UserInfo.UserData;
 import com.example.LifestyleApp.UserInfo.UserInfoViewModel;
 
@@ -38,12 +37,16 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
     TextView mBMR;
     TextView mActivityLevel;
     TextView mCalories;
+    TextView mStepsNum;
 
     private UserInfoViewModel userInfoViewModel;
 
-    private StepCounterUtility stepUtility;
     private SensorManager mSensorManager;
+    private StepCounterListener mStepCounterListener;
     private ShakeDetector mSensorListener;
+    private Sensor mStepCounterSensor;
+    private boolean stepCounterIsActive = false;
+    private int mSteps;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -51,15 +54,26 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
 
-        // ShakeDetector Initialization
+        // ShakeDetector & StepUtility Initialization
         mSensorManager  = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mStepCounterListener = new StepCounterListener();
         mSensorListener = new ShakeDetector();
         mSensorListener.setOnShakeListener(new ShakeDetector.OnShakeListener() {
 
             // Turn on step counter when phone has been shaken
             @Override
             public void onShake() {
+                if (!stepCounterIsActive) {
+                    stepCounterIsActive = true;
+                    mSensorManager.registerListener(mStepCounterListener,
+                                                    mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER),
+                                                    SensorManager.SENSOR_DELAY_UI);
+                    mSteps = mStepCounterListener.getSteps();
 
+                } else {
+                    stepCounterIsActive = false;    // turn off step counter
+                    mSensorManager.unregisterListener(mStepCounterListener);
+                }
             }
         });
 
@@ -76,6 +90,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         mBMR = findViewById(R.id.bmrValue);
         mActivityLevel = findViewById(R.id.activityLevelValue);
         mCalories = findViewById(R.id.calories_value);
+        mStepsNum = findViewById(R.id.stepsNum);
+
 
         userInfoViewModel = ViewModelProviders.of(this).get(UserInfoViewModel.class);
         userInfoViewModel.loadUserData();
@@ -117,8 +133,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
                     mBMR.setText(""+bmr);
                 }
                 float calories = userData.getUserGoals().getCalories();
-                if(calories != 0){
-                    mCalories.setText(""+calories);
+                if(calories != 0) {
+                    mCalories.setText("" + calories);
                 }
             }
         }
@@ -144,6 +160,11 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onPause() {
+
+        if (!stepCounterIsActive) {
+            mSensorManager.unregisterListener(mStepCounterListener);
+        }
+
         mSensorManager.unregisterListener(mSensorListener);
         super.onPause();
     }
