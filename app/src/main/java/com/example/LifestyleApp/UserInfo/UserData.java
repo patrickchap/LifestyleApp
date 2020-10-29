@@ -1,5 +1,7 @@
 package com.example.LifestyleApp.UserInfo;
 
+import javax.security.auth.callback.PasswordCallback;
+
 public class UserData {
 
     private UserData1 userData1;
@@ -15,6 +17,8 @@ public class UserData {
         userData3 = null;
         userGoals = null;
     }
+
+
 
     public class UserData1 {
         private int height; //inches

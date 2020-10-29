@@ -196,4 +196,5 @@ public class UserInfoTable {
 
     public boolean getAllGoalsSet(){ return allGoalsSet; }
 
+
 }
