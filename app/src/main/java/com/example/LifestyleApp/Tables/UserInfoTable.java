@@ -70,6 +70,28 @@ public class UserInfoTable {
     @ColumnInfo(name = "allGoalsSet")
     private boolean allGoalsSet;
 
+    @ColumnInfo(name = "password")
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    @ColumnInfo(name = "userName")
+    private String userName;
+
 
     //    public float calories;
     //
@@ -106,6 +128,8 @@ public class UserInfoTable {
         bmrSet = false;
         caloriesSet = false;
         allGoalsSet = false;
+        userName = "";
+        password = "";
     }
 
     public void setHeight(int height){

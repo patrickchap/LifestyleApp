@@ -295,6 +295,40 @@ public class UserInfoRepository {
         });
     }
 
+    public void insertPassword(String userPassword) {
+        userData.getValue().getUserData0().setPassword(userPassword);
+        userInfoTable.setPassword(userPassword);
+
+        userInfoDao.getAll().observeForever(userInfoTables -> {
+            if (userInfoTables != null) {
+                UserInfoTable userInfoTable = userInfoTables.get(0);
+                userInfoTable.setPassword(userPassword);
+                new insertAsyncTaskUserInfo(userInfoDao).execute(userInfoTable);
+            }
+        });
+    }
+
+    public void insertUserName(String userName) {
+        userData.getValue().getUserData0().setUserName(userName);
+        userInfoTable.setUserName(userName);
+
+        userInfoDao.getAll().observeForever(userInfoTables -> {
+            if (userInfoTables != null) {
+                UserInfoTable userInfoTable = userInfoTables.get(0);
+                userInfoTable.setUserName(userName);
+                new insertAsyncTaskUserInfo(userInfoDao).execute(userInfoTable);
+            }
+        });
+
+    }
+
+    private List<UserInfoTable> usersList;
+    public List<UserInfoTable> getUsersByUserName(String userName) {
+        new getAsyncTaskUser(userInfoDao).execute(userName);
+        return usersList;
+
+    }
+
     private static class insertAsyncTaskUserInfo extends AsyncTask<UserInfoTable, Void, Void> {
         private UserInfoDao mAsyncTaskDao;
 
@@ -322,4 +356,28 @@ public class UserInfoRepository {
             return null;
         }
     }
+
+    private static class getAsyncTaskUser extends AsyncTask<String, Void, List<UserInfoTable>> {
+        private UserInfoDao mAsyncTaskDao;
+
+        getAsyncTaskUser(UserInfoDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected List<UserInfoTable> doInBackground(String... strings) {
+            List<UserInfoTable> table = mAsyncTaskDao.findByUserName(strings[0]);
+            return table;
+        }
+
+        @Override
+        protected void onPostExecute(List<UserInfoTable> userInfoTables) {
+            super.onPostExecute(userInfoTables);
+
+
+        }
+    }
+
+
+
 }

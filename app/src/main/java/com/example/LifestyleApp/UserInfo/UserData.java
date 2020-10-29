@@ -4,6 +4,8 @@ import javax.security.auth.callback.PasswordCallback;
 
 public class UserData {
 
+    //new
+    private UserData0 userData0;
     private UserData1 userData1;
     private UserData2 userData2;
     private UserData3 userData3;
@@ -16,6 +18,33 @@ public class UserData {
         userData2 = null;
         userData3 = null;
         userGoals = null;
+        //new
+        userData0 = null;
+    }
+
+    //new
+    public class UserData0 {
+        private String password;
+        private String userName;
+
+        public UserData0() {
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
     }
 
 
@@ -237,6 +266,13 @@ public class UserData {
             userGoals = new UserGoals();
         }
         return userGoals;
+    }
+
+    public UserData0 getUserData0(){
+        if(userData0 == null){
+            userData0 = new UserData0();
+        }
+        return userData0;
     }
 
 }

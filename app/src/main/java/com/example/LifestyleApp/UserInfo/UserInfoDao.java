@@ -26,6 +26,9 @@ public interface UserInfoDao {
     @Query("SELECT * from userInfo_table")
     LiveData<List<UserInfoTable>> getAll();
 
+    @Query("SELECT * FROM userInfo_table WHERE userName LIKE :search")
+    public List<UserInfoTable> findByUserName(String search);
+
 //    @Query("SELECT goal from userInfo_table")
 //    LiveData<List<UserInfoTable>> getGoal();
 //

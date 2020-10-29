@@ -11,6 +11,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.LifestyleApp.Tables.UserInfoTable;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -19,6 +20,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 public class UserInfoViewModel extends AndroidViewModel {
@@ -42,6 +44,22 @@ public class UserInfoViewModel extends AndroidViewModel {
 
     public void insertUserID(String userID) {
         userInfoRepository.createNewUser(userID);
+    }
+
+    public List<UserInfoTable> getUsersByUserName(String userName){
+        return userInfoRepository.getUsersByUserName(userName);
+    }
+
+    //new
+    public void insertUserInfo0(TextView userNameText, TextView userPasswordText){
+        if (userNameText != null && userPasswordText != null) {
+            String userName = userNameText.getText().toString();
+            String userPassword = userPasswordText.getText().toString();
+            userInfoRepository.insertPassword(userPassword);
+            userInfoRepository.insertUserName(userName);
+
+        }
+
     }
 
 
