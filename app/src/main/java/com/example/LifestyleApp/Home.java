@@ -98,7 +98,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sen
             @Override
             public void onSwipeRight() {
                 stepCounterIsActive = true;
-
                 Toast toast = Toast.makeText(context, swipeRightText, duration);
                 swipeRightMP.start();
                 toast.show();

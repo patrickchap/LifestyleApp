@@ -29,6 +29,12 @@ android {
 }
 
 dependencies {
+    // BEGIN AWS DEPENDENCIES
+    def aws_version = "2.16.+"
+    implementation "com.amazonaws:aws-android-sdk-s3:$aws_version"
+    implementation ("com.amazonaws:aws-android-sdk-mobile-client:$aws_version") { transitive = true }
+    // END AWS DEPENDENCIES
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation "com.google.android.gms:play-services-location:17.1.0"
