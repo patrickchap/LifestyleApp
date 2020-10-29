@@ -149,6 +149,11 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sen
                 if(calories != 0) {
                     mCalories.setText("" + calories);
                 }
+
+                int steps = userData.getUserDataSteps().getSteps();
+                if(steps != 0) {
+                    mStepsNum.setText("" + steps);
+                }
             }
         }
     };
