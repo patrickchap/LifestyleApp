@@ -1,5 +1,6 @@
 package com.example.LifestyleApp;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,15 +14,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.LifestyleApp.MasterList.MasterList;
 import com.example.LifestyleApp.R;
+import com.example.LifestyleApp.StepCounter.OnSwipeTouchListener;
 import com.example.LifestyleApp.StepCounter.ShakeDetector;
 import com.example.LifestyleApp.StepCounter.StepCounterListener;
 import com.example.LifestyleApp.UserInfo.UserData;
@@ -38,6 +42,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
     TextView mActivityLevel;
     TextView mCalories;
     TextView mStepsNum;
+    ConstraintLayout mStepCounterLayout;
 
     private UserInfoViewModel userInfoViewModel;
 
@@ -48,6 +53,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
     private boolean stepCounterIsActive = false;
     private int mSteps;
 
+    @SuppressLint("ClickableViewAccessibility")
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,6 +97,26 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         mActivityLevel = findViewById(R.id.activityLevelValue);
         mCalories = findViewById(R.id.calories_value);
         mStepsNum = findViewById(R.id.stepsNum);
+
+        mStepCounterLayout = findViewById(R.id.stepCounterLayout);
+        Context context = getApplicationContext();
+        CharSequence swipeLeftText = "Swipe left!";
+        CharSequence swipeRightText = "Swipe right!";
+        int duration = Toast.LENGTH_SHORT;
+
+        mStepCounterLayout.setOnTouchListener(new OnSwipeTouchListener(context) {
+            @Override
+            public void onSwipeLeft() {
+                Toast toast = Toast.makeText(context, swipeLeftText, duration);
+                toast.show();
+            }
+
+            @Override
+            public void onSwipeRight() {
+                Toast toast = Toast.makeText(context, swipeRightText, duration);
+                toast.show();
+            }
+        });
 
 
         userInfoViewModel = ViewModelProviders.of(this).get(UserInfoViewModel.class);
