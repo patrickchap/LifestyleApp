@@ -95,7 +95,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/stepsGraphBox"
             app:layout_constraintTop_toBottomOf="@+id/stepCounterHeader"
-            app:layout_constraintBottom_toTopOf="@id/stepsInstruction"
+            app:layout_constraintBottom_toTopOf="@id/swipeRightInstructions"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
@@ -142,12 +142,27 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/stepsInstruction"
+            android:id="@+id/swipeRightInstructions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/shake_instructions"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/swipeTurnOn_instructions"
             app:layout_constraintTop_toBottomOf="@id/stepsGraphBox"
+            app:layout_constraintBottom_toBottomOf="@id/swipeLeftInstructions"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
+            android:paddingRight="10dp"
+            android:paddingEnd="10dp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/swipeLeftInstructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/swipeTurnOff_instructions"
+            app:layout_constraintTop_toBottomOf="@id/swipeRightInstructions"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:paddingLeft="10dp"

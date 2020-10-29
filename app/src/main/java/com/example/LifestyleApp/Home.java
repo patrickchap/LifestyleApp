@@ -5,6 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,7 +31,7 @@ import com.example.LifestyleApp.StepCounter.OnSwipeTouchListener;
 import com.example.LifestyleApp.UserInfo.UserData;
 import com.example.LifestyleApp.UserInfo.UserInfoViewModel;
 
-public class Home extends AppCompatActivity implements View.OnClickListener {
+public class Home extends AppCompatActivity implements View.OnClickListener, SensorEventListener {
     Button moduleBtn;
     ImageView mUserProfilePicture;
     TextView mBMI;
@@ -41,8 +45,11 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
     ConstraintLayout mStepCounterLayout;
 
     private UserInfoViewModel userInfoViewModel;
-
     private boolean stepCounterIsActive = false;
+    private SensorManager sensorManager;
+    private Sensor mStepCounter;
+    private int mSystemSteps;
+    private int mSteps;
 
     @SuppressLint("ClickableViewAccessibility")
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -73,9 +80,16 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         final MediaPlayer swipeLeftMP = MediaPlayer.create(this, R.raw.ui_quirky11);
         final MediaPlayer swipeRightMP = MediaPlayer.create(this, R.raw.ui_quirky12);
 
+        sensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null) {
+            mStepCounter = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        }
+
         mStepCounterLayout.setOnTouchListener(new OnSwipeTouchListener(context) {
             @Override
             public void onSwipeLeft() {
+                stepCounterIsActive = false;
                 Toast toast = Toast.makeText(context, swipeLeftText, duration);
                 swipeLeftMP.start();
                 toast.show();
@@ -83,6 +97,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
 
             @Override
             public void onSwipeRight() {
+                stepCounterIsActive = true;
+
                 Toast toast = Toast.makeText(context, swipeRightText, duration);
                 swipeRightMP.start();
                 toast.show();
@@ -150,10 +166,29 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onResume() {
         super.onResume();
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null)
+            sensorManager.registerListener(this, mStepCounter, sensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        if (!stepCounterIsActive) {
+            if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null)
+                sensorManager.unregisterListener(this, mStepCounter);
+        }
     }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        // Get systemSteps while the counter isn't active
+        if (!stepCounterIsActive)
+            mSystemSteps = (int) event.values[0];
+        else {
+            mSteps = (int) (event.values[0] - mSystemSteps);
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {} // Ignore
 }
