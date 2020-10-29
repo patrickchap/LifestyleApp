@@ -5,8 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
@@ -24,10 +23,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.LifestyleApp.MasterList.MasterList;
-import com.example.LifestyleApp.R;
 import com.example.LifestyleApp.StepCounter.OnSwipeTouchListener;
-import com.example.LifestyleApp.StepCounter.ShakeDetector;
-import com.example.LifestyleApp.StepCounter.StepCounterListener;
 import com.example.LifestyleApp.UserInfo.UserData;
 import com.example.LifestyleApp.UserInfo.UserInfoViewModel;
 
@@ -46,12 +42,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
 
     private UserInfoViewModel userInfoViewModel;
 
-    private SensorManager mSensorManager;
-    private StepCounterListener mStepCounterListener;
-    private ShakeDetector mSensorListener;
-    private Sensor mStepCounterSensor;
     private boolean stepCounterIsActive = false;
-    private int mSteps;
 
     @SuppressLint("ClickableViewAccessibility")
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -59,30 +50,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
-
-        // ShakeDetector & StepUtility Initialization
-        mSensorManager  = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mStepCounterListener = new StepCounterListener();
-        mSensorListener = new ShakeDetector();
-        mSensorListener.setOnShakeListener(new ShakeDetector.OnShakeListener() {
-
-            // Turn on step counter when phone has been shaken
-            @Override
-            public void onShake() {
-                if (!stepCounterIsActive) {
-                    stepCounterIsActive = true;
-                    mSensorManager.registerListener(mStepCounterListener,
-                                                    mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER),
-                                                    SensorManager.SENSOR_DELAY_UI);
-                    mSteps = mStepCounterListener.getSteps();
-
-                } else {
-                    stepCounterIsActive = false;    // turn off step counter
-                    mSensorManager.unregisterListener(mStepCounterListener);
-                }
-            }
-        });
-
 
         moduleBtn = findViewById(R.id.moduleButton);
         moduleBtn.setOnClickListener(this);
@@ -100,20 +67,24 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
 
         mStepCounterLayout = findViewById(R.id.stepCounterLayout);
         Context context = getApplicationContext();
-        CharSequence swipeLeftText = "Swipe left!";
-        CharSequence swipeRightText = "Swipe right!";
+        CharSequence swipeLeftText = "Stopping step counter!";
+        CharSequence swipeRightText = "Starting step counter!";
         int duration = Toast.LENGTH_SHORT;
+        final MediaPlayer swipeLeftMP = MediaPlayer.create(this, R.raw.ui_quirky11);
+        final MediaPlayer swipeRightMP = MediaPlayer.create(this, R.raw.ui_quirky12);
 
         mStepCounterLayout.setOnTouchListener(new OnSwipeTouchListener(context) {
             @Override
             public void onSwipeLeft() {
                 Toast toast = Toast.makeText(context, swipeLeftText, duration);
+                swipeLeftMP.start();
                 toast.show();
             }
 
             @Override
             public void onSwipeRight() {
                 Toast toast = Toast.makeText(context, swipeRightText, duration);
+                swipeRightMP.start();
                 toast.show();
             }
         });
@@ -179,19 +150,10 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onResume() {
         super.onResume();
-        mSensorManager.registerListener(mSensorListener,
-                                        mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-                                        SensorManager.SENSOR_DELAY_UI);
     }
 
     @Override
     protected void onPause() {
-
-        if (!stepCounterIsActive) {
-            mSensorManager.unregisterListener(mStepCounterListener);
-        }
-
-        mSensorManager.unregisterListener(mSensorListener);
         super.onPause();
     }
 }
