@@ -189,9 +189,7 @@
     <Button
         android:id="@+id/continueButton"
         android:layout_width="312dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="75dp"
-        android:layout_marginBottom="32dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/continue_button"
         android:text="@string/continue_button"
         android:textColor="@color/eWhite"
@@ -199,7 +197,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/heightTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/heightTextView"
+        app:layout_constraintVertical_bias="0.32999998" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

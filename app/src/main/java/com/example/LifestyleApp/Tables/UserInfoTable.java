@@ -92,8 +92,17 @@ public class UserInfoTable {
     @ColumnInfo(name = "userName")
     private String userName;
 
+    @ColumnInfo(name = "steps")
+    private int steps;
 
-    //    public float calories;
+    public int getSteps() {
+        return steps;
+    }
+
+    public void setSteps(int steps) {
+        this.steps = steps;
+    }
+//    public float calories;
     //
     //    //additional info
     //    public float goalWeight;
@@ -130,6 +139,7 @@ public class UserInfoTable {
         allGoalsSet = false;
         userName = "";
         password = "";
+        steps = 0;
     }
 
     public void setHeight(int height){

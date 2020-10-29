@@ -1,5 +1,6 @@
 package com.example.LifestyleApp.UserInfo;
 
+import android.app.Activity;
 import android.app.Application;
 import android.os.Build;
 import android.util.Base64;
@@ -202,5 +203,14 @@ public class UserInfoViewModel extends AndroidViewModel {
                 userInfoRepository.insertCalories(calories);
         }
         }
+    }
+
+
+
+    public void setSteps(int mSteps) {
+        if(mSteps != 0){
+            userInfoRepository.insertSteps(mSteps);
+        }
+
     }
 }

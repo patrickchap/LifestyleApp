@@ -50,31 +50,33 @@
 
     <ImageView
         android:id="@+id/profilePictureIV"
-        android:layout_width="84dp"
-        android:layout_height="78dp"
+        android:layout_width="82dp"
+        android:layout_height="55dp"
         android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/stepCounterLayout"
         app:layout_constraintEnd_toStartOf="@+id/guideline28"
         app:layout_constraintTop_toTopOf="@+id/guideline24"
-        app:layout_constraintBottom_toTopOf="@+id/stepCounterLayout"
         tools:srcCompat="@tools:sample/avatars" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/stepCounterLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="302dp"
+        android:layout_height="252dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
         android:background="@drawable/rounded_corner_box"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/profilePictureIV"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/guideline28"
         app:layout_constraintStart_toStartOf="@+id/guideline29"
-        app:layout_constraintEnd_toEndOf="@+id/guideline28" >
+        app:layout_constraintTop_toBottomOf="@+id/profilePictureIV">
 
         <TextView
             android:id="@+id/stepCounterHeader"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
             android:paddingStart="5dp"
             android:paddingLeft="5dp"
             android:paddingEnd="0dp"
@@ -83,37 +85,35 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@id/stepsGraphBox"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:gravity="center"
-            android:layout_marginTop="25dp"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/stepsCountBox"
             android:layout_width="130dp"
             android:layout_height="75dp"
-            android:background="@drawable/home_rounded_corner_box"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/stepsGraphBox"
-            app:layout_constraintTop_toBottomOf="@+id/stepCounterHeader"
-            app:layout_constraintBottom_toTopOf="@id/swipeRightInstructions"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginEnd="10dp" >
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/home_rounded_corner_box"
+            app:layout_constraintBottom_toTopOf="@id/swipeRightInstructions"
+            app:layout_constraintEnd_toStartOf="@id/stepsGraphBox"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stepCounterHeader">
 
             <TextView
                 android:id="@+id/stepsNum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="@string/home_steps"
                 android:textSize="18sp"
-                android:gravity="center"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -121,64 +121,63 @@
             android:id="@+id/stepsGraphBox"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:background="@drawable/home_rounded_corner_box"
-            app:layout_constraintStart_toEndOf="@id/stepsCountBox"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginEnd="10dp">
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/home_rounded_corner_box"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/stepsCountBox"
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.jjoe64.graphview.GraphView
                 android:id="@+id/stepsGraph"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/swipeRightInstructions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/swipeTurnOn_instructions"
-            app:layout_constraintTop_toBottomOf="@id/stepsGraphBox"
-            app:layout_constraintBottom_toBottomOf="@id/swipeLeftInstructions"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="10dp"
-            android:paddingLeft="10dp"
             android:paddingStart="10dp"
-            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
             android:paddingEnd="10dp"
-            android:textStyle="italic" />
+            android:paddingRight="10dp"
+            android:text="@string/swipeTurnOn_instructions"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@id/swipeLeftInstructions"
+            app:layout_constraintTop_toBottomOf="@id/stepsGraphBox" />
 
         <TextView
             android:id="@+id/swipeLeftInstructions"
-            android:layout_width="match_parent"
+            android:layout_width="305dp"
             android:layout_height="wrap_content"
-            android:text="@string/swipeTurnOff_instructions"
-            app:layout_constraintTop_toBottomOf="@id/swipeRightInstructions"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:paddingLeft="10dp"
             android:paddingStart="10dp"
-            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
             android:paddingEnd="10dp"
-            android:textStyle="italic" />
-
+            android:paddingRight="10dp"
+            android:text="@string/swipeTurnOff_instructions"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/swipeRightInstructions" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="311dp"
+        android:layout_height="258dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/home_rounded_corner_box"
         android:orientation="vertical"
@@ -191,8 +190,8 @@
 
         <TextView
             android:id="@+id/measurmentHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="309dp"
+            android:layout_height="26dp"
             android:paddingStart="5dp"
             android:paddingLeft="5dp"
             android:paddingEnd="0dp"

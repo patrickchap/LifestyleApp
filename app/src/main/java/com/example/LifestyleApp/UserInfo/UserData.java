@@ -10,6 +10,7 @@ public class UserData {
     private UserData2 userData2;
     private UserData3 userData3;
     private UserGoals userGoals;
+    private UserDataSteps userDataSteps;
     private String userID;
 
     public UserData(String userID) {
@@ -44,6 +45,22 @@ public class UserData {
 
         public void setUserName(String userName) {
             this.userName = userName;
+        }
+    }
+
+    public class UserDataSteps{
+        private int steps;
+
+        public UserDataSteps(){
+
+        }
+
+        public int getSteps() {
+            return steps;
+        }
+
+        public void setSteps(int steps) {
+            this.steps = steps;
         }
     }
 
@@ -273,6 +290,13 @@ public class UserData {
             userData0 = new UserData0();
         }
         return userData0;
+    }
+
+    public UserDataSteps getUserDataSteps(){
+        if(userDataSteps == null){
+            userDataSteps = new UserDataSteps();
+        }
+        return userDataSteps;
     }
 
 }

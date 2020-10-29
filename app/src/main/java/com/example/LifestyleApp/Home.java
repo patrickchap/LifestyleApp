@@ -90,6 +90,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sen
             @Override
             public void onSwipeLeft() {
                 stepCounterIsActive = false;
+                userInfoViewModel.setSteps(mSteps);
                 Toast toast = Toast.makeText(context, swipeLeftText, duration);
                 swipeLeftMP.start();
                 toast.show();
@@ -165,6 +166,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sen
     @Override
     protected void onResume() {
         super.onResume();
+
         if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null)
             sensorManager.registerListener(this, mStepCounter, sensorManager.SENSOR_DELAY_NORMAL);
     }

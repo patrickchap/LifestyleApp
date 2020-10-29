@@ -16,11 +16,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.room.RoomDatabase;
+import androidx.room.RoomMasterTable;
 
 import com.example.LifestyleApp.Tables.UserInfoTable;
 import com.example.LifestyleApp.UserInfo.UserData;
 import com.example.LifestyleApp.UserInfo.UserInfo1;
 import com.example.LifestyleApp.UserInfo.UserInfo2;
+import com.example.LifestyleApp.UserInfo.UserInfoDao;
+import com.example.LifestyleApp.UserInfo.UserInfoDatabase;
 import com.example.LifestyleApp.UserInfo.UserInfoViewModel;
 
 import java.util.List;
@@ -32,6 +36,7 @@ public class Login extends AppCompatActivity {
     UserInfoViewModel userInfoViewModel;
     EditText mUserName;
     EditText mPassword;
+    List<UserInfoTable> userList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,11 +64,12 @@ public class Login extends AppCompatActivity {
 
 
 
-    private void continueToUserInfo1() {
-//        List<UserInfoTable> users = userInfoViewModel.getUsersByUserName(mUserName.getText().toString());
-//
-//        System.out.println(users.size() + " <<< users size");
 
+    private void continueToUserInfo1() {
+//        userInfoViewModel.loadUserData();
+//        List<UserInfoTable> users  = userInfoViewModel.getUsersByUserName(mUserName.getText().toString());
+//        List<UserInfoTable> users = userInfoViewModel.getUsersByUserName(mUserName.getText().toString());
+//        System.out.println(users.size() + " <<< users size");
 
         if (!mUserName.getText().toString().equals("") || !mPassword.getText().toString().equals("")){
             userInfoViewModel.insertUserID(UUID.randomUUID().toString());

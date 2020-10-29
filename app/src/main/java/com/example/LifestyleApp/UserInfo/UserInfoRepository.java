@@ -1,5 +1,6 @@
 package com.example.LifestyleApp.UserInfo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 
@@ -7,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
+import com.example.LifestyleApp.Login;
 import com.example.LifestyleApp.Tables.UserIDTable;
 import com.example.LifestyleApp.Tables.UserInfoTable;
 import com.example.LifestyleApp.daos.UserIDDao;
@@ -322,12 +324,30 @@ public class UserInfoRepository {
 
     }
 
-    private List<UserInfoTable> usersList;
-    public List<UserInfoTable> getUsersByUserName(String userName) {
-        new getAsyncTaskUser(userInfoDao).execute(userName);
-        return usersList;
+    public void insertSteps(int mSteps) {
+        userData.getValue().getUserDataSteps().setSteps(mSteps);
+        userInfoTable.setSteps(mSteps);
 
+        userInfoDao.getAll().observeForever(userInfoTables -> {
+            if (userInfoTables != null) {
+                UserInfoTable userInfoTable = userInfoTables.get(0);
+                userInfoTable.setSteps(mSteps);
+                new insertAsyncTaskUserInfo(userInfoDao).execute(userInfoTable);
+            }
+        });
     }
+
+//    List<UserInfoTable> usersList;
+
+//    public void setUserList( List<UserInfoTable> list){
+//        usersList = list;
+//    }
+    public List<UserInfoTable>  getUsersByUserName(String userName) {
+//        new getAsyncTaskUser(userInfoDao).execute(userName);
+        return null;
+    }
+
+
 
     private static class insertAsyncTaskUserInfo extends AsyncTask<UserInfoTable, Void, Void> {
         private UserInfoDao mAsyncTaskDao;
@@ -357,26 +377,26 @@ public class UserInfoRepository {
         }
     }
 
-    private static class getAsyncTaskUser extends AsyncTask<String, Void, List<UserInfoTable>> {
-        private UserInfoDao mAsyncTaskDao;
-
-        getAsyncTaskUser(UserInfoDao dao) {
-            mAsyncTaskDao = dao;
-        }
-
-        @Override
-        protected List<UserInfoTable> doInBackground(String... strings) {
-            List<UserInfoTable> table = mAsyncTaskDao.findByUserName(strings[0]);
-            return table;
-        }
-
-        @Override
-        protected void onPostExecute(List<UserInfoTable> userInfoTables) {
-            super.onPostExecute(userInfoTables);
-
-
-        }
-    }
+//    private class getAsyncTaskUser extends AsyncTask<String, Void, List<UserInfoTable>> {
+//        private UserInfoDao mAsyncTaskDao;
+//
+//
+//        getAsyncTaskUser(UserInfoDao dao) {
+//            mAsyncTaskDao = dao;
+//        }
+//
+//        @Override
+//        protected List<UserInfoTable> doInBackground(String... strings) {
+//            List<UserInfoTable> table = mAsyncTaskDao.findByUserName(strings[0]);
+//            return table;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(List<UserInfoTable> userInfoTables) {
+//            super.onPostExecute(userInfoTables);
+////            setUserList(userInfoTables);
+//        }
+//    }
 
 
 
