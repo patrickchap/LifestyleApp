@@ -49,10 +49,9 @@ public class UserInfo3Tests {
 
         String city = userInfo2TestData.get("city");
         String country = userInfo2TestData.get("country");
-        String whoSees = userInfo2TestData.get("whoSees");
 
 //        user = userTestData.generateUserFromInfo2(user, city, country, whoSees);
-//        userInfo3 = userTestData.generateUserInfo3(user, userInfo2, city, country, whoSees);
+        userInfo3 = userTestData.generateUserInfo3(userInfo2, city, country);
 
     }
 

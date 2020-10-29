@@ -177,27 +177,24 @@ public class UserTestData {
 
     }
 
-//    public UserInfo3 generateUserInfo3(User user, UserInfo2 userInfo2, String city, String country, String whoSees){
-//
-//        EditText cityEditText = userInfo2.findViewById(R.id.editTextCity);
-//        cityEditText.setText(city);
-//
-//        EditText countryEditText = userInfo2.findViewById(R.id.editTextCountry);
-//        countryEditText.setText(country);
-//
-//        EditText whoSeesEditText = userInfo2.findViewById(R.id.editTextWhoCanSee);
-//        whoSeesEditText.setText(whoSees);
-//
-//        userInfo2.findViewById(R.id.continueButton).performClick();
-//
-//        Intent userInfo3Intent = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
-//
-//        userInfo3Intent.putExtra("user", user);
-//        UserInfo3 userInfo3 = Robolectric.buildActivity(UserInfo3.class, userInfo3Intent).create().get();
-//
-//        return userInfo3;
-//
-//}
+    public UserInfo3 generateUserInfo3(UserInfo2 userInfo2, String city, String country){
+
+        EditText cityEditText = userInfo2.findViewById(R.id.editTextCity);
+        cityEditText.setText(city);
+
+        EditText countryEditText = userInfo2.findViewById(R.id.editTextCountry);
+        countryEditText.setText(country);
+
+
+        userInfo2.findViewById(R.id.continueButton).performClick();
+
+        Intent userInfo3Intent = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
+
+        UserInfo3 userInfo3 = Robolectric.buildActivity(UserInfo3.class, userInfo3Intent).create().get();
+
+        return userInfo3;
+
+}
 
     private String getRandomHeight(){
 
