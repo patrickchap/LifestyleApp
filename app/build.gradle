@@ -2,14 +2,20 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 29
+    compileOptions {
+        // Support for Java 8 features
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
     defaultConfig {
         applicationId "com.example.myapplication"
-        minSdkVersion 16
+        minSdkVersion 15
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -26,6 +32,7 @@ android {
             includeAndroidResources = true
         }
     }
+
 }
 
 dependencies {
@@ -34,6 +41,17 @@ dependencies {
 //    implementation "com.amazonaws:aws-android-sdk-s3:$aws_version"
 //    implementation ("com.amazonaws:aws-android-sdk-mobile-client:$aws_version") { transitive = true }
 //    // END AWS DEPENDENCIES
+
+    def multidex_version = "2.0.1"
+    implementation "androidx.multidex:multidex:$multidex_version"
+    implementation 'com.android.support:multidex:1.0.3'
+
+    // Amplify core dependency
+    implementation 'com.amplifyframework:core:1.4.1'
+
+    // Support for Java 8 features
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.10'
+
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
