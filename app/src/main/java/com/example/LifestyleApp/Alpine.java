@@ -1,7 +1,10 @@
 package com.example.LifestyleApp;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
+
+import androidx.multidex.MultiDex;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
@@ -14,6 +17,7 @@ public class Alpine extends Application {
     public void onCreate() {
         super.onCreate();
 
+
         try {
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.addPlugin(new AWSS3StoragePlugin());
@@ -22,6 +26,12 @@ public class Alpine extends Application {
         } catch (AmplifyException error) {
             Log.e("AlpineApp-Login", "Could not initialize Amplify", error);
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
 }

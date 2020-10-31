@@ -2,26 +2,29 @@ package com.example.LifestyleApp;
 
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.multidex.MultiDex;
+import androidx.room.RoomDatabase;
+import androidx.room.RoomMasterTable;
 
-import com.amplifyframework.AmplifyException;
-import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
-import com.amplifyframework.core.Amplify;
-import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.example.LifestyleApp.Tables.UserInfoTable;
+import com.example.LifestyleApp.UserInfo.UserData;
 import com.example.LifestyleApp.UserInfo.UserInfo1;
+import com.example.LifestyleApp.UserInfo.UserInfo2;
+import com.example.LifestyleApp.UserInfo.UserInfoDao;
+import com.example.LifestyleApp.UserInfo.UserInfoDatabase;
 import com.example.LifestyleApp.UserInfo.UserInfoViewModel;
 
 import java.util.List;
@@ -34,12 +37,6 @@ public class Login extends AppCompatActivity {
     EditText mUserName;
     EditText mPassword;
     List<UserInfoTable> userList;
-
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        MultiDex.install(this);
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,6 +60,8 @@ public class Login extends AppCompatActivity {
         });
 
     }
+
+
 
 
 

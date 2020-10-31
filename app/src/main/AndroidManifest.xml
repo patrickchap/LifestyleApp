@@ -17,9 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:targetApi="m"
-        android:name=".Alpine"
-        >
+        tools:targetApi="m">
 
         <activity android:name="com.example.LifestyleApp.UserInfo.UserInfo1" />
         <activity android:name="com.example.LifestyleApp.UserInfo.UserInfo2" />

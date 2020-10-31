@@ -4,67 +4,9 @@
             "awsAPIPlugin": {
                 "amplifyDatasource": {
                     "endpointType": "GraphQL",
-                    "endpoint": "https://4jrxcuo5sbbsnpxl7ry5kltnta.appsync-api.us-west-2.amazonaws.com/graphql",
                     "region": "us-west-2",
-                    "authorizationType": "API_KEY",
-                    "apiKey": "da2-rirvrsucpzba5h4mi4hpowigry"
+                    "authorizationType": "API_KEY"
                 }
-            }
-        }
-    },
-    "auth": {
-        "plugins": {
-            "awsCognitoAuthPlugin": {
-                "UserAgent": "aws-amplify-cli/0.1.0",
-                "Version": "0.1.0",
-                "IdentityManager": {
-                    "Default": {}
-                },
-                "AppSync": {
-                    "Default": {
-                        "ApiUrl": "https://4jrxcuo5sbbsnpxl7ry5kltnta.appsync-api.us-west-2.amazonaws.com/graphql",
-                        "Region": "us-west-2",
-                        "AuthMode": "API_KEY",
-                        "ApiKey": "da2-rirvrsucpzba5h4mi4hpowigry",
-                        "ClientDatabasePrefix": "amplifyDatasource_API_KEY"
-                    }
-                },
-                "CredentialsProvider": {
-                    "CognitoIdentity": {
-                        "Default": {
-                            "PoolID": "us-east-2:bb6d315b-f284-4042-afe1-67013cf3994f",
-                            "Region": "Regions.US_EAST_2"
-                        }
-                    }
-                },
-                "CognitoUserPool": {
-                    "Default": {
-                        "PoolId": "us-west-2_oF15SFSNc",
-                        "AppClientId": "7h5ltlvvcpns3pnk1vnrabsupr",
-                        "AppClientSecret": "akbgd2us0j1vpkheecka4egobcgn36dqhhqa0nhufpj8od3fu3o",
-                        "Region": "us-west-2"
-                    }
-                },
-                "Auth": {
-                    "Default": {
-                        "authenticationFlowType": "USER_SRP_AUTH"
-                    }
-                },
-                "S3TransferUtility": {
-                    "Default": {
-                        "Bucket": "lifestyleappbucket",
-                        "Region": "us-west-1"
-                    }
-                }
-            }
-        }
-    },
-    "storage": {
-        "plugins": {
-            "awsS3StoragePlugin": {
-                "bucket": "alpinebucket183728-dev",
-                "region": "us-west-2",
-                "defaultAccessLevel": "guest"
             }
         }
     }
