@@ -80,6 +80,12 @@ public class Login extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+
 
 
 
