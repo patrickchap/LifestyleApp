@@ -26,8 +26,56 @@
               "apiKeyExpirationDays": 7
             }
           }
-        }
-      }
+        },
+        "GraphQLAPIIdOutput": "stqvpqxb3jdwndabpxptkl4nqu",
+        "GraphQLAPIEndpointOutput": "https://4jrxcuo5sbbsnpxl7ry5kltnta.appsync-api.us-west-2.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-rirvrsucpzba5h4mi4hpowigry"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-lifestyleapp-dev-183728-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apiamplifyDatasource"
+      },
+      "lastPushTimeStamp": "2020-10-31T02:04:29.071Z",
+      "lastPushDirHash": "7qKQBvmDDZ+M4it3z2YbC3Xo0b0="
+    }
+  },
+  "auth": {
+    "lifestyleapp28edeb43": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-lifestyleapp-dev-183728-deployment/amplify-cfn-templates/auth/lifestyleapp28edeb43-cloudformation-template.yml",
+        "logicalId": "authlifestyleapp28edeb43"
+      },
+      "lastPushTimeStamp": "2020-10-31T02:04:29.071Z",
+      "output": {
+        "AppClientSecret": "akbgd2us0j1vpkheecka4egobcgn36dqhhqa0nhufpj8od3fu3o",
+        "UserPoolId": "us-west-2_oF15SFSNc",
+        "AppClientIDWeb": "5dfec9u111t95qdm1rchomg6m6",
+        "AppClientID": "7h5ltlvvcpns3pnk1vnrabsupr",
+        "IdentityPoolId": "us-west-2:b56259fa-ce3e-4030-bc0a-cc15b256920b",
+        "IdentityPoolName": "lifestyleapp28edeb43_identitypool_28edeb43__dev",
+        "UserPoolName": "lifestyleapp28edeb43_userpool_28edeb43"
+      },
+      "lastPushDirHash": "m0i3Sp8hKUXcGB3m1bnkRc1NMdc="
+    }
+  },
+  "storage": {
+    "alpine": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-lifestyleapp-dev-183728-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
+        "logicalId": "storagealpine"
+      },
+      "lastPushTimeStamp": "2020-10-31T02:04:29.071Z",
+      "output": {
+        "BucketName": "alpinebucket183728-dev",
+        "Region": "us-west-2"
+      },
+      "lastPushDirHash": "efZRnzpVmJtiBu/Plp+z5+Mzu0s="
     }
   }
 }
