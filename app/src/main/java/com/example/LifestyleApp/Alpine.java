@@ -8,9 +8,6 @@ import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 
 public class Alpine extends Application {
     @Override
@@ -27,16 +24,4 @@ public class Alpine extends Application {
         }
     }
 
-    public void uploadFile() {
-        File userInfo = new File("/data/data/com.example.myapplication/databases/userInfo.db");
-        File userInfo_shm = new File("/data/data/com.example.myapplication/databases/userInfo.db");
-        File userInfo_wal = new File("/data/data/com.example.myapplication/databases/userInfo.db");
-
-        Amplify.Storage.uploadFile(
-                "userInfo",
-                userInfo,
-                result -> Log.i("AlpineApp-userInfo", "Successfully uploaded: " + result.getKey()),
-                storageFailure -> Log.e("AlpineApp", "Upload failed", storageFailure)
-        );
-    }
 }
