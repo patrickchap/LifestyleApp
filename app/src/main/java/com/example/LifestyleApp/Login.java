@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +22,8 @@ import androidx.multidex.MultiDex;
 import androidx.room.RoomDatabase;
 import androidx.room.RoomMasterTable;
 
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.core.Amplify;
 import com.example.LifestyleApp.Tables.UserInfoTable;
 import com.example.LifestyleApp.UserInfo.UserData;
 import com.example.LifestyleApp.UserInfo.UserInfo1;
@@ -41,10 +44,24 @@ public class Login extends AppCompatActivity {
     List<UserInfoTable> userList;
 
     @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         userInfoViewModel = ViewModelProviders.of(this).get(UserInfoViewModel.class);
+
+
+        try {
+            Amplify.configure(getApplicationContext());
+            Log.i("AlpineApp-Login", "Initialized Amplify");
+        } catch (AmplifyException error) {
+            Log.e("AlpineApp-Login", "Could not initialize Amplify", error);
+        }
 
 
         mUserName = findViewById(R.id.editTextTextEmailAddress);
