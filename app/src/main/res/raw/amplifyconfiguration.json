@@ -1,0 +1,13 @@
+{
+    "api": {
+        "plugins": {
+            "awsAPIPlugin": {
+                "amplifyDatasource": {
+                    "endpointType": "GraphQL",
+                    "region": "us-west-2",
+                    "authorizationType": "API_KEY"
+                }
+            }
+        }
+    }
+}

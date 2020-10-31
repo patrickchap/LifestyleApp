@@ -1,0 +1,33 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-lifestyleapp-dev-183728-authRole",
+      "UnauthRoleArn": "arn:aws:iam::097249486505:role/amplify-lifestyleapp-dev-183728-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::097249486505:role/amplify-lifestyleapp-dev-183728-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-lifestyleapp-dev-183728-deployment",
+      "UnauthRoleName": "amplify-lifestyleapp-dev-183728-unauthRole",
+      "StackName": "amplify-lifestyleapp-dev-183728",
+      "StackId": "arn:aws:cloudformation:us-west-2:097249486505:stack/amplify-lifestyleapp-dev-183728/43ba02f0-1b11-11eb-b35f-0694fa2fd9b9",
+      "AmplifyAppId": "d5c5vvns1wpni"
+    }
+  },
+  "api": {
+    "amplifyDatasource": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [],
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "description": "",
+              "apiKeyExpirationDays": 7
+            }
+          }
+        }
+      }
+    }
+  }
+}
