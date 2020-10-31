@@ -13,6 +13,7 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -26,10 +27,15 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.amplifyframework.core.Amplify;
 import com.example.LifestyleApp.MasterList.MasterList;
 import com.example.LifestyleApp.StepCounter.OnSwipeTouchListener;
 import com.example.LifestyleApp.UserInfo.UserData;
 import com.example.LifestyleApp.UserInfo.UserInfoViewModel;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 
 public class Home extends AppCompatActivity implements View.OnClickListener, SensorEventListener {
     Button moduleBtn;
@@ -193,6 +199,27 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sen
         else {
             mSteps = (int) (event.values[0] - mSystemSteps);
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        File exampleFile = new File(getApplicationContext().getFilesDir(), "ExampleKey");
+
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(exampleFile));
+            writer.append("Example file contents");
+            writer.close();
+        } catch (Exception exception) {
+            Log.e("MyAmplifyApp", "Upload failed", exception);
+        }
+
+        Amplify.Storage.uploadFile(
+                "ExampleKey",
+                exampleFile,
+                result -> Log.i("MyAmplifyApp", "Successfully uploaded: " + result.getKey()),
+                storageFailure -> Log.e("MyAmplifyApp", "Upload failed", storageFailure)
+        );
     }
 
     @Override

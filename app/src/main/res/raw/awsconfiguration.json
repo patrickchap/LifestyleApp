@@ -1,20 +1,34 @@
 {
-  "Version": "1.0",
-  "IdentityManager": {
-    "Default": {}
-  },
-  "CredentialsProvider": {
-    "CognitoIdentity": {
-      "Default": {
-        "PoolID": "us-east-2:bb6d315b-f284-4042-afe1-67013cf3994f",
-        "Region": "Regions.US_EAST_2"
-      }
+    "UserAgent": "aws-amplify-cli/0.1.0",
+    "Version": "0.1.0",
+    "IdentityManager": {
+        "Default": {}
+    },
+    "CredentialsProvider": {
+        "CognitoIdentity": {
+            "Default": {
+                "PoolId": "us-west-2:b8bd2fcd-d30b-4096-bf9e-ce072b185171",
+                "Region": "us-west-2"
+            }
+        }
+    },
+    "CognitoUserPool": {
+        "Default": {
+            "PoolId": "us-west-2_lOYPURqjZ",
+            "AppClientId": "2e156r5htl5rbi0fflvm1lg74",
+            "AppClientSecret": "1b5h6j52pm25mmtvkv930266gdjdttl35ki15fn4g8cjldds3lec",
+            "Region": "us-west-2"
+        }
+    },
+    "Auth": {
+        "Default": {
+            "authenticationFlowType": "USER_SRP_AUTH"
+        }
+    },
+    "S3TransferUtility": {
+        "Default": {
+            "Bucket": "bucketusersthree05656-dev",
+            "Region": "us-west-2"
+        }
     }
-  },
-  "S3TransferUtility": {
-    "Default": {
-      "Bucket": "lifestyleappbucket",
-      "Region": "us-west-1"
-    }
-  }
 }
