@@ -16,8 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.multidex.MultiDex;
 
-import com.amplifyframework.AmplifyException;
-import com.amplifyframework.core.Amplify;
 import com.example.LifestyleApp.Tables.UserInfoTable;
 import com.example.LifestyleApp.UserInfo.UserInfo1;
 import com.example.LifestyleApp.UserInfo.UserInfoViewModel;
@@ -61,8 +59,6 @@ public class Login extends AppCompatActivity {
         });
 
     }
-
-
 
 
 

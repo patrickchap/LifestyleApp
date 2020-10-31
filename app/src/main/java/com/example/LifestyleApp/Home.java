@@ -195,6 +195,14 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sen
         }
     }
 
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        Alpine alpine = new Alpine();
+//
+//        alpine.uploadFile();
+//    }
+
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {} // Ignore
 }
