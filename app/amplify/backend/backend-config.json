@@ -1,0 +1,16 @@
+{
+  "auth": {
+    "lifestyleappthree96f28c13": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
+  "storage": {
+    "lifestyleappthree": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
+  }
+}

@@ -4,28 +4,20 @@
     "IdentityManager": {
         "Default": {}
     },
-    "AppSync": {
-        "Default": {
-            "ApiUrl": "https://4jrxcuo5sbbsnpxl7ry5kltnta.appsync-api.us-west-2.amazonaws.com/graphql",
-            "Region": "us-west-2",
-            "AuthMode": "API_KEY",
-            "ApiKey": "da2-rirvrsucpzba5h4mi4hpowigry",
-            "ClientDatabasePrefix": "amplifyDatasource_API_KEY"
-        }
-    },
+
     "CredentialsProvider": {
         "CognitoIdentity": {
             "Default": {
-                "PoolID": "us-east-2:bb6d315b-f284-4042-afe1-67013cf3994f",
-                "Region": "Regions.US_EAST_2"
+                "PoolId": "us-west-2:b8bd2fcd-d30b-4096-bf9e-ce072b185171",
+                "Region": "us-west-2"
             }
         }
     },
     "CognitoUserPool": {
         "Default": {
-            "PoolId": "us-west-2_oF15SFSNc",
-            "AppClientId": "7h5ltlvvcpns3pnk1vnrabsupr",
-            "AppClientSecret": "akbgd2us0j1vpkheecka4egobcgn36dqhhqa0nhufpj8od3fu3o",
+            "PoolId": "us-west-2_lOYPURqjZ",
+            "AppClientId": "2e156r5htl5rbi0fflvm1lg74",
+            "AppClientSecret": "1b5h6j52pm25mmtvkv930266gdjdttl35ki15fn4g8cjldds3lec",
             "Region": "us-west-2"
         }
     },
@@ -36,8 +28,8 @@
     },
     "S3TransferUtility": {
         "Default": {
-            "Bucket": "lifestyleappbucket",
-            "Region": "us-west-1"
+            "Bucket": "bucketusersthree05656-dev",
+            "Region": "us-west-2"
         }
     }
 }

@@ -28,16 +28,17 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.amplifyframework.AmplifyException;
-import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
+
 import com.amplifyframework.core.Amplify;
-import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.example.LifestyleApp.MasterList.MasterList;
 import com.example.LifestyleApp.StepCounter.OnSwipeTouchListener;
 import com.example.LifestyleApp.UserInfo.UserData;
 import com.example.LifestyleApp.UserInfo.UserInfoViewModel;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+
 
 public class Home extends AppCompatActivity implements View.OnClickListener, SensorEventListener {
     Button moduleBtn;
@@ -206,27 +207,23 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sen
     @Override
     protected void onStop() {
         super.onStop();
-        File userInfo = new File("/data/data/com.example.myapplication/databases/userInfo.db");
-        File userInfo_shm = new File("/data/data/com.example.myapplication/databases/userInfo.db");
-        File userInfo_wal = new File("/data/data/com.example.myapplication/databases/userInfo.db");
+
+        File exampleFile = new File(getApplicationContext().getFilesDir(), "ExampleKey");
+
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(exampleFile));
+            writer.append("Example file contents");
+            writer.close();
+        } catch (Exception exception) {
+            Log.e("MyAmplifyApp", "Upload failed", exception);
+        }
 
         Amplify.Storage.uploadFile(
-                "userInfo",
-                userInfo,
-                result -> Log.i("AlpineApp-userInfo", "Successfully uploaded: " + result.getKey()),
-                storageFailure -> Log.e("AlpineApp", "Upload failed", storageFailure));
-
-        Amplify.Storage.uploadFile(
-                "userInfo",
-                userInfo_shm,
-                result -> Log.i("AlpineApp-userInfo", "Successfully uploaded: " + result.getKey()),
-                storageFailure -> Log.e("AlpineApp", "Upload failed", storageFailure));
-
-        Amplify.Storage.uploadFile(
-                "userInfo",
-                userInfo_wal,
-                result -> Log.i("AlpineApp-userInfo", "Successfully uploaded: " + result.getKey()),
-                storageFailure -> Log.e("AlpineApp", "Upload failed", storageFailure));
+                "ExampleKey",
+                exampleFile,
+                result -> Log.i("MyAmplifyApp", "Successfully uploaded: " + result.getKey()),
+                storageFailure -> Log.e("MyAmplifyApp", "Upload failed", storageFailure)
+        );
     }
 
     @Override

@@ -8,20 +8,19 @@ import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 
-
-public class Alpine extends Application {
-    @Override
+public class MyAmpApp extends Application {
     public void onCreate() {
         super.onCreate();
 
         try {
+            // Add these lines to add the AWSCognitoAuthPlugin and AWSS3StoragePlugin plugins
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.addPlugin(new AWSS3StoragePlugin());
             Amplify.configure(getApplicationContext());
-            Log.i("AlpineApp-Login", "Initialized Amplify");
+
+            Log.i("MyAmplifyApp", "Initialized Amplify");
         } catch (AmplifyException error) {
-            Log.e("AlpineApp-Login", "Could not initialize Amplify", error);
+            Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
         }
     }
-
 }
