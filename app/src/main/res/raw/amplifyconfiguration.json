@@ -20,28 +20,19 @@
                 "IdentityManager": {
                     "Default": {}
                 },
-                "AppSync": {
-                    "Default": {
-                        "ApiUrl": "https://4jrxcuo5sbbsnpxl7ry5kltnta.appsync-api.us-west-2.amazonaws.com/graphql",
-                        "Region": "us-west-2",
-                        "AuthMode": "API_KEY",
-                        "ApiKey": "da2-rirvrsucpzba5h4mi4hpowigry",
-                        "ClientDatabasePrefix": "amplifyDatasource_API_KEY"
-                    }
-                },
                 "CredentialsProvider": {
                     "CognitoIdentity": {
                         "Default": {
-                            "PoolID": "us-east-2:bb6d315b-f284-4042-afe1-67013cf3994f",
-                            "Region": "Regions.US_EAST_2"
+                            "PoolId": "us-west-2:8d96bd78-74bd-4046-9cf0-effc36cd450c",
+                            "Region": "us-west-2"
                         }
                     }
                 },
                 "CognitoUserPool": {
                     "Default": {
-                        "PoolId": "us-west-2_oF15SFSNc",
-                        "AppClientId": "7h5ltlvvcpns3pnk1vnrabsupr",
-                        "AppClientSecret": "akbgd2us0j1vpkheecka4egobcgn36dqhhqa0nhufpj8od3fu3o",
+                        "PoolId": "us-west-2_j8p4olw9E",
+                        "AppClientId": "8nktql9osvoqpnuf84btgrqq3",
+                        "AppClientSecret": "n20e50h3mu63plp5bi26mj3f926bq4vdks7m9lb73jpo8hvvj0s",
                         "Region": "us-west-2"
                     }
                 },
@@ -52,8 +43,8 @@
                 },
                 "S3TransferUtility": {
                     "Default": {
-                        "Bucket": "lifestyleappbucket",
-                        "Region": "us-west-1"
+                        "Bucket": "userbucketfour05656-dev",
+                        "Region": "us-west-2"
                     }
                 }
             }
@@ -62,7 +53,7 @@
     "storage": {
         "plugins": {
             "awsS3StoragePlugin": {
-                "bucket": "alpinebucket183728-dev",
+                "bucket": "userbucketfour05656-dev",
                 "region": "us-west-2",
                 "defaultAccessLevel": "guest"
             }

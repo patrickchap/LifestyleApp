@@ -4,20 +4,19 @@
     "IdentityManager": {
         "Default": {}
     },
-
     "CredentialsProvider": {
         "CognitoIdentity": {
             "Default": {
-                "PoolId": "us-west-2:b8bd2fcd-d30b-4096-bf9e-ce072b185171",
+                "PoolId": "us-west-2:8d96bd78-74bd-4046-9cf0-effc36cd450c",
                 "Region": "us-west-2"
             }
         }
     },
     "CognitoUserPool": {
         "Default": {
-            "PoolId": "us-west-2_lOYPURqjZ",
-            "AppClientId": "2e156r5htl5rbi0fflvm1lg74",
-            "AppClientSecret": "1b5h6j52pm25mmtvkv930266gdjdttl35ki15fn4g8cjldds3lec",
+            "PoolId": "us-west-2_j8p4olw9E",
+            "AppClientId": "8nktql9osvoqpnuf84btgrqq3",
+            "AppClientSecret": "n20e50h3mu63plp5bi26mj3f926bq4vdks7m9lb73jpo8hvvj0s",
             "Region": "us-west-2"
         }
     },
@@ -28,7 +27,7 @@
     },
     "S3TransferUtility": {
         "Default": {
-            "Bucket": "bucketusersthree05656-dev",
+            "Bucket": "userbucketfour05656-dev",
             "Region": "us-west-2"
         }
     }

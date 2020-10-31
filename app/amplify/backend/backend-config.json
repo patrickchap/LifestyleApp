@@ -1,6 +1,6 @@
 {
   "auth": {
-    "lifestyleappthree96f28c13": {
+    "lifestyleappthree85d3c906": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -8,7 +8,7 @@
     }
   },
   "storage": {
-    "lifestyleappthree": {
+    "lifestyleappfour": {
       "service": "S3",
       "providerPlugin": "awscloudformation"
     }
